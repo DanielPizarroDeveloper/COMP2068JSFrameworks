@@ -1,0 +1,47 @@
+:root {
+  --custom-font-family: monospace, sans-serif;
+  --custom-font-optical-sizing: auto;
+  --custom-font-weight: 100;
+  --custom-font-style: normal;
+  --custom-section-min-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+section, footer {
+  min-width: var(--custom-section-min-width);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a,
+span {
+  font-family: var(--custom-font-family);
+  font-optical-sizing: var(--custom-font-optical-sizing);
+  font-weight: var(--custom-font-weight);
+  font-style: var(--custom-font-style);
+}
+
+h1,
+h2,
+h3{
+  font-size: 120%;
+}

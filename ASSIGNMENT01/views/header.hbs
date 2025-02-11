@@ -1,0 +1,58 @@
+<section id="header" class='main-section-header'>
+    <article class='main-section-header__article'>
+      <img class='main-section-header__article__img' src='/imagenes/Winter.webp' alt='imagen de perfil del porfolio' />
+    </article>
+
+  <article class='main-section-header__article'>
+    <div class='main-section-header__article__personal__information'>
+      <h1>Hello,</h1>
+      <h2>I am Daniel Pizarro Saavedra</h2>
+      <h3>Computer Engineer</h3>
+    </div>         
+    {{!-- <div class='main-section-header__article--badge'>
+      <Badge color="green">
+        Open to new job opportunities.
+      </Badge>
+    </div> --}}   
+    {{!-- <div class='main-section-header__article__div'>
+      {
+        listadoBotones.map(({id, contenido}) => (
+          <button class='main-section-header__article__div--button' key={id} onClick={sendMail}>
+            <span class='main-section-header__article__div---span'>{contenido}</span>
+          </button>
+        ))
+      }
+      <Popover
+        position={Position.BOTTOM}
+        content={
+          <Menu>
+            <Menu.Group>
+              {
+                listadoCurriculum.map(({id, url, pdfName, version}) => (
+                  <Menu.Item key={id} icon={DownloadIcon}>
+                    <a style={{textDecoration: 'none', color: 'inherit'}} href={url} download={pdfName}>{version}</a>
+                  </Menu.Item>
+                ))
+              }
+            </Menu.Group>
+            <Menu.Divider />
+          </Menu>
+        }>
+        <button class='main-section-header__article__div--button'>Download Resume</button>
+      </Popover>
+    </div> --}}
+    {{!-- <div class='main-section-header__article__div'>
+        {
+          listadoRedes.map(({id, arialLabel, href, arialLabelSVG, viewBox, fill, svg}) => (
+            <button class='main-section-header__article__div--button-svg' key={id} aria-label={arialLabel}>
+                <a href={href} target="_blank" aria-label={arialLabelSVG}>
+                  <svg class='main-section-header__article__div--svg' xmlns="http://www.w3.org/2000/svg" viewBox={viewBox}>
+                    <path fill={fill} d={svg}/>
+                  </svg>
+                </a>
+            </button>
+          ))
+        }
+    </div> --}}
+  </article>
+</section>
