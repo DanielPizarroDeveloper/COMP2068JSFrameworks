@@ -1,0 +1,108 @@
+:root {
+    --custom-exp-color-black: #000;
+    --custom-exp-color-white: #fff;
+    --custom-exp-color-gray: #f4f4f5;
+}
+
+.main-section-exp {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding-top: 10%;
+    width: 100%;
+}
+
+.main-section-exp__titulo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.main-section-exp__titulo__h1 {
+    text-align: center;
+    color: var(--custom-exp-color-black);
+}
+
+.main-section-exp__experiencia {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    max-height: max-content;
+    flex-basis: 50%;
+}
+
+.main-section-exp__article {
+    display: flex;
+    padding-top: 3%;
+}
+
+.padding-experiencia-left {
+    padding-left: 4%;
+    padding-right: 2%;
+}
+
+.padding-experiencia-right {
+    padding-right: 4%;
+    padding-left: 2%;
+}
+
+.main-section-exp__experiencia__article__icon {
+    background-color: var(--custom-exp-color-gray);
+    position: relative;
+    top: -25px;
+    left: 50%;
+    border: 1px solid var(--custom-exp-color-black);
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    min-height: 50px;
+    border-radius: 100px;
+}
+
+.main-section-exp__experiencia__article__icon__svg {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+}
+
+.main-section-exp__experiencia__article__informacion {
+    border-radius: 15px;
+    border: 1px solid var(--custom-exp-color-black);
+    padding: 15px;
+    text-align: center;
+    max-width: 600px;
+}
+
+.main-section-exp__experiencia_article_informacion__details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.main-section-exp__experiencia__article__informacion__parrafo {
+    font-size: small; 
+    text-align: center;
+    line-height: 17px;
+}
+
+@media screen and (max-width: 1363.2px) {
+    .padding-experiencia-left {
+        padding-right: 4%;
+        padding-left: 4%;
+    }
+
+    .padding-experiencia-right {
+        padding-right: 4%;
+        padding-left: 4%;
+    }
+}
+
+@media screen and (max-width: 722px) {
+    .main-section-exp {
+        padding-top: 20%;
+    }
+}

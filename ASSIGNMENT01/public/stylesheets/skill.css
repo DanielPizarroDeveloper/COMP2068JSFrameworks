@@ -1,0 +1,290 @@
+:root {
+    --custom-skill-color-gray: #4b5563;
+    --custom-skill-color-white: #fff;
+    --custom-skill-color-black: #000;
+}
+
+.main-section-skill {
+    position: relative;
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-section-skill__container__titulo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.main-section-skill__titulo {
+    text-align: center;
+    color: var(--custom-skill-color-gray);
+}
+
+.main-section-skill__container__columns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-basis: 30%;
+}
+
+.main-section-skill__container_column_1, 
+.main-section-skill__container_column_2, 
+.main-section-skill__container_column_3 {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-section-skill__container__columns__logo {
+    background-color: var(--custom-skill-color-white);
+    position: relative;
+    top: 80px;
+    left: -25px;
+    border: 1px solid var(--custom-skill-color-black);
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
+
+.main-section-skill__container__columns__logo__svg {
+    position: relative;
+    top:10px;
+    left: 10px;
+    width: 30px;
+}
+
+.main-section-skill__container__columns__skill {
+    border-radius: 15px;
+    border: 1px solid var(--custom-skill-color-black);
+    padding: 10px;
+    text-align: center;
+    width: 1000px;
+    height: 100px;
+}
+
+.main-section-skill__container__columns__skill__titulo__div_frontend {
+    position: relative;
+    top: -60px;
+    left: 40px;
+    font-size: 22px;
+    width: fit-content;
+}
+
+.main-section-skill__container__columns__skill__titulo__div_frontend > h4 {
+    background-color: white;
+    line-height: 40px;
+    width: 125px;
+    height: 40px;
+}
+
+.main-section-skill__container__columns__skill__frontend {
+    display: flex;
+    justify-content: center;
+    padding-top: 0;
+    position: relative;
+    bottom: 80px;
+    flex-direction: row;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.main-section-skill__container__columns__skill__content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-section-skill__container__columns__skill__content__detalle {
+    padding-left: 15%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-section-skill__container__columns__skill__titulo {
+    padding-top: 9px;
+    line-height: 1px;
+}
+
+.main-section-skill__container__columns__skill__backend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: relative;
+    top: -80px;
+    gap: 10px;
+}
+
+.main-section-skill__container__columns__skill__content_backend {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.main-section-skill__container__columns__skill__content__backend__element {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-section-skill__container__columns__skill__content__detalle_backend {
+    padding-left: 15%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-section-skill__container__columns__skill__titulo__div_database {
+    position: relative;
+    top: -55px;
+    left: 34px;
+    font-size: 22px;
+    width: fit-content;
+}
+
+.main-section-skill__container__columns__skill__titulo__div__database-h4 {
+    background-color: white;
+    width: 200px;
+    height: 40px;
+}
+
+.main-section-skill__container__columns__skill__database {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-around;
+    position: relative;
+    top: -80px;
+}
+
+.main-section-skill__container__columns__skill__content_database {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-section-skill__container__columns__skill__content__svg, 
+.main-section-skill__container__columns__skill__content__backend__svg {
+    padding-left: 5%;
+    width: 80px;
+}
+
+.main-section-skill__container__columns__skill__content__detalle_span {
+    color: var(--custom-skill-color-gray);
+}
+
+.main-section-skill__container__level {
+    font-size: small !important; 
+    border-radius: 10px;
+}
+
+.green {
+    width: 75px;
+    color: #317159;
+    background-color: #dcf2ea; 
+}
+
+.yellow {
+    width: 105px;
+    color: #92460d;
+    background-color: #ffefd2; 
+}
+
+.main-section-skill__container__columns__skill__titulo__div__frontend-h4,
+.main-section-skill__container__columns__skill__titulo__div__backend,
+.main-section-skill__container__columns__skill__titulo__div__database-h4 {
+    color: var(--custom-skill-color-gray);   
+}
+
+.main-section-skill__container__columns__skill > h4 {
+    background-color: white;
+    line-height: 40px;
+    width: 125px;
+    height: 40px;
+}
+
+.main-section-skill__container__columns__skill__titulo__div__backend  {
+    position: relative;
+    top: -60px;
+    left: 35px;
+    font-size: 22px;
+}
+
+@media screen and (max-width: 1060px) {
+    .main-section-skill__container__columns {
+        flex-direction: row;
+        padding-right: 5%;
+        gap: 20px;
+    }
+
+    .main-section-skill__container_column_1, 
+    .main-section-skill__container_column_2, 
+    .main-section-skill__container_column_3 {
+        flex-direction: row;
+        padding-top: 2%;
+        height: fit-content;
+        width: 270px;
+        max-width: 270px;
+    }
+
+    .main-section-skill__container__columns__skill__frontend,
+    .main-section-skill__container__columns__skill__backend,
+    .main-section-skill__container__columns__skill__database {
+        flex-direction: column;
+        padding-top: 20%;
+    }
+
+    /* Fronted Skill */
+    .main-section-skill__container__columns__logo {
+        top: -20px;
+        left: 130px;
+    }
+    
+    .main-section-skill__container__columns__skill {
+        width: 210px;
+        height: 360px;
+    }
+
+    .main-section-skill__container__columns__skill__frontend,
+    .main-section-skill__container__columns__skill__backend {
+        gap: 30px;
+        width: fit-content;
+    }
+
+    /* Título - Backend & Frontend */
+    .main-section-skill__container__columns__skill__titulo__div_frontend,
+    .main-section-skill__container__columns__skill__titulo__div__backend {
+        top: -10px;
+        left: 30px;
+    }
+
+    /* Título Database */
+    .main-section-skill__container__columns__skill__titulo__div_database {
+        top: -5px;
+        left: 5px;
+    }
+
+    .main-section-skill__container__columns__skill__database {
+        gap: 60px;
+        justify-content: center;
+    }
+
+    .main-section-skill__container__columns__skill__titulo__div__database-h4 {
+        width: 190px;
+    }
+}
+
+@media screen and (max-width: 722px) {
+    .main-section-skill {
+        padding-top: 20%;
+    }
+}
+
+@media screen and (max-width: 588px) {
+    .main-section-skill__container__columns {
+        justify-content: center;
+        padding-top: 5%;
+        padding-right: 5%;
+    }
+}

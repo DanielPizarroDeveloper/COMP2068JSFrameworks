@@ -2,38 +2,53 @@
 <html>
   <head>
     <title>DanielPizarroDev</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <link rel="stylesheet" href="/stylesheets/nav.css">
-    <link rel="stylesheet" href="/stylesheets/header.css">
-    <link rel="shortcut icon" href="/images/favicon/dev.png" type="image/x-icon">
+    <link rel='stylesheet' href='/stylesheets/layout.css'>
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+    <link rel='stylesheet' href='/stylesheets/nav.css'>
+    <link rel='stylesheet' href='/stylesheets/experience.css'>
+    <link rel='stylesheet' href='/stylesheets/skill.css'>
+    <link rel='stylesheet' href='/stylesheets/aboutMe.css'>
+    <link rel='stylesheet' href='/stylesheets/project.css'>
+    <link rel='shortcut icon' href='/images/favicon/dev.png' type='image/x-icon'>
   </head>
+
   <body>
     <section class='main-section'>
         <nav class='main-section__nav'>
             <ul class='main-section__nav__list'>
                 <li class='main-section__nav__list__logo'>
                     <button class='main-section__nav__button--active'>
-                        <a class='main-section__nav__link--active' href='#header'>
-                            <svg class='main-section__nav__logo__svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                                <path class='main-section__nav__logo__fill' d="M 392.8 1.2 c -17 -4.9 -34.7 5 -39.6 22 l -128 448 c -4.9 17 5 34.7 22 39.6 s 34.7 -5 39.6 -22 l 128 -448 c 4.9 -17 -5 -34.7 -22 -39.6 Z m 80.6 120.1 c -12.5 12.5 -12.5 32.8 0 45.3 L 562.7 256 l -89.4 89.4 c -12.5 12.5 -12.5 32.8 0 45.3 s 32.8 12.5 45.3 0 l 112 -112 c 12.5 -12.5 12.5 -32.8 0 -45.3 l -112 -112 c -12.5 -12.5 -32.8 -12.5 -45.3 0 Z m -306.7 0 c -12.5 -12.5 -32.8 -12.5 -45.3 0 l -112 112 c -12.5 12.5 -12.5 32.8 0 45.3 l 112 112 c 12.5 12.5 32.8 12.5 45.3 0 s 12.5 -32.8 0 -45.3 L 77.3 256 l 89.4 -89.4 c 12.5 -12.5 12.5 -32.8 0 -45.3 Z"/>
-                            </svg>
+                        <a class='main-section__nav__link--active' href='/'>
+                            <img class='main-section__nav__logo__svg' src="/images/svg/Logo.svg" alt="">
                             <span class='main-section__nav__logo__titulo'>DanielPizarroDev</span>
                         </a>
                     </button>
                 </li>
-                <li class='main-section__nav__list__logo'>
-                    <a class='main-section__nav__link--active' href='#experience'>
+                <li>
+                    <a class='main-section__nav__link--active' href='/experience'>
                         <span class='main-section__nav__logo__titulo'>Experience</span>
                     </a>
                 </li>
+                
+                <li>
+                    <a class='main-section__nav__link--active' href='/project'>
+                        <span class='main-section__nav__logo__titulo'>My projects</span>
+                    </a>
+                </li>
+                
                 <li class='main-section__nav__list__logo extends'>
-                    <a class='main-section__nav__link--active' href='#programming'>
+                    <a class='main-section__nav__link--active' href='/programming'>
                         <span class='main-section__nav__logo__titulo'>Programming languages</span>
                     </a>
                 </li>
-                <li class='main-section__nav__list__logo'>
-                    <a class='main-section__nav__link--active' href='#about'>
+                <li>
+                    <a class='main-section__nav__link--active' href='/aboutMe'>
                         <span class='main-section__nav__logo__titulo'>About me</span>
+                    </a>
+                </li>
+                <li>
+                    <a class='main-section__nav__link--active' href='/contact'>
+                        <span class='main-section__nav__logo__titulo'>Contact</span>
                     </a>
                 </li>
             </ul>
@@ -41,5 +56,27 @@
     </section>
 
     {{{body}}}
+
+    <footer>
+        <span>©DanielPizarroDev</span>
+        <button class='main-section-layout__article__div--button-svg' aria-label='Button Linkedin'>
+            <a href='https://www.linkedin.com/in/daniel-pizarro-saavedra/' target='_blank' aria-label='Open the programmer\'s LinkedIn profile'>
+              <img class='main-section__nav__logo__svg' src="/images/svg/Linkedln.svg" alt="Open the programmer\'s LinkedIn profile">
+            </a>
+        </button>
+
+        <button class='main-section-layout__article__div--button-svg' aria-label='Button Github'>
+            <a href='https://github.com/DanielPizarroDeveloper' target='_blank' aria-label='Open the programmer\'s GitHub profile'>
+              <img class='main-section__nav__logo__svg' src="/images/svg/Github.svg" alt="">
+            </a>
+        </button>
+
+        <button class='main-section-layout__article__div--button-svg'>
+            <a href='https://www.linkedin.com/in/daniel-pizarro-saavedra/' target='_blank' aria-label='E-Mail the programmer'>
+              <img style="width: 40px;" src="/images/svg/mail.svg" alt="">
+            </a>
+        </button>
+    </footer>
   </body>
+  <script src="/javascripts/contact.js"></script>
 </html>
