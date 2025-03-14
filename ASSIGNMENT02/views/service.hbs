@@ -12,88 +12,22 @@
         </select>
     </section>
 
-    <section class="section-list">
-        <article class="article-result">
-            <img class="result" src='https://dbdzm869oupei.cloudfront.net/img/sticker/preview/38676.png' alt='Representative image of the service.'>
-            <div class="container">
-                <div class="detail">
-                    <span>Título: </span>
-                    <span>Descripción:</span>
-                </div>
+    {{#each services}}
+        <section class="section-list">
+            <article class="article-result">
+                <img class="result-service" src='{{imgService}}' alt='Representative image of the service.'>
+                <div class="container">
+                    <div class="detail">
+                        <span>{{title}}</span>
+                        <span>{{detail}}</span>
+                    </div>
 
-                <div class="number">
-                    <span>Amount: </span>
-                    <span>Price:</span>
+                    <div class="number">
+                        <span class="span-price">Price:</span>
+                        <span class="span-price">${{price}}</span>
+                    </div>
                 </div>
-            </div>
-        </article>
-    </section>
-
-    <section class="section-list">
-        <article class="article-result">
-            <img class="result" src='https://dbdzm869oupei.cloudfront.net/img/sticker/preview/38676.png' alt='Representative image of the service.'>
-            <div class="container">
-                <div class="detail">
-                    <span>Título: </span>
-                    <span>Descripción:</span>
-                </div>
-
-                <div class="number">
-                    <span>Amount: </span>
-                    <span>Price:</span>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <section class="section-list">
-        <article class="article-result">
-            <img class="result" src='https://dbdzm869oupei.cloudfront.net/img/sticker/preview/38676.png' alt='Representative image of the service.'>
-            <div class="container">
-                <div class="detail">
-                    <span>Título: </span>
-                    <span>Descripción:</span>
-                </div>
-
-                <div class="number">
-                    <span>Amount: </span>
-                    <span>Price:</span>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <section class="section-list">
-        <article class="article-result">
-            <img class="result" src='https://dbdzm869oupei.cloudfront.net/img/sticker/preview/38676.png' alt='Representative image of the service.'>
-            <div class="container">
-                <div class="detail">
-                    <span>Título: </span>
-                    <span>Descripción:</span>
-                </div>
-
-                <div class="number">
-                    <span>Amount: </span>
-                    <span>Price:</span>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <section class="section-list">
-        <article class="article-result">
-            <img class="result" src='https://dbdzm869oupei.cloudfront.net/img/sticker/preview/38676.png' alt='Representative image of the service.'>
-            <div class="container">
-                <div class="detail">
-                    <span>Título: </span>
-                    <span>Descripción:</span>
-                </div>
-
-                <div class="number">
-                    <span>Amount: </span>
-                    <span>Price:</span>
-                </div>
-            </div>
-        </article>
-    </section>
+            </article>
+        </section>
+    {{/each}}
 </main>

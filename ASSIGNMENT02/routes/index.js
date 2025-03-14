@@ -1,19 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
+const Comment = require('../models/comment');
+const Product = require('../models/product');
+const Service = require('../models/service');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Home' });
 });
 
 /* GET product page. */
-router.get('/product', function(req, res, next) {
-  res.render('product', { title: 'Product' });
+router.get('/product', async function(req, res, next) {
+  const products = await Product.find();
+  res.render('product', { title: 'Product', products });
 });
 
 /* GET service page. */
-router.get('/service', function(req, res, next) {
-  res.render('service', { title: 'Service' });
+router.get('/service', async function(req, res, next) {
+  const services = await Service.find();
+  res.render('service', { title: 'Service', services });
 });
 
 /* GET register page. */
@@ -37,8 +43,9 @@ router.get('/contact', function(req, res, next) {
 });
 
 /* GET comments page. */
-router.get('/comment', function(req, res, next) {
-  res.render('comment', { title: 'Comment' });
+router.get('/comment', async function(req, res, next) {
+  const comments = await Comment.find();
+  res.render('comment', { title: 'Comment', comments });
 });
 
 module.exports = router;

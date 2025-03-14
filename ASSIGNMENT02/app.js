@@ -3,10 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// Import configurations file and mongoose to connect to DB
+var configs = require('./configs/globals');
+var mongoose = require('mongoose');
 
+//Routing Rules
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -21,6 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+//Connect to MongoDB
+mongoose.connect(configs.ConnectionStrings.MongoDB)
+  .then(() => { console.log('Connected to MongoDB!'); })
+  .catch((err) => { console.log('Error connecting to MongoDB!', err); });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

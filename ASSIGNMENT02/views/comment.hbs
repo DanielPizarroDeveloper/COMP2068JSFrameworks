@@ -2,20 +2,10 @@
     <h1>Comments</h1>
 
     <section class='section-comment'>
-        <input class='comment-type-text' type='text' value='Daniel Pizarro Saavedra' disabled>
         <input class='comment-type-text' type='text' value='Title of your opinion' disabled>
-        <select class='comment-select' name='subject' id='subject'>
-            <option value='Seleccione' selected hidden>Seleccione</option>
-            <option value='Subject 1'>Subject 1</option>
-            <option value='Subject 2'>Subject 2</option>
-            <option value='Subject 3'>Subject 3</option>
-            <option value='Subject 4'>Subject 4</option>
-            <option value='Subject 5'>Subject 5</option>
-        </select>
         <textarea class='comment-textArea' name='opinion' id='opinion' placeholder='Type your opinion here!'></textarea>
         <input type='button' value='Post it'>
     </section>
-
 
     <section>
         <article class='article-filter-comment'>
@@ -28,101 +18,28 @@
         </article>
 
         <article class='second-article-comment'>
-            <div class='article-content-comment'>
-                <div class='content-comment-user'>
-                    <span class='comment-avatar'>DP</span>
-                </div>
-
-                <div class='comment-content'>
-                    <h3>Titulo Comentario</h3>
-                    <div class='comment-content-text'>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, ab quos eligendi consequatur odit quis. Provident, quisquam numquam nesciunt saepe magnam tenetur molestiae maiores adipisci blanditiis. Cum unde molestias necessitatibus?</p>
+            {{#each comments}}
+                <div class='article-content-comment'>
+                    <div class='content-comment-user'>
+                        <span class='comment-avatar'>DP</span>
                     </div>
 
-                    <div class='comment-content-user'>
-                        <span>Daniel Pizarro Saavedra</span>
-                        <span>March 10, 2025</span>
+                    <div class='comment-content'>
+                        <h3>{{title}}</h3>
+                        <div class='comment-content-text'>
+                            <p>{{bodydescription}}</p>
+                        </div>
+
+                        <div class='comment-content-user'>
+                            <span>{{responsable}}</span>
+                            <span>Publication date:&nbsp;&nbsp;{{date}}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class='line'></div>
+                <div class='line'></div>
+            {{/each}}
 
-            <div class='article-content-comment'>
-                <div class='content-comment-user'>
-                    <span class='comment-avatar'>DP</span>
-                </div>
-
-                <div class='comment-content'>
-                    <div class='comment-content-text'>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, ab quos eligendi consequatur odit quis. Provident, quisquam numquam nesciunt saepe magnam tenetur molestiae maiores adipisci blanditiis. Cum unde molestias necessitatibus?</p>
-                    </div>
-
-                    <div class='comment-content-user'>
-                        <span>Daniel Pizarro Saavedra</span>
-                        <span>March 10, 2025</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class='line'></div>
-
-            <div class='article-content-comment'>
-                <div class='content-comment-user'>
-                    <span class='comment-avatar'>DP</span>
-                </div>
-
-                <div class='comment-content'>
-                    <div class='comment-content-text'>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, ab quos eligendi consequatur odit quis. Provident, quisquam numquam nesciunt saepe magnam tenetur molestiae maiores adipisci blanditiis. Cum unde molestias necessitatibus?</p>
-                    </div>
-
-                    <div class='comment-content-user'>
-                        <span>Daniel Pizarro Saavedra</span>
-                        <span>March 10, 2025</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class='line'></div>
-
-            <div class='article-content-comment'>
-                <div class='content-comment-user'>
-                    <span class='comment-avatar'>DP</span>
-                </div>
-
-                <div class='comment-content'>
-                    <div class='comment-content-text'>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, ab quos eligendi consequatur odit quis. Provident, quisquam numquam nesciunt saepe magnam tenetur molestiae maiores adipisci blanditiis. Cum unde molestias necessitatibus?</p>
-                    </div>
-
-                    <div class='comment-content-user'>
-                        <span>Daniel Pizarro Saavedra</span>
-                        <span>March 10, 2025</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class='line'></div>
-
-            <div class='article-content-comment'>
-                <div class='content-comment-user'>
-                    <span class='comment-avatar'>DP</span>
-                </div>
-
-                <div class='comment-content'>
-                    <div class='comment-content-text'>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, ab quos eligendi consequatur odit quis. Provident, quisquam numquam nesciunt saepe magnam tenetur molestiae maiores adipisci blanditiis. Cum unde molestias necessitatibus?</p>
-                    </div>
-
-                    <div class='comment-content-user'>
-                        <span>Daniel Pizarro Saavedra</span>
-                        <span>March 10, 2025</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class='line'></div>
         </article>
     </section>
 </main>
