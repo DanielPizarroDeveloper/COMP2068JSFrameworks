@@ -9,6 +9,8 @@
     <link rel='stylesheet' href='/stylesheets/contact.css' />
     <link rel='stylesheet' href='/stylesheets/comment.css' />
     <link rel='stylesheet' href='/stylesheets/about.css' />
+    <link rel='stylesheet' href='/stylesheets/account.css' />
+    <link rel='stylesheet' href='/stylesheets/panel-product-service.css' />
     <link rel='shortcut icon' href='/images/favicon.png' type='image/x-icon'>
     <link rel='stylesheet' href='https://api.fontshare.com/v2/css?f=clash-display&display=swap' />
   </head>
@@ -22,17 +24,35 @@
           </a>
         </li>
         <li>
+          <a href='/about'><span><span>ABOUT US</span></span></a>
+        </li>
+        <li>
           <a href='/product'><span>PRODUCTS</span></a>
         </li>
         <li>
           <a href='/service'><span>SERVICES</span></a>
         </li>
-        <li>
-          <a href='/login'><span>LOGIN</span></a>
-        </li>
-        <li>
-          <a href='/register'><span>REGISTER</span></a>
-        </li>
+        {{#if user}}
+          <li>
+            <a href='/comment'><span>COMMENTS</span></a>
+          </li>
+          <li>
+            <a href='/contact'><span>CONTACT</span></a>
+          </li>
+          <li>
+            <a href='/account'><span>{{user}}</span></a>
+          </li>
+          <li>
+            <a href='/logout'><span>Logout</span></a>
+          </li>
+        {{else}}
+          <li>
+            <a href='/contact'><span>CONTACT</span></a>
+          </li>
+          <li>
+            <a href='/login'><span>LOGIN</span></a>
+          </li>
+        {{/if}}
       </ul>
     </nav>
 
@@ -42,12 +62,6 @@
       <article class='footer-article'>
         <img class='footer-logo' src='/images/Company_Img.webp' alt='Corporate image of the company'>
         <span>TAPICERIA LEONE</span>
-      </article>
-
-      <article class='footer-redirect'>
-        <a href='/about'><span><span>ABOUT US</span></span></a>
-        <a href='/comment'><span><span>COMMENTS</span></span></a>
-        <a href='/contact'><span><span>CONTACT</span></span></a>
       </article>
 
       <article class='footer-last'>

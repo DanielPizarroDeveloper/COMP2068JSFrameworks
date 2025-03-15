@@ -18,19 +18,24 @@
 }
 
 html {
-  font-family: "Clash Display", sans-serif;
+  font-family: 'Clash Display', sans-serif;
   background-color: var(--primary-black);
   color: var(--primary-white);
   box-sizing: border-box;
 }
 
+html::selection {
+  background-color: var(--red-500);
+}
+
 input[type='text'],
 input[type='email'],
 input[type='password'],
+input[type='number'],
 textarea,
 select {
   min-width: 250px;
-  width: max-content;
+  width: calc(80% + 10px);
   height: 40px;
   background-color: var(--gray-800);
   color: var(--primary-white);
@@ -44,6 +49,8 @@ select {
 textarea {
   height: 100px;
   padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 input[type='text']::placeholder,
@@ -57,7 +64,7 @@ textarea::placeholder {
   padding-top: 1px;
 }
 
-input[type='button'] {
+input[type='submit'] {
   min-width: 150px;
   width: max-content;
   height: 40px;
@@ -76,7 +83,7 @@ h5 {
 }
 
 select {
-  font-family: "Clash Display", sans-serif;
+  font-family: 'Clash Display', sans-serif;
 }
 
 body {
@@ -153,15 +160,6 @@ footer {
 .footer-logo {
   width: 40px;
   height: 30px;
-}
-
-.footer-redirect {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  padding-left: 5%;
-  padding-right: 5%;
 }
 
 .footer-last {

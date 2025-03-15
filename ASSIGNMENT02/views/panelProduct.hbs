@@ -1,0 +1,41 @@
+<main>
+    <h1>ADM. Products</h1>
+    <section class='section-filter'>
+        <h3>Filter by</h3>
+        <input type='text' placeholder='Custom Steering Wheel Cover' name='serviceFilter' id='serviceFilter'>
+        <input type='submit' value='Search'>
+    </section>  
+    {{#each products}}
+        <section class='section-list-panel-product'>
+            <article class='article-result-product-service'>
+                <img class='result' src='{{imgProduct}}' alt='Representative image of the product.'>
+                <div class='container-panel-product'>
+                    <div class='detail'>
+                        <div class='container-new-title'>
+                            <label for='New product name'>Title</label>
+                            <input class='text-input-editable' type='text' value='{{title}}' name='' id=''>
+                        </div>
+                        
+                        <div class='container-new-title'>
+                            <label for='New product name'>Description</label>
+                            <textarea class='text-area-editable' name='description' id='description'>{{detail}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class='detail'>
+                        <div class='container-new-title'>
+                            <span>Amount:</span>
+                            <input type='number' value='{{quantity}}' name='quantity' id='quantity'>
+                        </div>
+                        
+                        <div class='container-new-title'>
+                            <label for='New product name'>Price</label>
+                            <input type='text' value='{{price}}' name='price' id='price'>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <input type='submit' value='Update Item'>
+        </section>
+    {{/each}}
+</main>

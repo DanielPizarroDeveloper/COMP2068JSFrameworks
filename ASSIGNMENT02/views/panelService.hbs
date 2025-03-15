@@ -1,0 +1,36 @@
+<main>
+    <h1>ADM. Services</h1>
+    <section class='section-filter'>
+        <h3>Filter by</h3>
+        <input type='text' placeholder='Custom Upholstery for Private Jets' name='serviceFilter' id='serviceFilter'>
+        <input type='submit' value='Search'>
+    </section>
+
+    {{#each services}}
+        <section class='section-list-panel-service'>
+            <article class='article-result'>
+                <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
+                <div class='container-panel-service'>
+                    <div class='detail'>
+                        <div class='container-new-title'>
+                            <label for='New service name'>Title</label>
+                            <input class='text-input-editable' type='text' value='{{title}}' name='' id=''>
+                        </div>
+                        
+                        <div class='container-new-title'>
+                            <label for='New service description'>Description</label>
+                            <textarea class='text-area-editable' name='description' id='description'>{{detail}}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class='container-new-title'>
+                        <label for='New service price'>Price</label>
+                        <input type='text' name='price' id='price' value='{{price}}'>
+                    </div>
+                </div>
+            </article>
+            
+            <input type='submit' value='Update Service'>
+        </section>
+    {{/each}}
+</main>

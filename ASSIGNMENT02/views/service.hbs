@@ -3,28 +3,28 @@
     <section class='section-filter'>
         <h3>Filter by</h3>
         <select name='service' id='service'>
-            <option value="Seleccione" selected hidden disabled>Seleccione</option>
-            <option value="Opción 1">Opción 1</option>
-            <option value="Opción 2">Opción 2</option>
-            <option value="Opción 3">Opción 3</option>
-            <option value="Opción 4">Opción 4</option>
-            <option value="Opción 5">Opción 5</option>
+            <option value='Seleccione' selected hidden disabled>Seleccione</option>
+            <option value='Opción 1'>Opción 1</option>
+            <option value='Opción 2'>Opción 2</option>
+            <option value='Opción 3'>Opción 3</option>
+            <option value='Opción 4'>Opción 4</option>
+            <option value='Opción 5'>Opción 5</option>
         </select>
     </section>
 
     {{#each services}}
-        <section class="section-list">
-            <article class="article-result">
-                <img class="result-service" src='{{imgService}}' alt='Representative image of the service.'>
-                <div class="container">
-                    <div class="detail">
+        <section class='section-list'>
+            <article class='article-result'>
+                <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
+                <div class='container'>
+                    <div class='detail'>
                         <span>{{title}}</span>
                         <span>{{detail}}</span>
                     </div>
 
-                    <div class="number">
-                        <span class="span-price">Price:</span>
-                        <span class="span-price">${{price}}</span>
+                    <div class='number'>
+                        <span class='span-price'>Price:</span>
+                        <span class='span-price'>${{price}}</span>
                     </div>
                 </div>
             </article>

@@ -6,6 +6,12 @@ var logger = require('morgan');
 // Import configurations file and mongoose to connect to DB
 var configs = require('./configs/globals');
 var mongoose = require('mongoose');
+//import passport express-session
+var passport = require('passport');
+var session = require('express-session');
+//Import model and package for authentication strategies
+var User = require('./models/user');
+
 
 //Routing Rules
 var indexRouter = require('./routes/index');
@@ -21,6 +27,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//Use express-session and passport
+app.use(session(
+  {
+    secret: 'TapiceriaLeone',
+    resave: false,
+    saveUninitialized: false
+  }
+));
+app.use(passport.initialize());
+app.use(passport.session());
+// Implement basic authentication strategy with passport-local and mongoose models.
+passport.use(User.createStrategy()); //out-of-the-box strategy initialization code from plm
+passport.serializeUser(User.serializeUser()); //out-of-the-box serializeUser code from plm
+passport.deserializeUser(User.deserializeUser()); //out-of-the-box deserializeUser code from plm
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

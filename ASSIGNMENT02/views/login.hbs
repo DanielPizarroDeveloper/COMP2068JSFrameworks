@@ -11,26 +11,35 @@
             </div>
         </article>
 
-        <article class='article-content-form'>
-            <input type='email' placeholder='Type your e-mail' name='email' id='email'>
-            <input type='password' placeholder='Type your password' name='password' id='password'>
-            <input type='button' value='Sign In'>
-
-            <div class='content-message'>
-                <span>Don't have an account?</span>
-                <a href='/register'>Sign up here.</a>
+        {{#if messages}}
+            <div class='message-error-auth'> 
+                <span>Invalid credentials</span>
+                <span>Please, check your credentials</span>
             </div>
+        {{/if}}
 
-            <div class='separate'>
-                <div class='horizontal-line'></div>
-                <span>o</span>
-                <div class='horizontal-line'></div>
-            </div>
+        <form method='POST'>
+            <article class='article-content-form'>
+                <input type='email' placeholder='Type your e-mail' name='email' id='email'>
+                <input type='password' placeholder='Type your password' name='password' id='password'>
+                <input type='submit' value='Sign In'>
 
-            <div class='content-sign-another-option'>
-                <img src='/images/svg/google.svg' alt='Google logo for sign-in'>
-                <span>Continue with google </span>
-            </div>
-        </article>
+                <div class='content-message'>
+                    <span>Don't have an account?</span>
+                    <a href='/register'>Sign up here.</a>
+                </div>
+
+                <div class='separate'>
+                    <div class='horizontal-line'></div>
+                    <span>o</span>
+                    <div class='horizontal-line'></div>
+                </div>
+
+                <div class='content-sign-another-option'>
+                    <img src='/images/svg/google.svg' alt='Google logo for sign-in'>
+                    <span>Continue with Github</span>
+                </div>
+            </article>
+        </form>
     </section>
 </main>
