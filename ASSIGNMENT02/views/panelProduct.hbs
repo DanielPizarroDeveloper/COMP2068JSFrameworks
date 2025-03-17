@@ -1,41 +1,116 @@
 <main>
     <h1>ADM. Products</h1>
-    <section class='section-filter'>
-        <h3>Filter by</h3>
-        <input type='text' placeholder='Custom Steering Wheel Cover' name='serviceFilter' id='serviceFilter'>
-        <input type='submit' value='Search'>
+    <section class='section-options-filter'>
+        <h3>Select one option</h3>
+        <div class='radio-button-group'>
+            <input type='radio' name='option' id='create' value='create'><label for='create'>Create Product</label>
+            <input type='radio' name='option' id='update' value='update'><label for='update'>Update Product</label>
+            <input type='radio' name='option' id='delete' value='delete'><label for='delete'>Delete Product</label>
+        </div>
     </section>  
-    {{#each products}}
-        <section class='section-list-panel-product'>
-            <article class='article-result-product-service'>
-                <img class='result' src='{{imgProduct}}' alt='Representative image of the product.'>
-                <div class='container-panel-product'>
-                    <div class='detail'>
-                        <div class='container-new-title'>
-                            <label for='New product name'>Title</label>
-                            <input class='text-input-editable' type='text' value='{{title}}' name='' id=''>
-                        </div>
-                        
-                        <div class='container-new-title'>
-                            <label for='New product name'>Description</label>
-                            <textarea class='text-area-editable' name='description' id='description'>{{detail}}</textarea>
-                        </div>
-                    </div>
+    
+    <div id='createSection' class='hidden'>
+        <h1>Create New Product!</h1>
+    </div>
 
-                    <div class='detail'>
-                        <div class='container-new-title'>
-                            <span>Amount:</span>
-                            <input type='number' value='{{quantity}}' name='quantity' id='quantity'>
+    <div id='updateSection' class='section-list-panel-product hidden'>
+        <div class='filter-Result'>
+            <input type='text' placeholder='Synthetic Leather for Seats' name='product-Filter'>
+            <input type='submit' value='Search'>
+        </div>
+        {{#each products}}
+            <section class='section-result-products'>
+                <article class='article-result-product-service'>
+                    <img class='panel-result-img' src='{{imgProduct}}' alt='Representative image of the product.'>
+                    <div class='container-panel-product'>
+                        <div class='detail-product'>
+                            <div class='container-product-information'>
+                                <label>Title</label>
+                                <input type='text' value='{{title}}' name='Titulo'>
+                            </div>
+
+                            <div class='container-product-information'>
+                                <span>Amount:</span>
+                                <input type='number' value='{{quantity}}' name='quantity'>
+                            </div>
                         </div>
-                        
-                        <div class='container-new-title'>
-                            <label for='New product name'>Price</label>
-                            <input type='text' value='{{price}}' name='price' id='price'>
+
+                        <div class='detail-product'>
+                            <div class='container-product-information'>
+                                <label>Description</label>
+                                <textarea class='text-area-editable-product' name='description'>{{detail}}</textarea>
+                            </div>
+
+                            <div class='container-product-information'>
+                                <label>Price</label>
+                                <input type='text' value='{{price}}' name='price'>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
-            <input type='submit' value='Update Item'>
-        </section>
-    {{/each}}
+                </article>
+                <input type='submit' value='Update Item'>
+            </section>
+        {{/each}}
+    </div>
+
+    <div id='deleteSection' class='section-list-panel-product hidden'>
+        <div class='filter-Result'>
+            <input type='text' placeholder='Synthetic Leather for Seats' name='product-Filter'>
+            <input type='submit' value='Search'>
+        </div>
+
+        {{#each products}}
+            <section class='section-result-products'>
+                <article class='article-result-product-service'>
+                    <img class='panel-result-img' src='{{imgProduct}}' alt='Representative image of the product.'>
+                    <div class='container-panel-product'>
+                        <div class='detail-product'>
+                            <div class='container-delete-information'>
+                                <h3>Product name: &nbsp;&nbsp;{{title}}</h3>
+                            </div>
+
+                            <div class='container-delete-information'>
+                                <h3>Amount: &nbsp;&nbsp;{{quantity}}</h3>
+                            </div>
+
+                            <div class='container-delete-information'>
+                                <h3>Price: &nbsp;&nbsp;{{price}}</h2>
+                            </div>
+
+                            <div class='container-delete-information'>
+                                <h3>Description: &nbsp;&nbsp;{{detail}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <input type='submit' value='Delete Item'>
+            </section>
+        {{/each}}
+    </div>
 </main>
+
+<script>
+    const radios = document.querySelectorAll('input[name="option"]');
+    const createElement = document.getElementById('createSection');
+    const updateElement = document.getElementById('updateSection');
+    const deleteElement = document.getElementById('deleteSection');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.value === 'create') {
+                createElement.classList.remove('hidden');
+                updateElement.classList.add('hidden');
+                deleteElement.classList.add('hidden');
+            } else if (radio.value === 'update') {
+                createElement.classList.add('hidden');
+                updateElement.classList.remove('hidden');
+                deleteElement.classList.add('hidden');
+            }
+            else if (radio.value === 'delete'){
+                createElement.classList.add('hidden');
+                updateElement.classList.add('hidden');
+                deleteElement.classList.remove('hidden');
+            }
+        });
+    });
+</script>

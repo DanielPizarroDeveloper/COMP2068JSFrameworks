@@ -72,6 +72,10 @@
     padding-right: 5%;
 }
 
+.content-option:last-of-type {
+    padding-bottom: 3%;
+}
+
 .content-option-titulo {
     display: flex;
     flex-direction: column;

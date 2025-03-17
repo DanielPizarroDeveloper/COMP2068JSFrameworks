@@ -19,7 +19,7 @@ h3 {
 .section-list {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    /* width: 70%; */
     align-items: flex-start;
 }
 
@@ -53,11 +53,19 @@ h3 {
     box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
 }
 
-.container {
+.container-product {
     display: flex;
     align-items: center;
     flex-direction: row;
     gap: 200px;
+    width: 1000px;
+    max-width: 1000px;
+}
+
+.container-service {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     width: 1000px;
     max-width: 1000px;
 }

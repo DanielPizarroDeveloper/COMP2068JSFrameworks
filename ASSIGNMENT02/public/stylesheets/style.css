@@ -46,6 +46,10 @@ select {
   text-align: center;
 }
 
+input[type='radio'] {
+  accent-color: var(--red-600);
+}
+
 textarea {
   height: 100px;
   padding-top: 10px;

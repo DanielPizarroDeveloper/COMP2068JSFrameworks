@@ -1,36 +1,108 @@
 <main>
     <h1>ADM. Services</h1>
-    <section class='section-filter'>
-        <h3>Filter by</h3>
-        <input type='text' placeholder='Custom Upholstery for Private Jets' name='serviceFilter' id='serviceFilter'>
-        <input type='submit' value='Search'>
+    <section class='section-options-filter'>
+        <h3>Select one option</h3>
+        <div class="radio-button-group">
+            <input type="radio" name="option" id="create" value="create"><label for="create">Create Service</label>
+            <input type="radio" name="option" id="update" value="update"><label for="update">Update Service</label>
+            <input type="radio" name="option" id="delete" value="delete"><label for="delete">Delete Service</label>
+        </div>
     </section>
 
-    {{#each services}}
-        <section class='section-list-panel-service'>
-            <article class='article-result'>
-                <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
-                <div class='container-panel-service'>
-                    <div class='detail'>
-                        <div class='container-new-title'>
-                            <label for='New service name'>Title</label>
-                            <input class='text-input-editable' type='text' value='{{title}}' name='' id=''>
-                        </div>
-                        
-                        <div class='container-new-title'>
-                            <label for='New service description'>Description</label>
-                            <textarea class='text-area-editable' name='description' id='description'>{{detail}}</textarea>
+    <div id='createSection' class='hidden'>
+        <h1>Create New Service!</h1>
+    </div>
+
+    <div id='updateSection' class='section-list-panel-product hidden'>
+        <div class='filter-Result'>
+            <input type='text' placeholder='Luxury Vehicle Upholstery' name='serviceFilter'>
+            <input type='submit' value='Search'>
+        </div>
+    
+        {{#each services}}
+            <section class='section-list-panel-service'>
+                <article class='article-result-product-service'>
+                    <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
+                    <div class='container-panel-service'>
+                        <div class='detail-service'>
+                            <div class='container-service-information'>
+                                <label>Title</label>
+                                <input class='text-input-editable' type='text' value='{{title}}' name=''>
+                            </div>
+
+                            <div class='container-service-information'>
+                                <label>Price</label>
+                                <input type='text' name='price' value='{{price}}'>
+                            </div>
+
+                            <div class='container-new-description'>
+                                <label>Description</label>
+                                <textarea class='text-area-editable-service' name='description'>{{detail}}</textarea>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class='container-new-title'>
-                        <label for='New service price'>Price</label>
-                        <input type='text' name='price' id='price' value='{{price}}'>
+                </article>
+
+                <input type='submit' value='Update Service'>
+            </section>
+        {{/each}}
+    </div>
+
+    <div id='deleteSection' class='section-list-panel-product hidden'>
+        <div class='filter-Result'>
+            <input type='text' placeholder='Luxury Vehicle Upholstery' name='serviceFilter'>
+            <input type='submit' value='Search'>
+        </div>
+    
+        {{#each services}}
+            <section class='section-list-panel-service'>
+                <article class='article-result-product-service'>
+                    <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
+                    <div class='container-panel-service'>
+                        <div class='detail-service-delete'>
+                            <div class='container-delete-information'>
+                                <h3>Service name: &nbsp;&nbsp;{{title}}</h3>
+                            </div>
+
+                            <div class='container-delete-information'>
+                                <h3>Price: &nbsp;&nbsp;{{price}}</h3>
+                            </div>
+
+                            <div class='container-delete-information'>
+                                <h3>Description: &nbsp;&nbsp;{{detail}}</h3>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </article>
-            
-            <input type='submit' value='Update Service'>
-        </section>
-    {{/each}}
+                </article>
+
+                <input type='submit' value='Delete Service'>
+            </section>
+        {{/each}}
+    </div>
 </main>
+
+<script>
+    const radios = document.querySelectorAll('input[name="option"]');
+    const createElement = document.getElementById('createSection');
+    const updateElement = document.getElementById('updateSection');
+    const deleteElement = document.getElementById('deleteSection');
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.value === 'create') {
+                createElement.classList.remove('hidden');
+                updateElement.classList.add('hidden');
+                deleteElement.classList.add('hidden');
+            } else if (radio.value === 'update') {
+                createElement.classList.add('hidden');
+                updateElement.classList.remove('hidden');
+                deleteElement.classList.add('hidden');
+            }
+            else if (radio.value === 'delete'){
+                createElement.classList.add('hidden');
+                updateElement.classList.add('hidden');
+                deleteElement.classList.remove('hidden');
+            }
+        });
+    });
+</script>
