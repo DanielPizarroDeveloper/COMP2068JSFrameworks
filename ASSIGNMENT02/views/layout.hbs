@@ -31,16 +31,16 @@
             <span>TAPICERIA LEONE</span>
           </a>
         </li>
-        <li>
-          <a href='/about'><span><span>ABOUT US</span></span></a>
-        </li>
-        <li>
-          <a href='/product'><span>PRODUCTS</span></a>
-        </li>
-        <li>
-          <a href='/service'><span>SERVICES</span></a>
-        </li>
         {{#if user}}
+          <li>
+            <a href='/about'><span><span>ABOUT US</span></span></a>
+          </li>
+          <li>
+            <a href='/product'><span>PRODUCTS</span></a>
+          </li>
+          <li>
+            <a href='/service'><span>SERVICES</span></a>
+          </li>
           <li>
             <a href='/comment'><span>COMMENTS</span></a>
           </li>
@@ -54,9 +54,6 @@
             <a href='/logout'><span>Logout</span></a>
           </li>
         {{else}}
-          <li>
-            <a href='/contact'><span>CONTACT</span></a>
-          </li>
           <li>
             <a href='/login'><span>LOGIN</span></a>
           </li>

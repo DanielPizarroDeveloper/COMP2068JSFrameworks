@@ -17,7 +17,15 @@
     margin-bottom: 1%;
 }
 
+
 .container-panel-product {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    max-width:1000px
+}
+
+.container-panel-product-delete {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -34,17 +42,22 @@
     margin-bottom: 5%;
 }
 
+.detail-product-update {
+    display: flex;
+    flex-direction: row;
+    gap: 20px
+}
+
+.detail-product-description {
+    display: flex;
+    flex-direction: column;
+}
+
 .container-product-information > label {
     width: 50px;
 }
 
 .text-area-editable-product {
+    width: 99%;
     height: 55px !important;
-}
-
-.detail-product {
-    display: flex;
-    flex-direction: column;
-    width: 380px;
-    max-width: 380px;
 }

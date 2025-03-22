@@ -9,8 +9,25 @@
         </div>
     </section>
 
-    <div id='createSection' class='hidden'>
-        <h1>Create New Service!</h1>
+    <div class='hidden' id='createSection'>
+        <article class='article-create'>
+            <div class='article-content-form'>
+                <div class='content-group'>
+                    <input type='text' name='' id='' placeholder='Service name'>
+                    <input type='number' name='' id='' placeholder='price'>
+                </div>
+                
+                <textarea class='service-width' name='' id="" placeholder="Detail from product"></textarea>
+
+                <div class='content-group-file'>
+                    <label for='fileUpload' class='custom-file-label'>Upload your image</label>
+                    <input type='file' id='fileUpload' class='hidden' accept='.webp'>
+                    <p id='fileName'>No file has been selected.</p>
+                </div>
+    
+                <input type='submit' value='Create Service'>
+            </div>
+        </article>
     </div>
 
     <div id='updateSection' class='section-list-panel-product hidden'>
@@ -104,5 +121,13 @@
                 deleteElement.classList.remove('hidden');
             }
         });
+    });
+
+    const fileInput = document.getElementById("fileUpload");
+    const fileNameDisplay = document.getElementById("fileName");
+
+    fileInput.addEventListener("change", function() {
+        const fileName = fileInput.files[0]?.name || "No se ha seleccionado ningún archivo.";
+        fileNameDisplay.textContent = fileName;
     });
 </script>

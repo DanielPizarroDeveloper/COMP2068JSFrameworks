@@ -12,7 +12,6 @@ var session = require('express-session');
 //Import model and package for authentication strategies
 var User = require('./models/user');
 
-
 //Routing Rules
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

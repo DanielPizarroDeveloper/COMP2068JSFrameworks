@@ -9,8 +9,30 @@
         </div>
     </section>  
     
-    <div id='createSection' class='hidden'>
-        <h1>Create New Product!</h1>
+    <div class='hidden' id='createSection'>
+        <article class='article-create'>
+            <div class='article-content-form'>
+                <div class='content-group'>
+                    <input type='text' name='' id='' placeholder='Product name'>
+                    <input type='number' name='' id='' placeholder='Quantity'>
+                </div>
+                
+                <div class='content-group'>
+                    <input type='text' name='' id='' placeholder='Unit'>
+                    <input type='number' name='' id='' placeholder='Product price'>
+                </div>
+
+                <textarea class='text-area-create' name='' id='' placeholder='Detail from service'></textarea>
+    
+                <div class='content-group-file'>
+                    <label for='fileUpload' class='custom-file-label'>Upload your image</label>
+                    <input type='file' id='fileUpload' class='hidden' accept='.webp'>
+                    <p id='fileName'>No file has been selected.</p>
+                </div>
+    
+                <input type='submit' value='Create Product'>
+            </div>
+        </article>
     </div>
 
     <div id='updateSection' class='section-list-panel-product hidden'>
@@ -23,7 +45,7 @@
                 <article class='article-result-product-service'>
                     <img class='panel-result-img' src='{{imgProduct}}' alt='Representative image of the product.'>
                     <div class='container-panel-product'>
-                        <div class='detail-product'>
+                        <div class='detail-product-update'>
                             <div class='container-product-information'>
                                 <label>Title</label>
                                 <input type='text' value='{{title}}' name='Titulo'>
@@ -33,17 +55,17 @@
                                 <span>Amount:</span>
                                 <input type='number' value='{{quantity}}' name='quantity'>
                             </div>
-                        </div>
-
-                        <div class='detail-product'>
-                            <div class='container-product-information'>
-                                <label>Description</label>
-                                <textarea class='text-area-editable-product' name='description'>{{detail}}</textarea>
-                            </div>
 
                             <div class='container-product-information'>
                                 <label>Price</label>
                                 <input type='text' value='{{price}}' name='price'>
+                            </div>
+                        </div>
+
+                        <div class='detail-product-description'>
+                            <div class='container-product-information'>
+                                <label>Description</label>
+                                <textarea class='text-area-editable-product' name='description'>{{detail}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -63,7 +85,7 @@
             <section class='section-result-products'>
                 <article class='article-result-product-service'>
                     <img class='panel-result-img' src='{{imgProduct}}' alt='Representative image of the product.'>
-                    <div class='container-panel-product'>
+                    <div class='container-panel-product-delete'>
                         <div class='detail-product'>
                             <div class='container-delete-information'>
                                 <h3>Product name: &nbsp;&nbsp;{{title}}</h3>
@@ -112,5 +134,13 @@
                 deleteElement.classList.remove('hidden');
             }
         });
+    });
+
+    const fileInput = document.getElementById("fileUpload");
+    const fileNameDisplay = document.getElementById("fileName");
+
+    fileInput.addEventListener("change", function() {
+        const fileName = fileInput.files[0]?.name || "No se ha seleccionado ningún archivo.";
+        fileNameDisplay.textContent = fileName;
     });
 </script>

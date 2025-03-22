@@ -7,5 +7,6 @@ const configurations = {
         MongoDB: process.env.CONNECTION_STRING_MONGODB
     }
 }
+
 // export configuration object
 module.exports = configurations;

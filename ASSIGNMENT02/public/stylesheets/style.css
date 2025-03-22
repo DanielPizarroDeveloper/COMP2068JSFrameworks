@@ -60,6 +60,7 @@ textarea {
 input[type='text']::placeholder,
 input[type='email']::placeholder,
 input[type='password']::placeholder,
+input[type='number']::placeholder,
 textarea::placeholder {
   color: var(--gray-400);
 }
@@ -76,6 +77,16 @@ input[type='submit'] {
   border-radius: 20px;
   background-color: var(--red-500);
   color: var(--primary-white);
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield; /* Para Firefox */
 }
 
 h1,
