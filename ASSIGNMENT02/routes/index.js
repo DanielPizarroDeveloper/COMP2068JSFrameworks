@@ -59,18 +59,73 @@ router.get('/account', isAuthenticated, (req, res, next) => {
   res.render('account', { title: 'Account', user: req.user.name, email: req.user.email });
 });
 
-/* Get Account */
+/* Get panelProduct */
 router.get('/panelProduct', isAuthenticated, async(req, res, next) => {
   var user = null;
   if(req.isAuthenticated()) {
     user = req.user.name;
   }
 
-  const products = await Product.find();
+  const productsList = await Product.find();
 
-  res.render('panelProduct', { title: 'Product Administrator', products, user: req.user.name });
+  res.render('panelProduct', { title: 'Product Administrator', productsList, user: req.user.name });
 });
 
+//  CREATE PRODUCT PANEL
+router.post('/panelProduct', isAuthenticated, async(req, res, next) => {
+  try {
+    let newProduct = new Product({
+      title: req.body.productName,
+      detail: req.body.description,
+      quantity: req.body.quantity,
+      unit: req.body.unit,
+      publication: '22-03-2025',
+      price: req.body.price,
+      imgProduct: req.body.base64Create
+    });
+
+    await newProduct.save();
+    res.redirect('/panelProduct');
+
+  } catch (error) {
+    console.error('Msj: ', error);
+  }
+});
+
+//  PUT PRODUCT PANEL
+router.post('/panelProduct/:_id', async (req, res, next) => {
+  try {
+      let productID = req.params._id.replace(':', '').replace('_', '');
+      await Product.findByIdAndUpdate(
+        { _id: productID },
+        {
+          title: req.body.productName,
+          detail: req.body.description,
+          quantity: req.body.quantity,
+          publication: '22-03-2025',
+          price: req.body.price,
+          imgProduct: req.body.base64Update
+        }
+      )
+      res.redirect('/panelProduct');
+      
+  } catch (error) {
+    console.error('Msj: ', error);
+  }
+});
+
+//  DELETE PRODUCT PANEL
+router.get('/panelProduct/:_id', async (req, res, next) => {
+  try {
+      let productID = req.params._id.replace(':', '').replace('_', '');
+      await Product.findByIdAndDelete(productID);
+      res.redirect('/panelProduct')
+  } catch (error) {
+    console.error('Msj: ', error);
+  }
+});
+
+// GET SERVICE PANEL
 router.get('/panelService', isAuthenticated, async(req, res, next) => {
   var user = null;
   if(req.isAuthenticated()) {
@@ -118,7 +173,7 @@ router.post('/register', function(req, res, next) {
     req.body.password,
     (error, newUser) => {
       if(error) {
-        console.log(error);
+        console.error(error);
         return res.redirect('/register');
       }
 
