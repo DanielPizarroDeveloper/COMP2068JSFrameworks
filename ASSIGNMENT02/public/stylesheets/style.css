@@ -15,10 +15,12 @@
   /* Users */
   --lime-100: #ecfccb;
   --lime-700: #4d7c0f;
+
+  --font-family: 'Clash Display', sans-serif;
 }
 
 html {
-  font-family: 'Clash Display', sans-serif;
+  font-family: var(--font-family);
   background-color: var(--primary-black);
   color: var(--primary-white);
   box-sizing: border-box;
@@ -44,6 +46,7 @@ select {
   border-radius: 20px;
   appearance: none;
   text-align: center;
+  font-family: var(--font-family);
 }
 
 input[type='radio'] {
@@ -77,6 +80,16 @@ input[type='submit'] {
   border-radius: 20px;
   background-color: var(--red-500);
   color: var(--primary-white);
+  font-family: var(--font-family);
+}
+
+button[type='submit'] {
+  border: 0;
+  padding: 10px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: var(--red-500);
+  color: var(--primary-white);
 }
 
 input[type='number']::-webkit-outer-spin-button,
@@ -97,10 +110,6 @@ h5 {
   font-weight: 100;
 }
 
-select {
-  font-family: 'Clash Display', sans-serif;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -109,6 +118,7 @@ body {
   height: 100vh;
   flex-direction: column;
   justify-content: space-between;
+  font-family: var(--font-family);
 }
 
 nav {

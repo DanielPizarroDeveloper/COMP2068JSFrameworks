@@ -76,11 +76,11 @@ router.post('/panelProduct', isAuthenticated, async(req, res, next) => {
   try {
     let newProduct = new Product({
       title: req.body.productName,
-      detail: req.body.description,
-      quantity: req.body.quantity,
-      unit: req.body.unit,
+      detail: req.body.productDescription,
+      quantity: req.body.productQuantity,
+      unit: req.body.productUnit,
       publication: '22-03-2025',
-      price: req.body.price,
+      price: req.body.productPrice,
       imgProduct: req.body.base64Create
     });
 
@@ -95,19 +95,35 @@ router.post('/panelProduct', isAuthenticated, async(req, res, next) => {
 //  PUT PRODUCT PANEL
 router.post('/panelProduct/:_id', async (req, res, next) => {
   try {
-      let productID = req.params._id.replace(':', '').replace('_', '');
+    let path = req.body.base64Update;
+    let productID = req.params._id.replace(':', '').replace('_', '');
+    
+    if (path.length !== 0) {
       await Product.findByIdAndUpdate(
         { _id: productID },
         {
-          title: req.body.productName,
-          detail: req.body.description,
-          quantity: req.body.quantity,
+          title: req.body.productUpdateName,
+          detail: req.body.productUpdateDescription,
+          quantity: req.body.productUpdateQuantity,
           publication: '22-03-2025',
-          price: req.body.price,
+          price: req.body.productUpdatePrice,
           imgProduct: req.body.base64Update
         }
+      ) 
+    } else {
+      await Product.findByIdAndUpdate(
+        { _id: productID },
+        {
+          title: req.body.productUpdateName,
+          detail: req.body.productUpdateDescription,
+          quantity: req.body.productUpdateQuantity,
+          publication: '22-03-2025',
+          price: req.body.productUpdatePrice
+        }
       )
-      res.redirect('/panelProduct');
+    }
+    
+    res.redirect('/panelProduct');
       
   } catch (error) {
     console.error('Msj: ', error);
@@ -119,7 +135,8 @@ router.get('/panelProduct/:_id', async (req, res, next) => {
   try {
       let productID = req.params._id.replace(':', '').replace('_', '');
       await Product.findByIdAndDelete(productID);
-      res.redirect('/panelProduct')
+      res.redirect('/panelProduct');
+      
   } catch (error) {
     console.error('Msj: ', error);
   }
@@ -131,8 +148,72 @@ router.get('/panelService', isAuthenticated, async(req, res, next) => {
   if(req.isAuthenticated()) {
     user = req.user.name;
   }
-  const services = await Service.find();
-  res.render('panelService', { title: 'Service Administrator', services, user: req.user.name });
+  const serviceList = await Service.find();
+  res.render('panelService', { title: 'Service Administrator', serviceList, user: req.user.name });
+});
+
+// POST SERVICE PANEL
+router.post('/panelService', isAuthenticated, async(req, res, next) => {
+  try {
+    let newService = new Service({
+      title: req.body.serviceName,
+      detail: req.body.description,
+      price: req.body.price,
+      imgService: req.body.base64Create
+    });
+
+    await newService.save();
+    res.redirect('/panelService');
+
+  } catch (error) {
+    console.error('Msj: ', error);
+  }
+});
+
+// PUT SERVICE PANEL
+router.post('/panelService/:_id', isAuthenticated, async(req, res, next) => {
+  try {
+    let path = req.body.base64Update;
+    let serviceID = req.params._id.replace(':', '').replace('_', '');
+    
+    if (path.length !== 0) {
+      await Service.findByIdAndUpdate(
+        { _id: serviceID },
+        {
+          title: req.body.serviceName,
+          detail: req.body.description,
+          price: req.body.price,
+          imgService: req.body.base64Update
+        }
+      ) 
+    } else {
+      await Service.findByIdAndUpdate(
+        { _id: serviceID },
+        {
+          title: req.body.serviceName,
+          detail: req.body.description,
+          price: req.body.price
+        }
+      )
+    }
+    
+    res.redirect('/panelService');
+      
+  } catch (error) {
+    console.error('Msj: ', error);
+  }
+});
+
+//  DELETE PRODUCT PANEL
+router.get('/panelService/:_id', async (req, res, next) => {
+  try {
+      let serviceID = req.params._id.replace(':', '').replace('_', '');
+      await Service.findByIdAndDelete(serviceID);
+      res.redirect('/panelService');
+
+  } catch (error) {
+    console.error('Msj: ', error);
+  }
 });
 
 router.get('/panelComment', isAuthenticated, (req, res, next) => {
