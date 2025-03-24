@@ -105,3 +105,8 @@ h3 {
 .text-area-create {
     width: 520px !important;
 }
+
+.svg {
+    color: white;
+    width: 20px;
+}
