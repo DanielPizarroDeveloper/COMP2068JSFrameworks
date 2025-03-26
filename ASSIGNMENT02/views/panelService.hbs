@@ -11,10 +11,10 @@
 
     <div class='hidden' id='createSection'>
         <article class='article-create'>
-            <form method="post">
+            <form method='POST'>
                 <div class='article-content-form'>
                     <div class='content-group'>
-                        <input type='text' name='serviceName' placeholder='Service name'>
+                        <input type='text' name='serviceName' placeholder='Service Name'>
                         <input type='number' name='servicePrice' placeholder='price'>
                     </div>
 
@@ -24,7 +24,7 @@
                         <label for='fileUploadCreate' class='custom-file-label'>Upload your image</label>
                         <input type='file' id='fileUploadCreate' class='hidden' accept='.webp'>
                         <p id='fileNameCreate'>No file has been selected.</p>
-                        <input type='text' id='base64Create' name='base64Create'>
+                        <input type='text' id='base64Create' name='base64Create' class='hidden'>
                     </div>
 
                     <input type='submit' value='Create Service'>
@@ -48,7 +48,7 @@
                             <div class='detail-service'>
                                 <div class='container-service-information'>
                                     <label>Title</label>
-                                    <input class='text-input-editable' type='text' value='{{title}}' name=''>
+                                    <input class='text-input-editable' type='text' value='{{title}}' name='serviceName'>
                                 </div>
 
                                 <div class='container-service-information'>
@@ -60,6 +60,15 @@
                                     <label>Description</label>
                                     <textarea class='text-area-editable-service' name='description'>{{detail}}</textarea>
                                 </div>
+                            </div>
+
+                            <div class='detail-product-description'>
+                                <div class='content-group-file'>
+                                    <label for='fileUploadUpdate{{_id}}' class='custom-file-label' onclick="fileLoad('{{_id}}')">Upload your image</label>
+                                    <input type='file' id='fileUploadUpdate{{_id}}' accept='.webp' class='hidden'>
+                                    <p id='fileNameUpdate{{_id}}'>No file has been selected.</p>
+                                    <input type='text' id='base64Update{{_id}}' name='base64Update' class='hidden'>
+                                </div> 
                             </div>
                         </div>
                         <button type='submit'>

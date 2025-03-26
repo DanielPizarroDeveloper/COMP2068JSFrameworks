@@ -176,7 +176,7 @@ router.post('/panelService/:_id', isAuthenticated, async(req, res, next) => {
   try {
     let path = req.body.base64Update;
     let serviceID = req.params._id.replace(':', '').replace('_', '');
-    
+
     if (path.length !== 0) {
       await Service.findByIdAndUpdate(
         { _id: serviceID },
