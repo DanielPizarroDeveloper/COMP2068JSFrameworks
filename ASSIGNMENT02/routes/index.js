@@ -7,6 +7,7 @@ const Service = require('../models/service');
 
 const User = require('../models/user');
 const passport = require('passport');
+const service = require('../models/service');
 
 const isAuthenticated = (req, res, next) => {
   var user = null;
@@ -157,8 +158,8 @@ router.post('/panelService', isAuthenticated, async(req, res, next) => {
   try {
     let newService = new Service({
       title: req.body.serviceName,
-      detail: req.body.description,
-      price: req.body.price,
+      detail: req.body.serviceDescription,
+      price: req.body.servicePrice,
       imgService: req.body.base64Create
     });
 
