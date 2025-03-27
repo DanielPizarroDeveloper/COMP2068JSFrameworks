@@ -4,13 +4,12 @@ var router = express.Router();
 const Comment = require('../models/comment');
 const Product = require('../models/product');
 const Service = require('../models/service');
+const today = require('../public/javascripts/getToday.js');
 
 const User = require('../models/user');
 const passport = require('passport');
-const service = require('../models/service');
 
 const isAuthenticated = (req, res, next) => {
-  var user = null;
   if(req.isAuthenticated()) {
     return next();
   }
@@ -48,25 +47,71 @@ router.get('/contact', isAuthenticated, (req, res, next) => {
 /* GET comments page. */
 router.get('/comment', isAuthenticated,  async(req, res, next) => {
   const comments = await Comment.find();
-  res.render('comment', { title: 'Comment', comments, user: req.user.name });
+  const commentsOrderBy = comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+  res.render('comment', { title: 'Comment', commentsOrderBy, user: req.user.name });
 });
 
-/* Get Account */
-router.get('/account', isAuthenticated, (req, res, next) => {
-  var user = null;
-  if(req.isAuthenticated()) {
-    user = req.user.name;
+/* POST comments page. */
+router.post('/comment', isAuthenticated,  async(req, res, next) => {
+  try {
+    let usernameSplit = req.user.name.split(' ');
+    let lengthName = usernameSplit.length;
+    let initialsUser = null;
+
+    switch (lengthName) {
+      case 1:
+        initialsUser = usernameSplit[0][0];
+        console.log('Case 1');
+        break;
+      case 2:
+        initialsUser = usernameSplit[0][0] + usernameSplit[1][0];
+        break;
+      case 3:
+        initialsUser = usernameSplit[0][0] + usernameSplit[2][0];
+        break;
+      default:
+        initialsUser = 'NN';
+        break;
+    }
+
+    let newComment = new Comment({
+      responsable: req.user.name,
+      title: req.body.title,
+      date: today(),
+      bodydescription: req.body.opinion,
+      initials: initialsUser
+    });
+
+    await newComment.save();
+    res.redirect('/comment');
+
+  } catch (error) {
+    console.error('Msj: ', error);
   }
-  res.render('account', { title: 'Account', user: req.user.name, email: req.user.email });
+});
+
+/* GET panel comments page. */
+router.get('/panelComment', isAuthenticated,  async(req, res, next) => {
+  const comments = await Comment.find();
+  const commentsOrderBy = comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+  res.render('panelComment', { title: 'panel Comment', commentsOrderBy, user: req.user.name });
+});
+
+/* GET panel comments page. */
+router.get('/panelComment/:_id', isAuthenticated,  async(req, res, next) => {
+  try {
+    let commentID = req.params._id.replace(':', '').replace('_', '');
+
+    await Comment.findByIdAndDelete(commentID);
+    res.redirect('/panelComment');
+    
+  } catch (error) {
+    console.error('Msj: ', error);
+  }
 });
 
 /* Get panelProduct */
 router.get('/panelProduct', isAuthenticated, async(req, res, next) => {
-  var user = null;
-  if(req.isAuthenticated()) {
-    user = req.user.name;
-  }
-
   const productsList = await Product.find();
 
   res.render('panelProduct', { title: 'Product Administrator', productsList, user: req.user.name });
@@ -80,7 +125,7 @@ router.post('/panelProduct', isAuthenticated, async(req, res, next) => {
       detail: req.body.productDescription,
       quantity: req.body.productQuantity,
       unit: req.body.productUnit,
-      publication: '22-03-2025',
+      publication: today(),
       price: req.body.productPrice,
       imgProduct: req.body.base64Create
     });
@@ -98,7 +143,7 @@ router.post('/panelProduct/:_id', async (req, res, next) => {
   try {
     let path = req.body.base64Update;
     let productID = req.params._id.replace(':', '').replace('_', '');
-    
+
     if (path.length !== 0) {
       await Product.findByIdAndUpdate(
         { _id: productID },
@@ -106,11 +151,11 @@ router.post('/panelProduct/:_id', async (req, res, next) => {
           title: req.body.productUpdateName,
           detail: req.body.productUpdateDescription,
           quantity: req.body.productUpdateQuantity,
-          publication: '22-03-2025',
+          publication: today(),
           price: req.body.productUpdatePrice,
           imgProduct: req.body.base64Update
         }
-      ) 
+      )
     } else {
       await Product.findByIdAndUpdate(
         { _id: productID },
@@ -118,14 +163,14 @@ router.post('/panelProduct/:_id', async (req, res, next) => {
           title: req.body.productUpdateName,
           detail: req.body.productUpdateDescription,
           quantity: req.body.productUpdateQuantity,
-          publication: '22-03-2025',
+          publication: today(),
           price: req.body.productUpdatePrice
         }
       )
     }
-    
+
     res.redirect('/panelProduct');
-      
+
   } catch (error) {
     console.error('Msj: ', error);
   }
@@ -137,7 +182,7 @@ router.get('/panelProduct/:_id', async (req, res, next) => {
       let productID = req.params._id.replace(':', '').replace('_', '');
       await Product.findByIdAndDelete(productID);
       res.redirect('/panelProduct');
-      
+
   } catch (error) {
     console.error('Msj: ', error);
   }
@@ -145,10 +190,6 @@ router.get('/panelProduct/:_id', async (req, res, next) => {
 
 // GET SERVICE PANEL
 router.get('/panelService', isAuthenticated, async(req, res, next) => {
-  var user = null;
-  if(req.isAuthenticated()) {
-    user = req.user.name;
-  }
   const serviceList = await Service.find();
   res.render('panelService', { title: 'Service Administrator', serviceList, user: req.user.name });
 });
@@ -186,7 +227,7 @@ router.post('/panelService/:_id', isAuthenticated, async(req, res, next) => {
           price: req.body.price,
           imgService: req.body.base64Update
         }
-      ) 
+      )
     } else {
       await Service.findByIdAndUpdate(
         { _id: serviceID },
@@ -197,9 +238,9 @@ router.post('/panelService/:_id', isAuthenticated, async(req, res, next) => {
         }
       )
     }
-    
+
     res.redirect('/panelService');
-      
+
   } catch (error) {
     console.error('Msj: ', error);
   }
@@ -218,10 +259,6 @@ router.get('/panelService/:_id', async (req, res, next) => {
 });
 
 router.get('/panelComment', isAuthenticated, (req, res, next) => {
-  var user = null;
-  if(req.isAuthenticated()) {
-    user = req.user.name;
-  }
   res.render('panelComment', { title: 'Comment Administrator', user: req.user.name });
 });
 
@@ -271,6 +308,15 @@ router.get('/logout', (req, res, next) => {
   req.logout((error) => {
     res.redirect('/login');
   });
+});
+
+/* Get Account */
+router.get('/account', isAuthenticated, (req, res, next) => {
+  var user = null;
+  if(req.isAuthenticated()) {
+    user = req.user.name;
+  }
+  res.render('account', { title: 'Account', user: req.user.name, email: req.user.email });
 });
 
 module.exports = router;

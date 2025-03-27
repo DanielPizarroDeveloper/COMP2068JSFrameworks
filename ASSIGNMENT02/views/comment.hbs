@@ -1,27 +1,19 @@
 <main>
     <h1>Comments</h1>
-
-    <section class='section-comment'>
-        <input class='comment-type-text' type='text' value='Title of your opinion' disabled>
-        <textarea class='comment-textArea' name='opinion' id='opinion' placeholder='Type your opinion here!'></textarea>
-        <input type='submit' value='Post it'>
-    </section>
+    <form method='POST'>
+        <section class='section-comment'>
+            <input class='comment-type-text' type='text' name='title' placeholder='Title of your opinion'>
+            <textarea class='comment-textArea' name='opinion' placeholder='Type your opinion here!'></textarea>
+            <input type='submit' value='Post it'>
+        </section>
+    </form>
 
     <section>
-        <article class='article-filter-comment'>
-            <h3>Sort by</h3>
-            <select name='product' id='product'>
-                <option value='Seleccione' selected hidden disabled>Seleccione</option>
-                <option value='Newest'>Newest</option>
-                <option value='Oldest'>Oldest</option>
-            </select>
-        </article>
-
         <article class='second-article-comment'>
-            {{#each comments}}
+            {{#each commentsOrderBy}}
                 <div class='article-content-comment'>
                     <div class='content-comment-user'>
-                        <span class='comment-avatar'>DP</span>
+                        <span class='comment-avatar'>{{initials}}</span>
                     </div>
 
                     <div class='comment-content'>

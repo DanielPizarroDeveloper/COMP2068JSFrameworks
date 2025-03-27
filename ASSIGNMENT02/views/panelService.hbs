@@ -85,10 +85,10 @@
     </div>
 
     <div id='deleteSection' class='section-list-panel-product hidden'>
-        <div class='filter-Result'>
+        {{!-- <div class='filter-Result'>
             <input type='text' placeholder='Luxury Vehicle Upholstery' name='serviceFilter'>
             <input type='submit' value='Search'>
-        </div>
+        </div> --}}
     
         {{#each serviceList}}
             <section class='section-list-panel-service'>
@@ -121,37 +121,3 @@
         {{/each}}
     </div>
 </main>
-
-<script>
-    const radios = document.querySelectorAll('input[name="option"]');
-    const createElement = document.getElementById('createSection');
-    const updateElement = document.getElementById('updateSection');
-    const deleteElement = document.getElementById('deleteSection');
-
-    radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            if (radio.value === 'create') {
-                createElement.classList.remove('hidden');
-                updateElement.classList.add('hidden');
-                deleteElement.classList.add('hidden');
-            } else if (radio.value === 'update') {
-                createElement.classList.add('hidden');
-                updateElement.classList.remove('hidden');
-                deleteElement.classList.add('hidden');
-            }
-            else if (radio.value === 'delete'){
-                createElement.classList.add('hidden');
-                updateElement.classList.add('hidden');
-                deleteElement.classList.remove('hidden');
-            }
-        });
-    });
-
-    //const fileInput = document.getElementById("fileUpload");
-    //const fileNameDisplay = document.getElementById("fileName");
-
-    //fileInput.addEventListener("change", function() {
-    //    const fileName = fileInput.files[0]?.name || "No se ha seleccionado ningún archivo.";
-    //    fileNameDisplay.textContent = fileName;
-    //});
-</script>

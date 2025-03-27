@@ -10,7 +10,6 @@ const fileLoad = (id) => {
 
     fileInput.addEventListener('change', () => {
         if (fileInput.files && fileInput.files.length > 0) {
-            // Archivo seleccionado, procede a cargarlo
             loadImage(fileInput, fileName.id, base64.id);
         } else {
             console.error('No file was selected.');
@@ -21,21 +20,21 @@ const fileLoad = (id) => {
 const loadImage = (input, fileNameId, base64Id) => {
     const fileNameDisplay = document.getElementById(fileNameId);
     const base64 = document.getElementById(base64Id);
-    const file = input.files[0]; // Obtener el archivo seleccionado
+    const file = input.files[0];
     
     if (file) {
         const fileName = file.name;
-        fileNameDisplay.textContent = `Archivo seleccionado: ${fileName}`; // Mostrar nombre del archivo
+        fileNameDisplay.textContent = `Archivo seleccionado: ${fileName}`;
         const reader = new FileReader();
         reader.onload = function () {
-            const base64String = reader.result.split(',')[1]; // Obtener la cadena Base64
-            base64.value = 'data:image/webp;base64,' + base64String; // Asignar el Base64 al input oculto
+            const base64String = reader.result.split(',')[1];
+            base64.value = 'data:image/webp;base64,' + base64String;
         };
         reader.onerror = function (error) {
             console.error('Error al leer el archivo:', error);
         };
-        reader.readAsDataURL(file); // Leer el archivo como Data URL
+        reader.readAsDataURL(file);
     } else {
-        fileNameDisplay.textContent = 'No se ha seleccionado ningún archivo.'; // Mensaje si no hay archivo
+        fileNameDisplay.textContent = 'No se ha seleccionado ningún archivo.';
     }
 };

@@ -5,7 +5,8 @@ const schemaComment = {
     responsable: { type: String, required: true},
     title: { type: String, required: true},
     date: { type: String, required: true},
-    bodydescription: { type: String, required: true}
+    bodydescription: { type: String, required: true},
+    initials: { type: String, required: true}
 }
 
 // Create mongoose schema
