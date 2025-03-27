@@ -27,6 +27,7 @@
 .detail-service {
     display: flex;
     flex-direction: column;
+    margin-top: 4%;
 }
 
 .container-service-information {
@@ -42,6 +43,6 @@
 }
 
 .text-area-editable-service {
-    width: 500px !important;
+    width: 99%;
     height: 55px !important;
 }

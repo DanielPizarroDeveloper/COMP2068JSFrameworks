@@ -34,10 +34,10 @@
     </div>
 
     <div id='updateSection' class='section-list-panel-product hidden'>
-        <div class='filter-Result'>
+        {{!-- <div class='filter-Result'>
             <input type='text' placeholder='Luxury Vehicle Upholstery' name='serviceFilter'>
             <input type='submit' value='Search'>
-        </div>
+        </div> --}}
     
         {{#each serviceList}}
             <section class='section-list-panel-service'>
@@ -46,29 +46,31 @@
                         <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
                         <div class='container-panel-service'>
                             <div class='detail-service'>
-                                <div class='container-service-information'>
-                                    <label>Title</label>
-                                    <input class='text-input-editable' type='text' value='{{title}}' name='serviceName'>
-                                </div>
+                                <div style='display: flex; flex-direction: row; gap: 20px;'>
+                                    <div class='container-service-information'>
+                                        <label>Title</label>
+                                        <input class='text-input-editable' type='text' value='{{title}}' name='serviceName'>
+                                    </div>
 
-                                <div class='container-service-information'>
-                                    <label>Price</label>
-                                    <input type='text' name='price' value='{{price}}'>
+                                    <div class='container-service-information'>
+                                        <label>Price</label>
+                                        <input type='text' name='price' value='{{price}}'>
+                                    </div>
                                 </div>
 
                                 <div class='container-new-description'>
                                     <label>Description</label>
                                     <textarea class='text-area-editable-service' name='description'>{{detail}}</textarea>
                                 </div>
-                            </div>
-
-                            <div class='detail-product-description'>
-                                <div class='content-group-file'>
-                                    <label for='fileUploadUpdate{{_id}}' class='custom-file-label' onclick="fileLoad('{{_id}}')">Upload your image</label>
-                                    <input type='file' id='fileUploadUpdate{{_id}}' accept='.webp' class='hidden'>
-                                    <p id='fileNameUpdate{{_id}}'>No file has been selected.</p>
-                                    <input type='text' id='base64Update{{_id}}' name='base64Update' class='hidden'>
-                                </div> 
+                                
+                                <div class='detail-product-description'>
+                                    <div class='content-group-file'>
+                                        <label for='fileUploadUpdate{{_id}}' class='custom-file-label' onclick="fileLoad('{{_id}}')">Upload your image</label>
+                                        <input type='file' id='fileUploadUpdate{{_id}}' accept='.webp' class='hidden'>
+                                        <p id='fileNameUpdate{{_id}}'>No file has been selected.</p>
+                                        <input type='text' id='base64Update{{_id}}' name='base64Update' class='hidden'>
+                                    </div> 
+                                </div>
                             </div>
                         </div>
                         <button type='submit'>
