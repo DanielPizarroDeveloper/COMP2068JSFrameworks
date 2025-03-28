@@ -156,9 +156,19 @@ a {
   gap: 10px;
 }
 
-a:hover {
+/* a:hover {
   color: var(--red-400);
   font-size: large;
+} */
+
+a:not(.no-hover-a):hover{
+  color: var(--red-400);
+  font-size: large;
+}
+
+.no-hover-a {
+  color: var(--primary-white);
+  font-size: inherit;
 }
 
 .nav-ul-li-img {
