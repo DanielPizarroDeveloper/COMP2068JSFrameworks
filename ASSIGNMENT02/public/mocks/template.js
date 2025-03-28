@@ -54,8 +54,8 @@ function templateMail(topic, customerName, customerEmail, description) {
 
 const bodyContent = (customerName, topicData, description) => {
     return `Dear ${customerName},` + "<br> <br>" +
-            `Thank you for reaching out. We have received your request regarding ${topicData.title}` + " and our team is currently reviewing it. Below is your inquiry for your reference: " + "<br> <br>" + 
-            + "Customer's inquiry: " + "<br> <br>" +
+            `Thank you for reaching out. We have received your request regarding ${topicData.title}` + " and our team is currently reviewing it."+ "<br> <br>" +"Below is your inquiry for your reference: " + "<br> <br>" + 
+            "Customer's inquiry: " + "<br> <br>" +
             `${description}` + "<br> <br>" +
             `${topicData.message}` + "<br> <br>" +
             "We will get back to you shortly. If you need further assistance, please don’t hesitate to reach out."  + "<br> <br>" +
