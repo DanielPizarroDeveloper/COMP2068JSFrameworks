@@ -28,6 +28,7 @@ html {
 
 html::selection {
   background-color: var(--red-500);
+  color: var(--primary-white);
 }
 
 input[type='text'],

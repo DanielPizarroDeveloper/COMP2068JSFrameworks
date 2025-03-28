@@ -12,21 +12,22 @@
            <h2>Do you have any questions?</h2>
            <h1>Leave us a message here.</h1>
 
-            <div class='article-content-container'>
-                <input type='text' placeholder='Type your Name'>
-                <input type='text' placeholder='Type your email'>
-                <input type='text' placeholder='Type your subject'>
-                <select name='type' id='type'>
-                    <option value='Seleccione' disabled selected hidden> Seleccione</option>
-                    <option value='Inquiry 1'>Inquiry 1</option>
-                    <option value='Inquiry 2'>Inquiry 2</option>
-                    <option value='Inquiry 3'>Inquiry 3</option>
-                    <option value='Inquiry 4'>Inquiry 4</option>
-                    <option value='Inquiry 5'>Inquiry 5</option>
-                </select>
-                <textarea name='description' id='description' placeholder='Type your message here!' rows='10'></textarea>
-                <input type='submit' value='Send email'>
-            </div>
+            <form method='POST'>
+                <div class='article-content-container'>
+                    <input type='text' placeholder='Type your Name' name='customerName' value='{{user}}' required>
+                    <input type='email' placeholder='Type your email' name='customerEmail' value='{{email}}' required>
+                    <select name='type' id='type'>
+                        <option value='Select' disabled selected hidden>Select your Subject</option>
+                        <option value='Request a quote'>Request a quote</option>
+                        <option value='Check availability'>Check availability</option>
+                        <option value='Material & design advice'>Material & design advice</option>
+                        <option value='Order tracking'>Order tracking</option>
+                        <option value='Other inquiry'>Other inquiry</option>
+                    </select>
+                    <textarea name='description' id='description' placeholder='Type your message here!' rows='10'></textarea>
+                    <input type='submit' value='Send email'>
+                </div>
+            </form>
         </article>
     </section>
 </main>

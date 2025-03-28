@@ -5,6 +5,8 @@ const Comment = require('../models/comment');
 const Product = require('../models/product');
 const Service = require('../models/service');
 const today = require('../public/javascripts/getToday.js');
+const templateMail = require('../public/mocks/template.js');
+const nodemailer = require('../public/javascripts/email.js');
 
 const User = require('../models/user');
 const passport = require('passport');
@@ -19,7 +21,6 @@ const isAuthenticated = (req, res, next) => {
 
 /* GET home page. */
 router.get('/', isAuthenticated, (req, res, next) => {
-  console.log(req.user);
   res.render('index', { title: 'Home', user: req.user.username });
 });
 
@@ -42,8 +43,24 @@ router.get('/about', isAuthenticated, (req, res, next) => {
 
 /* GET contact page. */
 router.get('/contact', isAuthenticated, (req, res, next) => {
+  res.render('contact', { title: 'Contact', user: req.user.username, email: req.user.email });
+});
+
+/* POST contact page. */
+router.post('/contact', isAuthenticated, async (req, res, next) => {
+  var result = templateMail(req.body.type, req.body.customerName, req.body.customerEmail, req.body.description);
+
+  nodemailer.sendMail(result, (error, info) => {
+    if (error) {
+      console.error('Error al enviar:', error);
+    } else {
+      console.log('Correo enviado:', info.response);
+    }
+  });
+  
   res.render('contact', { title: 'Contact', user: req.user.username });
 });
+
 
 /* GET comments page. */
 router.get('/comment', isAuthenticated,  async(req, res, next) => {
@@ -326,6 +343,6 @@ router.get('/github/callback',
   (req, res, next) => {
     res.redirect('/')
   }
-)
+);
 
 module.exports = router;
