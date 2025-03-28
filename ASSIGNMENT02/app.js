@@ -11,10 +11,11 @@ var passport = require('passport');
 var session = require('express-session');
 //Import model and package for authentication strategies
 var User = require('./models/user');
-
+var githubStrategy = require('passport-github2').Strategy;
 //Routing Rules
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { profile, Console } = require('console');
 var app = express();
 
 // view engine setup
@@ -34,10 +35,36 @@ app.use(session(
     saveUninitialized: false
   }
 ));
+
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use('local', User.createStrategy());
+passport.use('github',
+  new githubStrategy ({
+    clientID: configs.GitHub.clientId,
+    clientSecret: configs.GitHub.clientSecret,
+    callbackURL: configs.GitHub.callback
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    const user = await User.findOne({ oauthId: profile.id });
+    if (user) {
+      return done(null, user);
+    }
+    else {
+      const newUser = new User({
+        username: profile.displayName,
+        email: profile.username,
+        oauthId: profile.id,
+        oauthProvider: 'GitHub'
+      });
+      const savedUser = await newUser.save();
+      return done(null, savedUser);
+    }
+  }
+));
+
 // Implement basic authentication strategy with passport-local and mongoose models.
-passport.use(User.createStrategy()); //out-of-the-box strategy initialization code from plm
+passport.use('local', User.createStrategy()); //out-of-the-box strategy initialization code from plm
 passport.serializeUser(User.serializeUser()); //out-of-the-box serializeUser code from plm
 passport.deserializeUser(User.deserializeUser()); //out-of-the-box deserializeUser code from plm
 

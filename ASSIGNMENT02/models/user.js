@@ -3,9 +3,11 @@ const plm = require('passport-local-mongoose');
 
 // Define schema object
 const schemaUser = {
-    name: { type: String, required: true },
-    email: { type: String, required: true }
-}
+    username: { type: String, required: true },
+    email: { type: String, required: true },
+    oauthId: { type: String },
+    oauthProvider: { type: String }
+};
 
 // Create mongoose schema
 const mongooseSchema = new mongoose.Schema(schemaUser);

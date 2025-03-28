@@ -19,42 +19,43 @@ const isAuthenticated = (req, res, next) => {
 
 /* GET home page. */
 router.get('/', isAuthenticated, (req, res, next) => {
-  res.render('index', { title: 'Home', user: req.user.name });
+  console.log(req.user);
+  res.render('index', { title: 'Home', user: req.user.username });
 });
 
 /* GET product page. */
 router.get('/product', isAuthenticated, async(req, res, next) => {
   const products = await Product.find();
-  res.render('product', { title: 'Product', products, user: req.user.name });
+  res.render('product', { title: 'Product', products, user: req.user.username });
 });
 
 /* GET service page. */
 router.get('/service', isAuthenticated, async(req, res, next) => {
   const services = await Service.find();
-  res.render('service', { title: 'Service', services, user: req.user.name });
+  res.render('service', { title: 'Service', services, user: req.user.username });
 });
 
 /* GET about page. */
 router.get('/about', isAuthenticated, (req, res, next) => {
-  res.render('about', { title: 'About', user: req.user.name });
+  res.render('about', { title: 'About', user: req.user.username });
 });
 
 /* GET contact page. */
 router.get('/contact', isAuthenticated, (req, res, next) => {
-  res.render('contact', { title: 'Contact', user: req.user.name });
+  res.render('contact', { title: 'Contact', user: req.user.username });
 });
 
 /* GET comments page. */
 router.get('/comment', isAuthenticated,  async(req, res, next) => {
   const comments = await Comment.find();
   const commentsOrderBy = comments.sort((a, b) => new Date(b.date) - new Date(a.date));
-  res.render('comment', { title: 'Comment', commentsOrderBy, user: req.user.name });
+  res.render('comment', { title: 'Comment', commentsOrderBy, user: req.user.username });
 });
 
 /* POST comments page. */
 router.post('/comment', isAuthenticated,  async(req, res, next) => {
   try {
-    let usernameSplit = req.user.name.split(' ');
+    let usernameSplit = req.user.username.split(' ');
     let lengthName = usernameSplit.length;
     let initialsUser = null;
 
@@ -75,7 +76,7 @@ router.post('/comment', isAuthenticated,  async(req, res, next) => {
     }
 
     let newComment = new Comment({
-      responsable: req.user.name,
+      responsable: req.user.username,
       title: req.body.title,
       date: today(),
       bodydescription: req.body.opinion,
@@ -94,7 +95,7 @@ router.post('/comment', isAuthenticated,  async(req, res, next) => {
 router.get('/panelComment', isAuthenticated,  async(req, res, next) => {
   const comments = await Comment.find();
   const commentsOrderBy = comments.sort((a, b) => new Date(b.date) - new Date(a.date));
-  res.render('panelComment', { title: 'panel Comment', commentsOrderBy, user: req.user.name });
+  res.render('panelComment', { title: 'panel Comment', commentsOrderBy, user: req.user.username });
 });
 
 /* GET panel comments page. */
@@ -114,7 +115,7 @@ router.get('/panelComment/:_id', isAuthenticated,  async(req, res, next) => {
 router.get('/panelProduct', isAuthenticated, async(req, res, next) => {
   const productsList = await Product.find();
 
-  res.render('panelProduct', { title: 'Product Administrator', productsList, user: req.user.name });
+  res.render('panelProduct', { title: 'Product Administrator', productsList, user: req.user.username });
 });
 
 //  CREATE PRODUCT PANEL
@@ -191,7 +192,7 @@ router.get('/panelProduct/:_id', async (req, res, next) => {
 // GET SERVICE PANEL
 router.get('/panelService', isAuthenticated, async(req, res, next) => {
   const serviceList = await Service.find();
-  res.render('panelService', { title: 'Service Administrator', serviceList, user: req.user.name });
+  res.render('panelService', { title: 'Service Administrator', serviceList, user: req.user.username });
 });
 
 // POST SERVICE PANEL
@@ -259,7 +260,7 @@ router.get('/panelService/:_id', async (req, res, next) => {
 });
 
 router.get('/panelComment', isAuthenticated, (req, res, next) => {
-  res.render('panelComment', { title: 'Comment Administrator', user: req.user.name });
+  res.render('panelComment', { title: 'Comment Administrator', user: req.user.username });
 });
 
 /* GET login page. */
@@ -286,7 +287,7 @@ router.get('/register', function(req, res, next) {
 router.post('/register', function(req, res, next) {
   User.register(
     new User({
-      name: req.body.username,
+      username: req.body.username,
       email: req.body.email
     }),
     req.body.password,
@@ -312,11 +313,19 @@ router.get('/logout', (req, res, next) => {
 
 /* Get Account */
 router.get('/account', isAuthenticated, (req, res, next) => {
-  var user = null;
-  if(req.isAuthenticated()) {
-    user = req.user.name;
-  }
-  res.render('account', { title: 'Account', user: req.user.name, email: req.user.email });
+  res.render('account', { title: 'Account', user: req.user.username, email: req.user.email });
 });
+
+/* Get GitHub */
+router.get('/github',
+  passport.authenticate('github', { scope: ['user.email']})
+);
+
+router.get('/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login', }),
+  (req, res, next) => {
+    res.redirect('/')
+  }
+)
 
 module.exports = router;

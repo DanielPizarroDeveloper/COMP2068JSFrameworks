@@ -18,17 +18,15 @@
             </div>
         {{/if}}
 
-        <form method='POST'>
-            <article class='article-content-form'>
+        <article>
+            <form method='POST' class='article-content-form'>
                 <input type='email' placeholder='Type your e-mail' name='email' id='email'>
                 <input type='password' placeholder='Type your password' name='password' id='password'>
                 <input type='submit' value='Sign In'>
-
                 <div class='content-message'>
                     <span>Don't have an account?</span>
                     <a href='/register'>Sign up here.</a>
                 </div>
-
                 <div class='separate'>
                     <div class='horizontal-line-account'></div>
                     <span>o</span>
@@ -36,10 +34,10 @@
                 </div>
 
                 <div class='content-sign-another-option'>
-                    <img style="width: 28px; height: 28px;" src='/images/svg/github.svg' alt='Google logo for sign-in'>
-                    <span>Continue with Github</span>
+                    <img style="width: 28px; height: 28px;" src='/images/svg/github.svg' alt='Github logo for sign-in'>
+                    <a href='/github'><span>Continue with Github</span></a>
                 </div>
-            </article>
-        </form>
+            </form>
+        </article>
     </section>
 </main>
