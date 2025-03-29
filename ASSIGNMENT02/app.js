@@ -15,7 +15,7 @@ var githubStrategy = require('passport-github2').Strategy;
 //Routing Rules
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const { profile, Console } = require('console');
+
 var app = express();
 
 // view engine setup

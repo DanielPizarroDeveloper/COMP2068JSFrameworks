@@ -11,6 +11,9 @@ const nodemailer = require('../public/javascripts/email.js');
 const User = require('../models/user');
 const passport = require('passport');
 
+//Message Error
+const { handleIncompleteSignup, handleExistsAccount } = require('../public/mocks/log/register/message.js').default;
+
 const isAuthenticated = (req, res, next) => {
   if(req.isAuthenticated()) {
     return next();
@@ -297,29 +300,47 @@ router.post('/login', passport.authenticate('local', {
 
 /* GET register page. */
 router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'Register' });
+  const errorMessage = req.session.errorMessage;
+  req.session.errorMessage = null;
+  res.render('register', { title: 'Register', errorMessage });
 });
 
 /* POST register page. */
-router.post('/register', function(req, res, next) {
-  User.register(
-    new User({
-      username: req.body.username,
-      email: req.body.email
-    }),
-    req.body.password,
-    (error, newUser) => {
-      if(error) {
-        console.error(error);
-        return res.redirect('/register');
-      }
+router.post('/register', async(req, res, next) => {
+  try {
+    if(!req.body.username || !req.body.email || !req.body.password) {
+      throw new Error(handleIncompleteSignup());
+    } 
+    else {
+      const findUser = await User.findOne({ email: req.body.email });
 
-      req.login(newUser, (error) => {
-        res.redirect('/');
-      })
+      if(findUser === null) {
+        User.register(
+          new User({
+            username: req.body.username,
+            email: req.body.email
+          }),
+          req.body.password,
+          (error, newUser) => {
+            if(error) {
+              return res.redirect('/register');
+            }
+            req.login(newUser, (error) => {
+              res.redirect('/');
+            })
+          }
+        );
+      }
+      else {
+        throw new Error(handleExistsAccount());
+      }
     }
-  );
-})
+  }
+  catch(error) {
+    req.session.errorMessage = error.message;
+    res.redirect('/register');
+  }
+});
 
 /* GET logout */
 router.get('/logout', (req, res, next) => {
