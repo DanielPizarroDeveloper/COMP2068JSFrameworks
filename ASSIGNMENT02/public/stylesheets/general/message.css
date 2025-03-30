@@ -1,4 +1,49 @@
 /* Common */
+.container-message-visible {
+    width: 100%;
+}
+
+.container-message-visible-medium {
+    width: 85%;
+    margin-bottom: 5%;
+}
+
+.container-message-visible-small {
+    width: 40%;
+}
+
+.container-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.container-message-span {
+    padding-left: 20px;
+}
+
+.success-color {
+    background-color: var(--success-600);
+}
+
+.warning-color {
+    background-color: var(--warning-600);
+}
+
+.button-closed {
+    border: 0;
+    background-color: var(--primary-transparent);
+    color: var(--primary-white);
+}
+
+.icon-X {
+    width: 20px;
+}
+
 .message-error {
     color: var(--red-600);
 }

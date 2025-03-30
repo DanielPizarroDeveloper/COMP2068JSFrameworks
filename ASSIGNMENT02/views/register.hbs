@@ -14,8 +14,15 @@
         <form method='POST'>
             <article class='article-content-form'>
                 {{#if errorMessage}}
-                    <div class='message-error-form-register'>
-                        <span class='message-error'>{{errorMessage}}</span>
+                    <div id='MessageFailed' class='container-message'>
+                        <div class='container-message warning-color'>
+                            <span class='container-message-span'>{{errorMessage}}</span>
+                            <button class='button-closed' onclick="CloseMessageFailed()">
+                                <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                                  <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 {{/if}}
                 <input type='text' placeholder='Type your name and last name' name='username' id='username'>
@@ -37,3 +44,10 @@
         </form>
     </section>
 </main>
+
+<script>
+    function CloseMessageFailed() {
+        var msjFail = document.getElementById('MessageFailed');
+        msjFail.classList.add('hidden');
+    }
+</script>

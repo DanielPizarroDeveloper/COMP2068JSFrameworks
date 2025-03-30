@@ -9,12 +9,38 @@
         </div>
     </section>  
     
-    <div class='hidden' id='createSection'>
+    <div class='section-list-panel-product hidden' id='createSection'>
+        {{#if successCreateMessage_Panel_Product}}
+            <div id='MessageSuccess' class='container-message-visible'>
+                <div class='container-message success-color'>
+                    <span class='container-message-span'>{{successCreateMessage_Panel_Product}}</span>
+                    <button class='button-closed' onclick="CloseMessageSuccess()">
+                        <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                          <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+
+        {{#if failedCreateMessage_Panel_Product}}
+            <div id='MessageFailed' class='container-message-visible'>
+                <div class='container-message warning-color'>
+                    <span class='container-message-span'>{{failedCreateMessage_Panel_Product}}</span>
+                    <button class='button-closed' onclick="CloseMessageFailed()">
+                        <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                          <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+
         <article class='article-create'>
             <form method='POST'>
                 <div class='article-content-form'>
                     <div class='content-group'>
-                        <input type='text' name='productName' placeholder='Product name' required>
+                        <input type='text' name='productName' placeholder='Product name'>
                         <input type='number' name='productQuantity' placeholder='Quantity'>
                     </div>
 
@@ -39,11 +65,32 @@
     </div>
 
     <div id='updateSection' class='section-list-panel-product hidden'>
-        {{!-- <div class='filter-Result'>
-            <input type="text" name='' id=''>
-            <input type='submit' value='Search'>
-        </div> --}}
-
+        {{#if successUpdateMessage_Panel_Product}}
+            <div id='MessageSuccess' class='container-message-visible'>
+                <div class='container-message success-color'>
+                    <span class='container-message-span'>{{successUpdateMessage_Panel_Product}}</span>
+                    <button class='button-closed' onclick="CloseMessageSuccess()">
+                        <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                          <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+        
+        {{#if failedUpdateMessage_Panel_Product}}
+            <div id='MessageFailed' class='container-message-visible'>
+                <div class='container-message warning-color'>
+                    <span class='container-message-span'>{{failedUpdateMessage_Panel_Product}}</span>
+                    <button class='button-closed' onclick="CloseMessageFailed()">
+                        <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                          <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+        
         {{#each productsList}}
             <section class='section-result-products'>
                 <form method='POST' action='/panelProduct/:_{{_id}}'>
@@ -95,11 +142,32 @@
     </div>
 
     <div id='deleteSection' class='section-list-panel-product hidden'>
-        {{!-- <div class='filter-Result'>
-            <input type='text' placeholder='Synthetic Leather for Seats' name='product-Filter'>
-            <input type='submit' value='Search'>
-        </div> --}}
-
+        {{#if successDeleteMessage_Panel_Product}}
+            <div id='MessageSuccess' class='container-message-visible'>
+                <div class='container-message success-color'>
+                    <span class='container-message-span'>{{successDeleteMessage_Panel_Product}}</span>
+                    <button class='button-closed' onclick="CloseMessageSuccess()">
+                        <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                          <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+        
+        {{#if failedDeleteMessage}}
+            <div id='MessageFailed' class='container-message-visible'>
+                <div class='container-message warning-color'>
+                    <span class='container-message-span'>{{successDeleteMessage}}</span>
+                    <button class='button-closed' onclick="CloseMessageFailed()">
+                        <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                          <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+        
         {{#each productsList}}
             <section class='section-result-products'>
                 <form method='GET' action='/panelProduct/:_{{_id}}'>
@@ -135,3 +203,15 @@
         {{/each}}
     </div>
 </main>
+
+<script>
+    function CloseMessageSuccess() {
+        var msjSuccess = document.getElementById('MessageSuccess');
+        msjSuccess.classList.add('hidden');
+    }
+
+    function CloseMessageFailed() {
+        var msjFail = document.getElementById('MessageFailed');
+        msjFail.classList.add('hidden');
+    }
+</script>

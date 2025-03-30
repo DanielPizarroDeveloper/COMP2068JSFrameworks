@@ -1,6 +1,7 @@
 :root {
   --primary-black: #000;
   --primary-white: #fff;
+  --primary-transparent: 'transparent';
 
   /* Red */
   --red-400: #f87171;
@@ -16,6 +17,11 @@
   --lime-100: #ecfccb;
   --lime-700: #4d7c0f;
 
+  /* Color Message */
+  --success-600: #059669;
+  --warning-600: #d97706;
+
+  /* Font Family */
   --font-family: 'Clash Display', sans-serif;
 }
 
@@ -156,11 +162,6 @@ a {
   align-items: center;
   gap: 10px;
 }
-
-/* a:hover {
-  color: var(--red-400);
-  font-size: large;
-} */
 
 a:not(.no-hover-a):hover{
   color: var(--red-400);

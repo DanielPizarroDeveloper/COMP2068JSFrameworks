@@ -1,5 +1,31 @@
 <main>
     <h1>ADM. Comments</h1>
+    {{#if successDeleteMessage_Panel_Comment}}
+        <div id='MessageSuccess' class='container-message-visible-small'>
+            <div class='container-message success-color'>
+                <span class='container-message-span'>{{successDeleteMessage_Panel_Comment}}</span>
+                <button class='button-closed' onclick="CloseMessageSuccess()">
+                    <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    {{/if}}
+    
+    {{#if failedDeleteMessage_Panel_Comment}}
+        <div id='MessageFailed' class='container-message-visible-small'>
+            <div class='container-message warning-color'>
+                <span class='container-message-span'>{{failedDeleteMessage_Panel_Comment}}</span>
+                <button class='button-closed' onclick="CloseMessageFailed()">
+                    <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    {{/if}}
+    
     <section>
         <article class='second-article-comment'>
             {{#each commentsOrderBy}}
@@ -30,3 +56,15 @@
         </article>
     </section>
 </main>
+
+<script>
+    function CloseMessageSuccess() {
+        var msjSuccess = document.getElementById('MessageSuccess');
+        msjSuccess.classList.add('hidden');
+    }
+
+    function CloseMessageFailed() {
+        var msjFail = document.getElementById('MessageFailed');
+        msjFail.classList.add('hidden');
+    }
+</script>

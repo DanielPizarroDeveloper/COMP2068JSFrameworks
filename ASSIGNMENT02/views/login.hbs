@@ -12,9 +12,15 @@
         </article>
 
         {{#if messages}}
-            <div class='message-error-auth'> 
-                <span>Invalid credentials</span>
-                <span>Please, check your credentials</span>
+            <div id='MessageFailed' class='container-message'>
+                <div class='container-message warning-color'>
+                    <span class='container-message-span'>{{messages}}</span>
+                    <button class='button-closed' onclick="CloseMessageFailed()">
+                        <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                          <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                        </svg>
+                    </button>
+                </div>
             </div>
         {{/if}}
 
@@ -35,7 +41,7 @@
                 
                 <a class='no-hover-a' href='/github'>
                     <div class='content-sign-another-option'>
-                        <img style="width: 28px; height: 28px;" src='/images/svg/github.svg' alt='Github logo for sign-in'>
+                        <img class='login-svg' src='/images/svg/github.svg' alt='Github logo for sign-in'>
                         <span>Continue with Github</span>
                     </div>
                 </a>
@@ -43,3 +49,10 @@
         </article>
     </section>
 </main>
+
+<script>
+    function CloseMessageFailed() {
+        var msjFail = document.getElementById('MessageFailed');
+        msjFail.classList.add('hidden');
+    }
+</script>

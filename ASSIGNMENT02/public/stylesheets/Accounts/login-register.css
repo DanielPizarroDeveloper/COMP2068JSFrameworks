@@ -75,11 +75,7 @@
     border-radius: 10px;
 }
 
-.message-error-auth {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    color: var(--red-500);
-    margin-bottom: 3%;
+.login-svg {
+    width: 28px;
+    height: 28px;
 }

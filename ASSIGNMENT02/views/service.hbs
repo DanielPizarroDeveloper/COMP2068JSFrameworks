@@ -1,16 +1,17 @@
 <main>
     <h1>Our Services</h1>
-    <section class='section-filter'>
-        <h3>Filter by</h3>
-        <select name='service' id='service'>
-            <option value='Seleccione' selected hidden disabled>Seleccione</option>
-            <option value='Opción 1'>Opción 1</option>
-            <option value='Opción 2'>Opción 2</option>
-            <option value='Opción 3'>Opción 3</option>
-            <option value='Opción 4'>Opción 4</option>
-            <option value='Opción 5'>Opción 5</option>
-        </select>
-    </section>
+    {{#if failedReadMessage_Service}}
+        <div id='MessageFailed' class='container-message-visible-small'>
+            <div class='container-message warning-color'>
+                <span class='container-message-span'>{{failedReadMessage_Service}}</span>
+                <button class='button-closed' onclick="CloseMessageFailed()">
+                    <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    {{/if}}
 
     {{#each services}}
         <section class='section-list'>
@@ -31,3 +32,10 @@
         </section>
     {{/each}}
 </main>
+
+<script>
+    function CloseMessageFailed() {
+        var msjFail = document.getElementById('MessageFailed');
+        msjFail.classList.add('hidden');
+    }
+</script>

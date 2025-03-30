@@ -5,7 +5,8 @@ const schemaService = {
     title: { type: String },
     detail: { type: String },
     price: { type: Number },
-    imgService: { type: String }
+    imgService: { type: String },
+    publication: { type: String }
 }
 
 // Create mongoose schema

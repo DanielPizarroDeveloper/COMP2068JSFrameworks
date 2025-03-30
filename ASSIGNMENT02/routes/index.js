@@ -1,24 +1,39 @@
 var express = require('express');
 var router = express.Router();
 
-const Comment = require('../models/comment');
-const Product = require('../models/product');
-const Service = require('../models/service');
-const today = require('../public/javascripts/getToday.js');
-const templateMail = require('../public/mocks/template.js');
-const nodemailer = require('../public/javascripts/email.js');
+const today = require('../public/javascripts/getToday');
+const nodemailer = require('../public/javascripts/email');
+const contactMail = require('../Controllers/Contact/contact');
 
-const User = require('../models/user');
 const passport = require('passport');
 
-//Message Error
-const { handleIncompleteSignup, handleExistsAccount } = require('../public/mocks/log/register/message.js').default;
+//USER CRUD
+const { registerUser } = require('../Controllers/User/user');
+
+//SERVICE CRUD
+const { createService, getService, updatedServiceByID, deleteServiceByID } = require('../Controllers/Service/service');
+
+//PRODUCT CRUD
+const { createProduct, getProduct, updatedProductByID, deleteProductByID } = require('../Controllers/Product/product');
+
+//COMMENT CRUD
+const { createComment, getComments, deleteCommentByID } = require('../Controllers/Comment/comment');
+
+//Message
+const { 
+  //Account
+  handleIncompleteSignup, handleFailedSignIn, handleSigninError,
+  //Service - Product 
+  handleSuccessCreate, handleSuccessUpdate, handleSuccessDelete,
+  //Comment 
+  handlerSuccessCreate_Comment, 
+  //Contact 
+  handleSendEmail, handleErrorEmail } = require('../public/mocks/Message');
 
 const isAuthenticated = (req, res, next) => {
   if(req.isAuthenticated()) {
     return next();
   }
-
   res.redirect('/login');
 }
 
@@ -29,14 +44,28 @@ router.get('/', isAuthenticated, (req, res, next) => {
 
 /* GET product page. */
 router.get('/product', isAuthenticated, async(req, res, next) => {
-  const products = await Product.find();
-  res.render('product', { title: 'Product', products, user: req.user.username });
+  try {
+    const products = await getProduct();
+    if(products.length > 0) {
+      res.render('product', { title: 'Product', products, user: req.user.username });
+    }
+  } catch (error) {
+    const failedReadMessage_Product = error.message;
+    res.render('product', { title: 'Service', user: req.user.username, failedReadMessage_Product });
+  }
 });
 
 /* GET service page. */
 router.get('/service', isAuthenticated, async(req, res, next) => {
-  const services = await Service.find();
-  res.render('service', { title: 'Service', services, user: req.user.username });
+  try {
+    const services = await getService();
+    if (services.length > 0) {
+      res.render('service', { title: 'Service', services, user: req.user.username });
+    }
+  } catch (error) {
+    const failedReadMessage_Service = error.message;
+    res.render('service', { title: 'Service', user: req.user.username, failedReadMessage_Service });
+  }
 });
 
 /* GET about page. */
@@ -46,241 +75,268 @@ router.get('/about', isAuthenticated, (req, res, next) => {
 
 /* GET contact page. */
 router.get('/contact', isAuthenticated, (req, res, next) => {
-  res.render('contact', { title: 'Contact', user: req.user.username, email: req.user.email });
+  const successSend_Mail = req.session.Message_Send_Mail;
+  const failedSend_Mail = req.session.MessageError_Send_Mail;
+
+  req.session.Message_Send_Mail = null;
+  req.session.MessageError_Send_Mail = null;
+
+  res.render('contact', { title: 'Contact', user: req.user.username, email: req.user.email, successSend_Mail, failedSend_Mail });
 });
 
 /* POST contact page. */
-router.post('/contact', isAuthenticated, async (req, res, next) => {
-  var result = templateMail(req.body.type, req.body.customerName, req.body.customerEmail, req.body.description);
+router.post('/contact', isAuthenticated, (req, res, next) => {
+  try {
+    var result = contactMail(req.body.type, req.body.customerName, req.body.customerEmail, req.body.description);
 
-  nodemailer.sendMail(result, (error, info) => {
-    if (error) {
-      console.error('Error al enviar:', error);
-    } else {
-      console.log('Correo enviado:', info.response);
-    }
-  });
-  
-  res.render('contact', { title: 'Contact', user: req.user.username });
+    nodemailer.sendMail(result, (error, info) => {
+      if (error) {
+        req.session.MessageError_Send_Mail = handleErrorEmail();
+      } else {
+        req.session.Message_Send_Mail = handleSendEmail();
+      }
+      res.redirect('/contact');
+    });
+
+  } catch (error) {
+    req.session.MessageError_Send_Mail = error.message;
+    res.redirect('/contact');
+  }
 });
-
 
 /* GET comments page. */
 router.get('/comment', isAuthenticated,  async(req, res, next) => {
-  const comments = await Comment.find();
-  const commentsOrderBy = comments.sort((a, b) => new Date(b.date) - new Date(a.date));
-  res.render('comment', { title: 'Comment', commentsOrderBy, user: req.user.username });
+  try {
+    //Create
+    const successCreateMessage_Comment = req.session.Message_Create_Comment;
+    const failedCreateMessage_Comment = req.session.MessageError_Create_Comment;
+
+    req.session.Message_Create_Comment = null;
+    req.session.MessageError_Create_Comment = null;
+
+    const commentsOrderBy = await getComments();
+    if (commentsOrderBy.length > 0) {
+      res.render('comment', { title: 'Comment', commentsOrderBy, user: req.user.username, successCreateMessage_Comment, failedCreateMessage_Comment });
+    }
+  } catch (error) {
+    req.session.MessageError_Create_Comment = error.message;
+    res.redirect('/comment');
+  }
 });
 
 /* POST comments page. */
 router.post('/comment', isAuthenticated,  async(req, res, next) => {
   try {
-    let usernameSplit = req.user.username.split(' ');
-    let lengthName = usernameSplit.length;
-    let initialsUser = null;
+    const result = await createComment(req.user.username, req.body.title, today(), req.body.opinion);
 
-    switch (lengthName) {
-      case 1:
-        initialsUser = usernameSplit[0][0];
-        console.log('Case 1');
-        break;
-      case 2:
-        initialsUser = usernameSplit[0][0] + usernameSplit[1][0];
-        break;
-      case 3:
-        initialsUser = usernameSplit[0][0] + usernameSplit[2][0];
-        break;
-      default:
-        initialsUser = 'NN';
-        break;
+    if (result) {
+      req.session.Message_Create_Comment = handlerSuccessCreate_Comment();
+      res.redirect('/comment');
     }
-
-    let newComment = new Comment({
-      responsable: req.user.username,
-      title: req.body.title,
-      date: today(),
-      bodydescription: req.body.opinion,
-      initials: initialsUser
-    });
-
-    await newComment.save();
+  } catch (error) {
+    req.session.MessageError_Create_Comment = error.message;
     res.redirect('/comment');
-
-  } catch (error) {
-    console.error('Msj: ', error);
-  }
-});
-
-/* GET panel comments page. */
-router.get('/panelComment', isAuthenticated,  async(req, res, next) => {
-  const comments = await Comment.find();
-  const commentsOrderBy = comments.sort((a, b) => new Date(b.date) - new Date(a.date));
-  res.render('panelComment', { title: 'panel Comment', commentsOrderBy, user: req.user.username });
-});
-
-/* GET panel comments page. */
-router.get('/panelComment/:_id', isAuthenticated,  async(req, res, next) => {
-  try {
-    let commentID = req.params._id.replace(':', '').replace('_', '');
-
-    await Comment.findByIdAndDelete(commentID);
-    res.redirect('/panelComment');
-    
-  } catch (error) {
-    console.error('Msj: ', error);
   }
 });
 
 /* Get panelProduct */
 router.get('/panelProduct', isAuthenticated, async(req, res, next) => {
-  const productsList = await Product.find();
-
-  res.render('panelProduct', { title: 'Product Administrator', productsList, user: req.user.username });
+  try {
+    const productsList = await getProduct();
+    if(productsList.length > 0) {
+      //Create
+      const successCreateMessage_Panel_Product = req.session.Message_Create_Panel_Product;
+      const failedCreateMessage_Panel_Product = req.session.MessageError_Create_Panel_Product;
+        
+      //Update
+      const successUpdateMessage_Panel_Product = req.session.Message_Update_Panel_Product;
+      const failedUpdateMessage_Panel_Product = req.session.MessageError_Update_Panel_Product;
+        
+      //Delete
+      const successDeleteMessage_Panel_Product = req.session.Message_Delete_Panel_Product;
+      const failedDeleteMessage_Panel_Product = req.session.MessageError_Delete_Panel_Product;
+        
+      //Create
+      req.session.Message_Create_Panel_Product = null;
+      req.session.MessageError_Create_Panel_Product = null;
+        
+      //Update
+      req.session.Message_Update_Panel_Product = null;
+      req.session.MessageError_Update_Panel_Product = null;
+        
+      //Delete
+      req.session.Message_Delete_Panel_Product = null;
+      req.session.MessageError_Delete_Panel_Product = null;
+        
+      res.render('panelProduct', { title: 'Product Administrator', productsList, user: req.user.username, successCreateMessage_Panel_Product, failedCreateMessage_Panel_Product, successUpdateMessage_Panel_Product, failedUpdateMessage_Panel_Product, successDeleteMessage_Panel_Product, failedDeleteMessage_Panel_Product });
+    }
+  } catch (error) {
+    req.session.MessageError_Read = error.message;
+    res.redirect('/product');
+  }
 });
 
 //  CREATE PRODUCT PANEL
 router.post('/panelProduct', isAuthenticated, async(req, res, next) => {
   try {
-    let newProduct = new Product({
-      title: req.body.productName,
-      detail: req.body.productDescription,
-      quantity: req.body.productQuantity,
-      unit: req.body.productUnit,
-      publication: today(),
-      price: req.body.productPrice,
-      imgProduct: req.body.base64Create
-    });
-
-    await newProduct.save();
-    res.redirect('/panelProduct');
+    const result = await createProduct(req.body.productName, req.body.productDescription, req.body.productQuantity, req.body.productUnit, today(), req.body.productPrice, req.body.base64Create);
+    
+    if(result) {
+      req.session.Message_Create_Panel_Product = handleSuccessCreate();
+      res.redirect('/panelProduct');
+    }
 
   } catch (error) {
-    console.error('Msj: ', error);
+    req.session.MessageError_Create_Panel_Product = error.message;
+    res.redirect('/panelProduct');
   }
 });
 
 //  PUT PRODUCT PANEL
 router.post('/panelProduct/:_id', async (req, res, next) => {
   try {
-    let path = req.body.base64Update;
-    let productID = req.params._id.replace(':', '').replace('_', '');
-
-    if (path.length !== 0) {
-      await Product.findByIdAndUpdate(
-        { _id: productID },
-        {
-          title: req.body.productUpdateName,
-          detail: req.body.productUpdateDescription,
-          quantity: req.body.productUpdateQuantity,
-          publication: today(),
-          price: req.body.productUpdatePrice,
-          imgProduct: req.body.base64Update
-        }
-      )
-    } else {
-      await Product.findByIdAndUpdate(
-        { _id: productID },
-        {
-          title: req.body.productUpdateName,
-          detail: req.body.productUpdateDescription,
-          quantity: req.body.productUpdateQuantity,
-          publication: today(),
-          price: req.body.productUpdatePrice
-        }
-      )
+    const result = await updatedProductByID(req.params._id, req.body.productName, req.body.productDescription, req.body.productQuantity, req.body.productUnit, today(), req.body.productPrice, req.body.base64Create);
+    
+    if(result) {
+      req.session.Message_Update_Panel_Product = handleSuccessUpdate();
+      res.redirect('/panelProduct');
     }
-
-    res.redirect('/panelProduct');
-
   } catch (error) {
-    console.error('Msj: ', error);
+    req.session.MessageError_Update_Panel_Product = error.message;
+    res.redirect('/panelProduct');
   }
 });
 
 //  DELETE PRODUCT PANEL
 router.get('/panelProduct/:_id', async (req, res, next) => {
   try {
-      let productID = req.params._id.replace(':', '').replace('_', '');
-      await Product.findByIdAndDelete(productID);
+    const result = await deleteProductByID(req.params._id);
+
+    if(result) {
+      req.session.Message_Delete_Panel_Product = handleSuccessDelete();
       res.redirect('/panelProduct');
+    }
 
   } catch (error) {
-    console.error('Msj: ', error);
+    req.session.MessageError_Delete_Panel_Product = error.message;
+    res.redirect('/panelProduct');
   }
 });
 
 // GET SERVICE PANEL
 router.get('/panelService', isAuthenticated, async(req, res, next) => {
-  const serviceList = await Service.find();
-  res.render('panelService', { title: 'Service Administrator', serviceList, user: req.user.username });
+  const serviceList = await getService();
+  const successCreateMessage_Panel_Service = req.session.Message_Create_Panel_Service;
+  const failedCreateMessage_Panel_Service = req.session.MessageError_Create_Panel_Service;
+  
+  //Update
+  const successUpdateMessage_Panel_Service = req.session.Message_Update_Panel_Service;
+  const failedUpdateMessage_Panel_Service = req.session.MessageError_Update_Panel_Service;
+  
+  //Delete
+  const successDeleteMessage_Panel_Service = req.session.Message_Delete_Panel_Service;
+  const failedDeleteMessage_Panel_Service = req.session.MessageError_Delete_Panel_Service;
+  
+  //Create
+  req.session.Message_Create_Panel_Service = null;
+  req.session.MessageError_Create_Panel_Service = null;
+  
+  //Update
+  req.session.Message_Update_Panel_Service = null;
+  req.session.MessageError_Update_Panel_Service = null;
+  
+  //Delete
+  req.session.Message_Delete_Panel_Service = null;
+  req.session.MessageError_Delete_Panel_Service = null;
+
+  if (serviceList > 0) {
+    res.render('panelService', { title: 'Service Administrator', serviceList, user: req.user.username, successCreateMessage_Panel_Service, failedCreateMessage_Panel_Service, successUpdateMessage_Panel_Service, failedUpdateMessage_Panel_Service, successDeleteMessage_Panel_Service, failedDeleteMessage_Panel_Service }); 
+  }
+  else {
+    res.render('panelService', { title: 'Service Administrator', serviceList, user: req.user.username, successDeleteMessage_Panel_Service });
+  }
 });
 
 // POST SERVICE PANEL
 router.post('/panelService', isAuthenticated, async(req, res, next) => {
   try {
-    let newService = new Service({
-      title: req.body.serviceName,
-      detail: req.body.serviceDescription,
-      price: req.body.servicePrice,
-      imgService: req.body.base64Create
-    });
-
-    await newService.save();
-    res.redirect('/panelService');
-
+    const result = await createService(req.body.serviceName, req.body.serviceDescription, req.body.servicePrice, req.body.base64Create, today());
+    
+    if(result) {
+      req.session.Message_Create_Panel_Service = handleSuccessCreate();
+      res.redirect('/panelService');
+    }
   } catch (error) {
-    console.error('Msj: ', error);
+    req.session.MessageError_Create_Panel_Service = error.message;
+    res.redirect('/panelService');
   }
 });
 
 // PUT SERVICE PANEL
 router.post('/panelService/:_id', isAuthenticated, async(req, res, next) => {
   try {
-    let path = req.body.base64Update;
-    let serviceID = req.params._id.replace(':', '').replace('_', '');
-
-    if (path.length !== 0) {
-      await Service.findByIdAndUpdate(
-        { _id: serviceID },
-        {
-          title: req.body.serviceName,
-          detail: req.body.description,
-          price: req.body.price,
-          imgService: req.body.base64Update
-        }
-      )
-    } else {
-      await Service.findByIdAndUpdate(
-        { _id: serviceID },
-        {
-          title: req.body.serviceName,
-          detail: req.body.description,
-          price: req.body.price
-        }
-      )
-    }
-
-    res.redirect('/panelService');
-
-  } catch (error) {
-    console.error('Msj: ', error);
-  }
-});
-
-//  DELETE PRODUCT PANEL
-router.get('/panelService/:_id', async (req, res, next) => {
-  try {
-      let serviceID = req.params._id.replace(':', '').replace('_', '');
-      await Service.findByIdAndDelete(serviceID);
+    const result = await updatedServiceByID(req.params._id, req.body.serviceName, req.body.description, req.body.price, req.body.base64Update, today());
+    
+    if(result) {
+      req.session.Message_Update_Panel_Service = handleSuccessUpdate();
       res.redirect('/panelService');
-
+    }
   } catch (error) {
-    console.error('Msj: ', error);
+    req.session.MessageError_Update_Panel_Service = error.message;
+    res.redirect('/panelService');
   }
 });
 
-router.get('/panelComment', isAuthenticated, (req, res, next) => {
-  res.render('panelComment', { title: 'Comment Administrator', user: req.user.username });
+//  DELETE SERVICE PANEL
+router.get('/panelService/:_id', async(req, res, next) => {
+  try {
+    const result = await deleteServiceByID(req.params._id);
+
+    if(result) {
+      req.session.Message_Delete_Panel_Service = handleSuccessDelete();
+      res.redirect('/panelService');
+    }
+  } catch (error) {
+    req.session.MessageError_Delete_Panel_Service = error.message;
+    res.redirect('/panelService');
+  }
+});
+
+router.get('/panelComment', isAuthenticated, async(req, res, next) => {
+  try {
+    const commentsOrderBy = await getComments();
+    
+    //Delete
+    const successDeleteMessage_Panel_Comment = req.session.Message_Delete_Panel_Comment;
+    const failedDeleteMessage_Panel_Comment = req.session.MessageError_Delete_Panel_Comment;
+
+    req.session.Message_Delete_Panel_Comment = null;
+    req.session.MessageError_Delete_Panel_Comment = null;
+
+    if (commentsOrderBy.length > 0) {
+      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: req.user.username, successDeleteMessage_Panel_Comment, failedDeleteMessage_Panel_Comment });
+    }
+    else {
+      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: req.user.username, successDeleteMessage_Panel_Comment });
+    }
+  } catch (error) {
+    failedLoadMessage_Comment = error.message;
+    res.render('panelComment', { title: 'Panel Comment', user: req.user.username, failedLoadMessage_Comment });
+  }
+});
+
+//Delete Comment
+router.get('/panelComment/:_id', async(req, res, next) => {
+  try {
+    const result = await deleteCommentByID(req.params._id);
+    if(result) {
+      req.session.Message_Delete_Panel_Comment = handleSuccessDelete();
+      res.redirect('/panelComment');
+    }
+  } catch (error) {
+    req.session.MessageError_Delete_Panel_Comment = error.message;
+    res.redirect('/panelComment');
+  }
 });
 
 /* GET login page. */
@@ -295,7 +351,7 @@ router.get('/login', function(req, res, next) {
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/', // where to go if login is successful
   failureRedirect: '/login', // where to go if login fails
-  failureMessage: 'Invalid Credentials' //additional message for login failure
+  failureMessage: handleSigninError() //additional message for login failure
 }));
 
 /* GET register page. */
@@ -312,28 +368,13 @@ router.post('/register', async(req, res, next) => {
       throw new Error(handleIncompleteSignup());
     } 
     else {
-      const findUser = await User.findOne({ email: req.body.email });
-
-      if(findUser === null) {
-        User.register(
-          new User({
-            username: req.body.username,
-            email: req.body.email
-          }),
-          req.body.password,
-          (error, newUser) => {
-            if(error) {
-              return res.redirect('/register');
-            }
-            req.login(newUser, (error) => {
-              res.redirect('/');
-            })
-          }
-        );
-      }
-      else {
-        throw new Error(handleExistsAccount());
-      }
+      const newUser = await registerUser(req.body.username, req.body.email, req.body.password);
+      req.login(newUser, (error) => {
+        if(error) {
+          throw new Error (handleFailedSignIn());
+        }
+        res.redirect('/');
+      });
     }
   }
   catch(error) {

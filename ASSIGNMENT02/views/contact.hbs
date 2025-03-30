@@ -7,15 +7,41 @@
         <article class='article-contact-line'>
             <div class='vertical-line'></div>
         </article>
-
+    
         <article class='article-content'>
            <h2>Do you have any questions?</h2>
            <h1>Leave us a message here.</h1>
 
+            {{#if successSend_Mail}}
+                <div id='MessageSuccess' class='container-message-visible-medium'>
+                    <div class='container-message success-color'>
+                        <span class='container-message-span'>{{successSend_Mail}}</span>
+                        <button class='button-closed' onclick="CloseMessageFailed()">
+                            <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                              <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if failedSend_Mail}}
+                <div id='MessageFailed' class='container-message-visible-medium'>
+                    <div class='container-message warning-color'>
+                        <span class='container-message-span'>{{failedSend_Mail}}</span>
+                        <button class='button-closed' onclick="CloseMessageFailed()">
+                            <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                              <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            {{/if}}
+
             <form method='POST'>
                 <div class='article-content-container'>
-                    <input type='text' placeholder='Type your Name' name='customerName' value='{{user}}' required>
-                    <input type='email' placeholder='Type your email' name='customerEmail' value='{{email}}' required>
+                    <input type='text' placeholder='Type your Name' name='customerName' value='{{user}}'>
+                    <input type='email' placeholder='Type your email' name='customerEmail' value='{{email}}'>
                     <select name='type' id='type'>
                         <option value='Select' disabled selected hidden>Select your Subject</option>
                         <option value='Request a quote'>Request a quote</option>
@@ -31,3 +57,15 @@
         </article>
     </section>
 </main>
+
+<script>
+    function CloseMessageSuccess() {
+        var msjSuccess = document.getElementById('MessageSuccess');
+        msjSuccess.classList.add('hidden');
+    }
+
+    function CloseMessageFailed() {
+        var msjFail = document.getElementById('MessageFailed');
+        msjFail.classList.add('hidden');
+    }
+</script>

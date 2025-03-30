@@ -1,15 +1,18 @@
 <main>
     <h1>Our Products</h1>
-    <section class='section-filter'>
-        <h3>Filter by</h3>
-        <select name='product' id='product'>
-            <option value='Select' selected hidden disabled>Select</option>
-            <option value='Most relevant'>Most relevant</option>
-            <option value='Lowest price'>Lowest price</option>
-            <option value='Highest price'>Highest price</option>
-        </select>
-    </section>
-
+    {{#if failedReadMessage_Product}}
+        <div id='MessageFailed' class='container-message-visible-small'>
+            <div class='container-message warning-color'>
+                <span class='container-message-span'>{{failedReadMessage_Product}}</span>
+                <button class='button-closed' onclick="CloseMessageFailed()">
+                    <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                      <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    {{/if}}
+    
     {{#each products}}
         <section class='section-list-product'>
             <article class='article-result-product'>
@@ -20,7 +23,6 @@
                             <span>{{title}}</span>
                         </div>
                         <span>{{detail}}</span>
-                        <span>Date: {{publication}}</span>
                     </div>
 
                     <div class='number-product'>
@@ -35,3 +37,10 @@
         </section>
     {{/each}}
 </main>
+
+<script>
+    function CloseMessageFailed() {
+        var msjFail = document.getElementById('MessageFailed');
+        msjFail.classList.add('hidden');
+    }
+</script>
