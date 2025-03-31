@@ -3,13 +3,18 @@ require('dotenv').config();
 
 // create configuration object
 const configurations = {
-    ConnectionStrings:{
+    ConnectionStrings: {
         MongoDB: process.env.CONNECTION_STRING_MONGODB
     },
-    GitHub:{
+    GitHub: {
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
         callback: process.env.GITHUB_CLIENT_CALLBACK
+    },
+    Google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_sECRET,
+        callback: process.env.GOOGLE_CLIENT_CALLBACK
     }
 }
 

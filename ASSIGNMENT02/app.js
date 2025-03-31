@@ -9,9 +9,12 @@ var mongoose = require('mongoose');
 //import passport express-session
 var passport = require('passport');
 var session = require('express-session');
+
 //Import model and package for authentication strategies
 var User = require('./models/user');
 var githubStrategy = require('passport-github2').Strategy;
+var googleStrategy = require('passport-google-oauth20').Strategy;
+
 //Routing Rules
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -62,6 +65,34 @@ passport.use('github',
     }
   }
 ));
+passport.use(
+  new googleStrategy(
+    {
+      clientID: configs.Google.clientId,
+      clientSecret: configs.Google.clientSecret,
+      callbackURL: configs.Google.callback,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const user = await User.findOne({ oauthId: profile.id });
+        if (user) {
+          return done(null, user);
+        } else {
+          const newUser = new User({
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            oauthId: profile.id,
+            oauthProvider: 'Google',
+          });
+          const savedUser = await newUser.save();
+          return done(null, savedUser);
+        }
+      } catch (error) {
+        return done(error, null);
+      }
+    }
+  )
+);
 
 // Implement basic authentication strategy with passport-local and mongoose models.
 passport.use('local', User.createStrategy()); //out-of-the-box strategy initialization code from plm

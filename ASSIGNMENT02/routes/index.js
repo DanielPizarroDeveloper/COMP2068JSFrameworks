@@ -397,11 +397,23 @@ router.get('/account', isAuthenticated, (req, res, next) => {
 
 /* Get GitHub */
 router.get('/github',
-  passport.authenticate('github', { scope: ['user.email']})
+  passport.authenticate('github', { scope: ['profile', 'email']})
 );
 
 router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/login', }),
+  (req, res, next) => {
+    res.redirect('/')
+  }
+);
+
+/* Get Google */
+router.get('/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+router.get('/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login', }),
   (req, res, next) => {
     res.redirect('/')
   }
