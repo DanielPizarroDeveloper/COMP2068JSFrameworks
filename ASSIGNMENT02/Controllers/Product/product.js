@@ -33,9 +33,11 @@ const getProduct = async () => {
     }
 }
 
-const updatedProductByID = async(ID, productName, productDescription, productQuantity, productUnit, today, productPrice, productImage) => {
+const updatedProductByID = async(ID, productName, productDescription, productQuantity, today, productPrice, productImage) => {
     try {
         const productID = normalize_identifier(ID);
+        console.log('Path: ', productImage);
+        console.log('Path Length: ', productImage.length);
         let path = productImage.length;
 
         if (path.length !== 0) {
@@ -45,7 +47,6 @@ const updatedProductByID = async(ID, productName, productDescription, productQua
               title: productName,
               detail: productDescription,
               quantity: productQuantity,
-              unit: productUnit,
               publication: today,
               price: productPrice,
               imgProduct: productImage
@@ -58,7 +59,6 @@ const updatedProductByID = async(ID, productName, productDescription, productQua
                 title: productName,
                 detail: productDescription,
                 quantity: productQuantity,
-                unit: productUnit,
                 publication: today,
                 price: productPrice,
             }
@@ -66,7 +66,7 @@ const updatedProductByID = async(ID, productName, productDescription, productQua
         }
         return true;
     } catch (error) {
-        throw Error(handleFailedUpdate())
+        throw Error(handleFailedUpdate());
     }
 }
 

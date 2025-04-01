@@ -14,7 +14,7 @@
         {{#if successCreateMessage_Panel_Service}}
             <div id='MessageSuccess' class='container-message-visible'>
                 <div class='container-message success-color'>
-                    <span class='container-message-span'>{{successCreateMessage}}</span>
+                    <span class='container-message-span'>{{successCreateMessage_Panel_Service}}</span>
                     <button class='button-closed' onclick="CloseMessageSuccess()">
                         <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
                           <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
@@ -89,7 +89,7 @@
 
         {{#each serviceList}}
             <section class='section-list-panel-service'>
-                <form method='POST' action='/panelService/:_{{_id}}'>
+                <form method='POST' action='/admServices/panelService/:_{{_id}}'>
                     <article class='article-result-product-service'>
                         <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
                         <div class='container-panel-service'>
@@ -161,7 +161,7 @@
     
         {{#each serviceList}}
             <section class='section-list-panel-service'>
-                <form method='GET' action='/panelService/:_{{_id}}'>
+                <form method='GET' action='/admServices/panelService/:_{{_id}}'>
                     <article class='article-result-product-service'>
                         <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
                         <div class='container-panel-service'>

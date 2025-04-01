@@ -3,9 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 // Import configurations file and mongoose to connect to DB
 var configs = require('./configs/globals');
 var mongoose = require('mongoose');
+
 //import passport express-session
 var passport = require('passport');
 var session = require('express-session');
@@ -18,6 +20,13 @@ var googleStrategy = require('passport-google-oauth20').Strategy;
 //Routing Rules
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var commentRouter = require('./routes/comment');
+var contactRouter = require('./routes/contact');
+var productRouter = require('./routes/products');
+var serviceRouter = require('./routes/services');
+var productADMRouter = require('./routes/admProducts');
+var serviceADMRouter = require('./routes/admServices');
+var commentADMRouter = require('./routes/admComment');
 
 var app = express();
 
@@ -101,6 +110,14 @@ passport.deserializeUser(User.deserializeUser()); //out-of-the-box deserializeUs
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/products', productRouter);
+app.use('/comments', commentRouter);
+app.use('/contacts', contactRouter);
+app.use('/services', serviceRouter);
+app.use('/admProducts', productADMRouter);
+app.use('/admServices', serviceADMRouter);
+app.use('/admComment', commentADMRouter);
+
 //Connect to MongoDB
 mongoose.connect(configs.ConnectionStrings.MongoDB)
   .then(() => { console.log('Connected to MongoDB!'); })
