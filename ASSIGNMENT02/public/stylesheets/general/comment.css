@@ -1,8 +1,15 @@
-.section-comment {
+.form-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+}
+
+.section-comment {
+    width: 100%;
+    display: flex;
     gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .second-article-comment {
@@ -62,11 +69,49 @@
     width: 980px;
 }
 
-.comment-type-text,
-.comment-select {
+.comment-type-text {
     width: 300px !important;
 }
 
 .comment-textArea {
-    width: 500px !important;
+    width: 500px;
+}
+
+@media screen and (max-width: 1100px) {
+    /* Comment */
+    .second-article-comment {
+        width: 90%;
+    }
+    
+    .article-content-comment {
+        max-width: none;
+        width: 85%;
+    }
+
+    .comment-textArea {
+        width: 300px;
+    }
+
+    /* Panel ADM. Comment */
+    .section-comment {
+        width: 85%;
+    }
+
+    .second-article-comment {
+        width: 100%;
+    }
+
+    .form-content-comment {
+        width: 95%;
+    }
+
+    .comment-avatar {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    p {
+        font-size: 20px;
+    }
 }

@@ -26,7 +26,7 @@
         </div>
     {{/if}}
 
-    <form method='POST'>
+    <form class='form-section' method='POST'>
         <section class='section-comment'>
             <input class='comment-type-text' type='text' name='title' placeholder='Title of your opinion'>
             <textarea class='comment-textArea' name='opinion' placeholder='Type your opinion here!'></textarea>
@@ -34,7 +34,7 @@
         </section>
     </form>
 
-    <section>
+    <section class='section-comment'>
         <article class='second-article-comment'>
             {{#each commentsOrderBy}}
                 <div class='article-content-comment'>
@@ -50,7 +50,7 @@
 
                         <div class='comment-content-user'>
                             <span>{{responsable}}</span>
-                            <span>Publication date:&nbsp;&nbsp;{{date}}</span>
+                            <span>Posted:&nbsp;&nbsp;{{date}}</span>
                         </div>
                     </div>
                 </div>

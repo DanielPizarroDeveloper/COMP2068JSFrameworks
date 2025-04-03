@@ -84,10 +84,6 @@
         width: 260px;
         flex-direction: column;
     }
-/* 
-    .container-service-information > label {
-        text-align: center;
-    } */
 }
 
 @media screen and (max-width: 374px) {
