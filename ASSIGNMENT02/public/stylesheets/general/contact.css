@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     padding-top: 3.5%;
+    width: 100%;
 }
 
 .img-contact {
@@ -44,4 +45,11 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+
+@media screen and (max-width:  1445px) {
+    .content-user-information:last-of-type > span {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }

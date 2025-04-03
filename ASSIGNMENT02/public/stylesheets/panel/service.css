@@ -15,6 +15,7 @@
 .container-panel-service {
     display: flex;
     align-items: center;
+    min-width: 600px;
 }
 
 .container-new-title {
@@ -30,9 +31,14 @@
     margin-top: 4%;
 }
 
+.detail-service-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .container-service-information {
     display: flex;
-    align-items: flex-start;
     align-items: center;
     gap: 10px;
     margin-bottom: 5%;
@@ -45,4 +51,48 @@
 .text-area-editable-service {
     width: 99%;
     height: 55px !important;
+}
+
+@media screen and (max-width: 1130px) {
+    .detail-service-delete {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 474px) {
+    .container-panel-service {
+        min-width: 0;
+    }
+    
+    .container-delete-information > h3 {
+        text-align: center;
+        width: fit-content;
+    }
+
+    .container-delete-information > span {
+        text-align: center;
+    }
+
+    /* Update */
+    .detail-service-group {
+        width: max-content;
+        flex-direction: column;
+    }
+
+    .container-service-information {
+        width: 260px;
+        flex-direction: column;
+    }
+/* 
+    .container-service-information > label {
+        text-align: center;
+    } */
+}
+
+@media screen and (max-width: 374px) {
+    .result-service {
+        width: 250px;
+        height: 150px;
+    }
 }

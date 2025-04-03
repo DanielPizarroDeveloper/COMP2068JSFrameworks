@@ -20,6 +20,13 @@ h3 {
 .radio-button-group {
     display: flex;
     flex-direction: row;
+    gap: 20px;
+}
+
+.radio-button-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: 10px;
 }
 
@@ -38,7 +45,7 @@ h3 {
 .article-result-product-service {
     display: flex;
     flex-direction: row;
-    gap: 5%;
+    gap: 10%;
     max-width: 1100px;
     align-items: center;
     margin-bottom: 2%;
@@ -55,10 +62,15 @@ h3 {
 
 .container-delete-information {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: row;
     gap: 10px;
-    margin-bottom: 5%;
+    margin-bottom: 2.5%;
+}
+
+.container-delete-information > h3 {
+    width: 100px;
+    max-width: 100px;
 }
 
 .article-create {
@@ -103,10 +115,71 @@ h3 {
 }
 
 .text-area-create {
-    width: 520px !important;
+    width: 520px;
 }
 
 .svg {
-    color: white;
+    color: var(--primary-white);
     width: 20px;
+}
+
+/* ADM. Product Update */
+@media screen and (max-width: 1130px) {
+    .article-result-product-service {
+        flex-direction: column;
+        gap: 6%;
+    }
+    
+    .panel-result-img {
+        margin-bottom: 2%;
+    }
+
+    .container-new-description {
+        align-items: center;
+    }
+
+    .container-delete-information {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-delete-information > h3 {
+        text-align: center;
+    }
+
+    /* span description */
+    .container-delete-information:last-child > span {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .section-options-filter {
+        flex-direction: column;
+    }
+
+    .radio-button-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .container-new-description {
+        margin-top: 4%;
+        margin-bottom: 10%;
+        align-items: center;
+    }
+
+    /* Update */
+    .content-group-file > p {
+        text-align: center;
+    }
+
+    /* Create */
+    .content-group {
+        flex-direction: column;
+    }
+
+    .text-area-create {
+        width: auto;
+    }
 }

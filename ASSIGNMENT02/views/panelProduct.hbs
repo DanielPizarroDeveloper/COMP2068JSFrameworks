@@ -99,24 +99,24 @@
                         <div class='container-panel-product'>
                             <div class='detail-product-update'>
                                 <div class='container-product-information'>
-                                    <label>Title</label>
+                                    <span>Title</span>
                                     <input type='text' value='{{title}}' name='productUpdateName'>
                                 </div>
 
                                 <div class='container-product-information'>
-                                    <span>Amount:</span>
+                                    <span>Amount</span>
                                     <input type='number' value='{{quantity}}' name='productUpdateQuantity'>
                                 </div>
 
                                 <div class='container-product-information'>
-                                    <label>Price</label>
+                                    <span>Price</span>
                                     <input type='number' value='{{price}}' name='productUpdatePrice'>
                                 </div>
                             </div>
 
                             <div class='detail-product-description'>
                                 <div class='container-product-information'>
-                                    <label>Description</label>
+                                    <span>Description</span>
                                     <textarea class='text-area-editable-product' name='productUpdateDescription'>{{detail}}</textarea>
                                 </div>
                             </div>
@@ -176,19 +176,22 @@
                         <div class='container-panel-product-delete'>
                             <div class='detail-product'>
                                 <div class='container-delete-information'>
-                                    <h3>Product name: &nbsp;&nbsp;{{title}}</h3>
+                                    <h3>Product</h3>
+                                    <span>{{title}}</span>
+                                </div>
+                                <div class='container-delete-information'>
+                                    <h3>Amount</h3>
+                                    <span>{{quantity}} {{unit}}</span>
                                 </div>
 
                                 <div class='container-delete-information'>
-                                    <h3>Amount: &nbsp;&nbsp;{{quantity}}</h3>
+                                    <h3>Price</h3>
+                                    <span>{{price}}</span>
                                 </div>
 
                                 <div class='container-delete-information'>
-                                    <h3>Price: &nbsp;&nbsp;{{price}}</h2>
-                                </div>
-
-                                <div class='container-delete-information'>
-                                    <h3>Description: &nbsp;&nbsp;{{detail}}</h3>
+                                    <h3>Description</h3>
+                                    <span>{{detail}}</span>
                                 </div>
                             </div>
                         </div>

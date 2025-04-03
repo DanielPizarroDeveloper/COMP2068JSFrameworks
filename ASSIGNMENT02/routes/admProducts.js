@@ -62,7 +62,6 @@ router.post('/panelProduct', isAuthenticated, async(req, res, next) => {
   
 router.post('/panelProduct/:_id', async (req, res, next) => {
   try {
-    console.log('IMG: ', req.body.base64Update);
     const result = await updatedProductByID(req.params._id, req.body.productUpdateName, req.body.productUpdateDescription, req.body.productUpdateQuantity, today(), req.body.productUpdatePrice, req.body.base64Update); 
     if(result) {
       req.session.Message_Update_Panel_Product = handleSuccessUpdate();

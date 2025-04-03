@@ -34,7 +34,7 @@ h3 {
     flex-direction: row;
     justify-content: space-between;
     gap: 5%;
-    padding-left: 5%;
+    /* padding-left: 5%; */
     max-width: 1100px;
     align-items: center;
 }
@@ -95,14 +95,7 @@ h3 {
 .section-list-product {
     display: flex;
     flex-direction: column;
-    width: 60%;
     align-items: flex-start;
-}
-
-.section-list-product:hover {
-    padding: 1%;
-    border-radius: 10px;
-    box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
 }
 
 .article-result-product {
@@ -110,9 +103,14 @@ h3 {
     flex-direction: row;
     justify-content: space-between;
     gap: 5%;
-    padding-left: 5%;
     max-width: 1100px;
     align-items: center;
+}
+
+.section-list-product:hover {
+    padding: 1%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
 }
 
 .number-product {

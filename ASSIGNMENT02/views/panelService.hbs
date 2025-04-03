@@ -4,13 +4,19 @@
     <section class='section-options-filter'>
         <h3>Select one option</h3>
         <div class='radio-button-group'>
-            <input type='radio' name='option' id='create' value='create'><label for='create'>Create Service</label>
-            <input type='radio' name='option' id='update' value='update'><label for='update'>Update Service</label>
-            <input type='radio' name='option' id='delete' value='delete'><label for='delete'>Delete Service</label>
+            <div class='radio-button-option'>
+                <input type='radio' name='option' id='create' value='create'><label for='create'>Create Service</label>
+            </div>
+            <div class='radio-button-option'>
+                <input type='radio' name='option' id='update' value='update'><label for='update'>Update Service</label>
+            </div>
+            <div class='radio-button-option'>
+                <input type='radio' name='option' id='delete' value='delete'><label for='delete'>Delete Service</label>
+            </div>
         </div>
     </section>
 
-    <div class='section-list-panel-product hidden' id='createSection'>
+    <div id='createSection' class='section-list-panel-product hidden'>
         {{#if successCreateMessage_Panel_Service}}
             <div id='MessageSuccess' class='container-message-visible'>
                 <div class='container-message success-color'>
@@ -94,20 +100,20 @@
                         <img class='result-service' src='{{imgService}}' alt='Representative image of the service.'>
                         <div class='container-panel-service'>
                             <div class='detail-service'>
-                                <div style='display: flex; flex-direction: row; gap: 20px;'>
+                                <div class='detail-service-group'>
                                     <div class='container-service-information'>
-                                        <label>Title</label>
+                                        <span>Title</span>
                                         <input class='text-input-editable' type='text' value='{{title}}' name='serviceName'>
                                     </div>
 
                                     <div class='container-service-information'>
-                                        <label>Price</label>
+                                        <span>Price</span>
                                         <input type='text' name='price' value='{{price}}'>
                                     </div>
                                 </div>
 
                                 <div class='container-new-description'>
-                                    <label>Description</label>
+                                    <span>Description</span>
                                     <textarea class='text-area-editable-service' name='description'>{{detail}}</textarea>
                                 </div>
                                 
@@ -167,15 +173,18 @@
                         <div class='container-panel-service'>
                             <div class='detail-service-delete'>
                                 <div class='container-delete-information'>
-                                    <h3>Service name: &nbsp;&nbsp;{{title}}</h3>
+                                    <h3>Service</h3>
+                                    <span>{{title}}</span>
                                 </div>
 
                                 <div class='container-delete-information'>
-                                    <h3>Price: &nbsp;&nbsp;{{price}}</h3>
+                                    <h3>Price</h3>
+                                    <span>{{price}}</span>
                                 </div>
 
                                 <div class='container-delete-information'>
-                                    <h3>Description: &nbsp;&nbsp;{{detail}}</h3>
+                                    <h3>Description</h3>
+                                    <span>{{detail}}</span>
                                 </div>
                             </div>
                         </div>
