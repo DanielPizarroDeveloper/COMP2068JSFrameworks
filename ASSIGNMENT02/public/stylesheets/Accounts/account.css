@@ -85,3 +85,34 @@
     width: 100%;
     border-top: 1px solid var(--gray-800);
 }
+
+
+@media screen and (max-width: 767px) {
+    .section-account {
+        flex-direction: column;
+    }
+
+    .article-account {
+        margin-left: 0;
+    }
+
+    .article-option-panel {
+        margin-right: 0;
+    }
+
+    .content-option-titulo {
+        align-items: center;
+    }
+
+    .content-option-titulo > h2 {
+        text-align: center;
+    }
+
+    .content-option > p, a {
+        text-align: center;
+    }
+
+    .content-option > a {
+        justify-content: center;
+    }
+}
