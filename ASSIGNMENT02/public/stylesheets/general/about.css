@@ -33,3 +33,50 @@
     display: flex;
     flex-basis: 35%;
 }
+
+@media screen and (max-width: 1024px) {
+    .section-about {
+        gap: 5%;
+        flex-direction: column-reverse;
+    }
+
+    .line-article {
+        display: none;
+    }
+
+    .article-about {
+        text-align: center;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .section-about {
+        gap: 2%;
+        flex-direction: column-reverse;
+    }
+
+    .line-article {
+        display: none;
+    }
+
+    .article-about {
+        text-align: center;
+        width: 90%;
+    }
+
+    .article-logo {
+        justify-content: center;
+    }
+
+    .article-logo > img {
+        width: 80%;
+        aspect-ratio: 90/61;
+    }
+}
+
+@media screen and (max-width: 428px) {
+    .article-about > p {
+        font-size: 15px;
+    }
+}
