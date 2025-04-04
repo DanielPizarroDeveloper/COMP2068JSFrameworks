@@ -38,6 +38,7 @@ h3 {
 .result {
     width: 250px;
     height: 250px;
+    margin-right: 5%;
     border-radius: 10px;
     box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
 }
@@ -54,8 +55,6 @@ h3 {
     display: flex;
     align-items: center;
     flex-direction: row;
-    gap: 200px;
-    width: 1000px;
     max-width: 1000px;
 }
 
@@ -82,6 +81,22 @@ h3 {
     justify-content: center;
 }
 
+.detail-product {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 360px;
+    max-width: 360px;
+}
+
+.number-product {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 200px;
+    justify-content: center;
+}
+
 .span-price {
     display: flex;
     justify-content: flex-end;
@@ -90,7 +105,6 @@ h3 {
 /* Product */
 .section-list-product {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
 }
 
@@ -108,15 +122,8 @@ h3 {
     box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
 }
 
-.number-product {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 200px;
-    justify-content: flex-end;
-}
-
 @media screen and (max-width: 980px) {
+    /* Service */
     .article-result {
         flex-direction: column;
     }
@@ -135,9 +142,55 @@ h3 {
         max-width: 280px;
         text-align: center;
     }
+
+    /* Product */
+    .article-result-product {
+        width: 710px;
+    }
+
+    .result {
+        margin-right: 0;
+    }
+
+    .container-product {
+        width: 440px;
+        gap: 2%;
+    }
+
+    .detail-product {
+        width: 300px;
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    /* Product */
+    .article-result-product {
+        flex-direction: column;
+    }
+
+    .result {
+        margin-right: 0;
+        margin-bottom: 5%;
+    }
+
+    .container-product {
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .detail-product {
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .number-product {
+        align-items: center;
+    }   
 }
 
 @media screen and (max-width: 395px) {
+    /* Service */
     .container-service {
         width: 95%;
         gap: 20px;
