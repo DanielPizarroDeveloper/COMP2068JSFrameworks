@@ -1,7 +1,9 @@
 const fileInputCreate = document.getElementById('fileUploadCreate');
-fileInputCreate.addEventListener('change', () => {
-    loadImage(fileInputCreate, 'fileNameCreate', 'base64Create');
-});
+if(fileInputCreate !== null) {
+    fileInputCreate.addEventListener('change', () => {
+        loadImage(fileInputCreate, 'fileNameCreate', 'base64Create');
+    });
+}
 
 const fileLoad = (id) => {
     let fileInput = document.getElementById('fileUploadUpdate' + id);

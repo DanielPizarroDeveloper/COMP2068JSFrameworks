@@ -11,43 +11,35 @@
             </div>
         </article>
 
-        <form method='POST'>
-            <article class='article-content-form'>
-                {{#if errorMessage}}
-                    <div id='MessageFailed' class='container-message'>
-                        <div class='container-message warning-color'>
-                            <span class='container-message-span'>{{errorMessage}}</span>
-                            <button class='button-closed' onclick="CloseMessageFailed()">
-                                <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
-                                  <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
-                                </svg>
-                            </button>
-                        </div>
+        <article>
+            {{#if errorMessage}}
+                <div id='MessageFailed' class='container-message'>
+                    <div class='container-message warning-color'>
+                        <span class='container-message-span'>{{errorMessage}}</span>
+                        <button class='button-closed' onclick="CloseMessageFailed()">
+                            <svg class='icon-X' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' class='size-6'>
+                              <path stroke-linecap='round' stroke-linejoin='round' d='M6 18 18 6M6 6l12 12' />
+                            </svg>
+                        </button>
                     </div>
-                {{/if}}
+                </div>
+            {{/if}}
+
+            <form method='POST' class='article-content-form'>
                 <input type='text' placeholder='Type your name and last name' name='username' id='username'>
                 <input type='email' placeholder='Type your e-mail' name='email' id='email'>
                 <input type='password' placeholder='Type your password' name='password' id='password'>
                 <input type='submit' value='Create Account'>
-
                 <div class='separate'>
                     <div class='horizontal-line-account'></div>
                     <span>o</span>
                     <div class='horizontal-line-account'></div>
                 </div>
-
                 <div class='content-message'>
                     <span>Do have an account?</span>
                     <a href='/login'>Sign in here.</a>
                 </div>
-            </article>
-        </form>
+            </form>
+        </article>
     </section>
 </main>
-
-<script>
-    function CloseMessageFailed() {
-        var msjFail = document.getElementById('MessageFailed');
-        msjFail.classList.add('hidden');
-    }
-</script>

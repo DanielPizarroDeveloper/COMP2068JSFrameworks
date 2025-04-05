@@ -29,13 +29,15 @@ router.get('/register', function(req, res, next) {
 router.post('/register', async(req, res, next) => {
   try {
     if(!req.body.username || !req.body.email || !req.body.password) {
-      throw new Error(handleIncompleteSignup());
+      req.session.errorMessage = handleIncompleteSignup();
+      res.redirect('/register');
     } 
     else {
       const newUser = await registerUser(req.body.username, req.body.email, req.body.password);
       req.login(newUser, (error) => {
         if(error) {
-          throw new Error(handleFailedSignIn());
+          req.session.errorMessage = handleFailedSignIn();
+          res.redirect('/register');
         }
         res.redirect('/');
       });

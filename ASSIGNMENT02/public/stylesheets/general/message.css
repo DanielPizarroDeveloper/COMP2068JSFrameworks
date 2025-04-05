@@ -1,15 +1,23 @@
 /* Common */
+.hidden-message {
+    display: none;
+    animation:scale-down-center 0.4s;
+}
+
 .container-message-visible {
     width: 100%;
+    animation: scale-up-center 0.4s;
 }
 
 .container-message-visible-medium {
     width: 85%;
     margin-bottom: 5%;
+    animation: scale-up-center 0.4s;
 }
 
 .container-message-visible-small {
     width: 40%;
+    animation: scale-up-center 0.4s;
 }
 
 .container-message {
@@ -20,6 +28,7 @@
     padding: 2%;
     border-radius: 20px;
     width: 100%;
+    animation: scale-up-center 0.4s;
 }
 
 .container-message-span {
@@ -55,3 +64,20 @@
     align-items: center;
 }
 
+/* Show Message */
+@keyframes scale-up-center { 
+    0% {
+        transform:scale(.5)
+    } 100% {
+        transform:scale(1)
+    }
+}
+
+/* Hidden Message */
+@keyframes scale-down-center { 
+    0% {
+        transform:scale(1)
+    } 100% { 
+        transform:scale(.5)
+    }
+}

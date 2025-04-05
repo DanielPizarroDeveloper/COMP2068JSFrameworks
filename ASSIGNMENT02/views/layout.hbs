@@ -69,31 +69,31 @@
     </nav>
 
     <aside id='responsive-menu' class='hidden'>
-      <nav style="height: 100%; display: flex; flex-direction: column; gap: 30%; padding-top: 5%; padding-bottom: 5%;">
-        <ul style="display: flex; flex-direction: column; align-items: center; list-style: none; height: 100%; gap: 11%">
+      <nav class='nav-vertical'>
+        <ul class='ul-vertical'>
           {{#if user}}
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/'><span>HOME</span></a>
             </li>
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/about'><span>ABOUT US</span></a>
             </li>
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/products/product'><span>PRODUCTS</span></a>
             </li>
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/services/service'><span>SERVICES</span></a>
             </li>
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/comments/comment'><span>COMMENTS</span></a>
             </li>
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/contacts/contact'><span>CONTACT</span></a>
             </li>
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/account'><span>{{user}}</span></a>
             </li>
-            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+            <li class='li-vertical'>
               <a href='/logout'><span>Logout</span></a>
             </li>
           {{else}}
@@ -124,14 +124,32 @@
     </footer>
   </body>
   <script src='../javascripts/image.js'></script>
-  <script src='../javascripts/getToday.js'></script>
+  <script src='../javascripts/closeMessage.js'></script>
   <script src='../javascripts/animation.js'></script>
 
   <script>
-    const open_lateral_menu = () => {
+    document.addEventListener('click', function() {
       const menu = document.getElementById('responsive-menu');
-      menu.classList.remove('hidden');
-      menu.classList.add('slide-left');
-    };
+      
+      if(menu.classList[0] === 'slide-left') {
+        close_lateral_menu(menu);
+      }
+    });
+
+    const close_lateral_menu = (menu) => {
+      menu.classList = 'slide-right';
+    }
+
+    const open_lateral_menu = () => {
+      event.stopPropagation();
+      const menu = document.getElementById('responsive-menu');
+
+      if(menu.classList[0] == 'hidden') {
+        menu.classList = 'slide-left';
+      }
+      else {
+        menu.classList = 'slide-left';
+      }
+    }
   </script>
 </html>
