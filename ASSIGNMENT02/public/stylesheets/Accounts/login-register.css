@@ -47,6 +47,7 @@
 .content-message {
     display: flex;
     gap: 10px;
+    margin-bottom: 2%;
 }
 
 .separate {
@@ -75,7 +76,49 @@
     border-radius: 10px;
 }
 
+.content-sign-another-option:last-child {
+    margin-bottom: 5%;
+}
+
 .login-svg {
     width: 28px;
     height: 28px;
+}
+
+@media screen and (max-width: 530px) {
+    .section-login-register {
+        width: 375px;
+    }
+}
+
+@media screen and (max-width: 469px) {
+    .section-login-register {
+        width: 320px;
+    }
+
+    .horizontal-line-account {
+        width: 100px;
+    }
+
+    .content-sign-another-option{ 
+        min-width: 270px;
+    }
+
+    .article-login-register {
+        height: 100px;
+    }
+
+    .content {
+        margin-bottom: 10px;
+    }
+    
+    .article-content-form {
+        gap: 15px !important;
+    }
+}
+
+@media screen and (max-width: 374px) {
+    .section-login-register {
+        box-shadow: none;
+    }
 }

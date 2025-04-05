@@ -27,43 +27,83 @@
     <link rel='stylesheet' href='https://api.fontshare.com/v2/css?f=clash-display&display=swap' />
   </head>
   <body>
-    <nav>
-      <ul>
-        <li>
+    <nav class='nav-horizontal'>
+      <ul class='ul-horizontal'>
+        <li class='li-horizontal'>
           <a href='/'>
             <img class='nav-ul-li-img' src='/images/Company_Img.webp' alt='Corporate image of the company'>
             <span>TAPICERIA LEONE</span>
           </a>
         </li>
         {{#if user}}
-          <li>
+          <li class='li-horizontal'>
             <a href='/about'><span><span>ABOUT US</span></span></a>
           </li>
-          <li>
+          <li class='li-horizontal'>
             <a href='/products/product'><span>PRODUCTS</span></a>
           </li>
-          <li>
+          <li class='li-horizontal'>
             <a href='/services/service'><span>SERVICES</span></a>
           </li>
-          <li>
+          <li class='li-horizontal'>
             <a href='/comments/comment'><span>COMMENTS</span></a>
           </li>
-          <li>
+          <li class='li-horizontal'>
             <a href='/contacts/contact'><span>CONTACT</span></a>
           </li>
-          <li>
+          <li class='li-horizontal'>
             <a href='/account'><span>{{user}}</span></a>
           </li>
-          <li>
+          <li class='li-horizontal'>
             <a href='/logout'><span>Logout</span></a>
           </li>
-        {{else}}
-          <li>
-            <a href='/login'><span>LOGIN</span></a>
+          <li class='li-horizontal'>
+            <button class='button-hamburguesa' onclick="open_lateral_menu()">
+              <svg class='svg-hamburguesa' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
           </li>
         {{/if}}
       </ul>
     </nav>
+
+    <aside id='responsive-menu' class='hidden'>
+      <nav style="height: 100%; display: flex; flex-direction: column; gap: 30%; padding-top: 5%; padding-bottom: 5%;">
+        <ul style="display: flex; flex-direction: column; align-items: center; list-style: none; height: 100%; gap: 11%">
+          {{#if user}}
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/'><span>HOME</span></a>
+            </li>
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/about'><span>ABOUT US</span></a>
+            </li>
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/products/product'><span>PRODUCTS</span></a>
+            </li>
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/services/service'><span>SERVICES</span></a>
+            </li>
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/comments/comment'><span>COMMENTS</span></a>
+            </li>
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/contacts/contact'><span>CONTACT</span></a>
+            </li>
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/account'><span>{{user}}</span></a>
+            </li>
+            <li class='height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;'>
+              <a href='/logout'><span>Logout</span></a>
+            </li>
+          {{else}}
+            <li class='li-login'>
+              <a href='/login'><span>LOGIN</span></a>
+            </li>
+          {{/if}}
+        </ul>
+      </nav>
+    </aside>
 
     {{{body}}}
     
@@ -86,4 +126,12 @@
   <script src='../javascripts/image.js'></script>
   <script src='../javascripts/getToday.js'></script>
   <script src='../javascripts/animation.js'></script>
+
+  <script>
+    const open_lateral_menu = () => {
+      const menu = document.getElementById('responsive-menu');
+      menu.classList.remove('hidden');
+      menu.classList.add('slide-left');
+    };
+  </script>
 </html>
