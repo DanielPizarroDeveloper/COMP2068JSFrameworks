@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const hbs = require('hbs');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
@@ -58,6 +59,10 @@ app.use('/admComment', commentADMRouter);
 
 //Connect to MongoDB
 connections_Mongo_DB();
+
+hbs.registerHelper('eq', function(a, b) {
+  return a === b;
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

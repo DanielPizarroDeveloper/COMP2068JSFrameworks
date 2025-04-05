@@ -73,6 +73,17 @@ const handleErrorEmail = () => {
     return '⚠️ Failed to send your email. Please try again later.';
 }
 
+const checked_Create = () => {
+    return 'create';
+}
+
+const checked_Update = () => {
+    return 'update';
+}
+
+const checked_Delete = () => {
+    return 'delete';
+}
 
 module.exports = {
     handleSuccessCreate,
@@ -91,5 +102,8 @@ module.exports = {
     handleIncompleteForm_Comment,
     handleSigninError,
     handleSendEmail,
-    handleErrorEmail
+    handleErrorEmail,
+    checked_Create,
+    checked_Update,
+    checked_Delete
 }

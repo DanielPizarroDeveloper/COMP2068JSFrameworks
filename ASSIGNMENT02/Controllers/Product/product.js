@@ -40,7 +40,7 @@ const updatedProductByID = async(ID, productName, productDescription, productQua
         console.log('Path Length: ', productImage.length);
         let path = productImage.length;
 
-        if (path.length !== 0) {
+        if (path > 0) {
           await Product.findByIdAndUpdate(
             { _id: productID },
             {
@@ -60,7 +60,7 @@ const updatedProductByID = async(ID, productName, productDescription, productQua
                 detail: productDescription,
                 quantity: productQuantity,
                 publication: today,
-                price: productPrice,
+                price: productPrice
             }
           )
         }

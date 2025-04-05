@@ -36,7 +36,7 @@ const updatedServiceByID = async(ID, serviceName, serviceDescription, servicePri
   try {
       const serviceID = normalize_identifier(ID);
       let path = serviceImage.length;
-      if (path.length !== 0) {
+      if (path > 0) {
         await Service.findByIdAndUpdate(
           { _id: serviceID },
           {
