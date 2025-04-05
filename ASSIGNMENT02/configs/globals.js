@@ -13,7 +13,7 @@ const configurations = {
     },
     Google: {
         clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_sECRET,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callback: process.env.GOOGLE_CLIENT_CALLBACK
     }
 }
