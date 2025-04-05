@@ -7,9 +7,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 
-const MongoStore = require('connect-mongo');
-
-// Cargar el archivo `.env` adecuado según el entorno
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 dotenv.config({ path: envFile });
 
@@ -43,30 +40,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Use express-session and passport
-// app.use(session(
-//   {
-//     secret: 'TapiceriaLeone',
-//     resave: false,
-//     saveUninitialized: false
-//   }
-// ));
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-app.use(session({
-  store: MongoStore.create({
-    mongoUrl: process.env.CONNECTION_STRING_MONGODB, // URL de MongoDB
-  }),
-  secret: 'CLAVESECRETA', // Clave secreta segura
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: isProduction, // Cookies seguras solo en producción
-    httpOnly: true, // Protege contra acceso del cliente
-    maxAge: 1000 * 60 * 60 * 24, // Tiempo de vida de la cookie (1 día en este caso)
-  },
-}));
-
+app.use(session(
+  {
+    secret: 'TapiceriaLeone',
+    resave: false,
+    saveUninitialized: false
+  }
+));
 
 // Authentications...
 Auth_Options(app);
