@@ -2,9 +2,14 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 const hbs = require('hbs');
+const dotenv = require('dotenv');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+
+// Cargar el archivo `.env` adecuado según el entorno
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+dotenv.config({ path: envFile });
 
 // Auth
 const { Auth_Options } = require('./middlewares/AuthLocal');
