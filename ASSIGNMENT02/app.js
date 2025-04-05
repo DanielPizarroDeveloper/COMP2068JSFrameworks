@@ -40,13 +40,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Use express-session and passport
-app.use(session(
-  {
-    secret: 'TapiceriaLeone',
-    resave: false,
-    saveUninitialized: false
-  }
-));
+// app.use(session(
+//   {
+//     secret: 'TapiceriaLeone',
+//     resave: false,
+//     saveUninitialized: false
+//   }
+// ));
 
 // Authentications...
 Auth_Options(app);
