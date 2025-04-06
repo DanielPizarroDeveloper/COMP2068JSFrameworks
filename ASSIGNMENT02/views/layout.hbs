@@ -55,7 +55,7 @@
             <a href='/account'><span>{{user}}</span></a>
           </li>
           <li class='li-horizontal'>
-            <a href='/logout'><span>Logout</span></a>
+            <a href='/logout'><span>LOGOUT</span></a>
           </li>
           <li class='li-horizontal'>
             <button class='button-hamburguesa' onclick="open_lateral_menu()">
@@ -94,7 +94,7 @@
               <a href='/account'><span>{{user}}</span></a>
             </li>
             <li class='li-vertical'>
-              <a href='/logout'><span>Logout</span></a>
+              <a href='/logout'><span>LOGOUT</span></a>
             </li>
           {{else}}
             <li class='li-login'>
@@ -126,30 +126,5 @@
   <script src='../javascripts/image.js'></script>
   <script src='../javascripts/closeMessage.js'></script>
   <script src='../javascripts/animation.js'></script>
-
-  <script>
-    document.addEventListener('click', function() {
-      const menu = document.getElementById('responsive-menu');
-      
-      if(menu.classList[0] === 'slide-left') {
-        close_lateral_menu(menu);
-      }
-    });
-
-    const close_lateral_menu = (menu) => {
-      menu.classList = 'slide-right';
-    }
-
-    const open_lateral_menu = () => {
-      event.stopPropagation();
-      const menu = document.getElementById('responsive-menu');
-
-      if(menu.classList[0] == 'hidden') {
-        menu.classList = 'slide-left';
-      }
-      else {
-        menu.classList = 'slide-left';
-      }
-    }
-  </script>
+  <script src='../javascripts/menu.js'></script>
 </html>

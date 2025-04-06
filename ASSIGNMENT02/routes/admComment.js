@@ -1,14 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
+//isAuthenticated
 const isAuthenticated = require('../middlewares/Auth');
 
+//Message
 const { handleSuccessDelete } = require('../public/mocks/Message');
 
+//CRUD
 const { getComments, deleteCommentByID } = require('../Controllers/Comment/comment');
+
+//toUpperCaseUser
+const toUpperCaseText = require('../public/javascripts/toUpperCase');
 
 router.get('/panelComment', isAuthenticated, async(req, res, next) => {
   try {
+    var displayName = toUpperCaseText(req.user.username);
     const commentsOrderBy = await getComments();
     
     //Delete
@@ -19,14 +26,14 @@ router.get('/panelComment', isAuthenticated, async(req, res, next) => {
     req.session.MessageError_Delete_Panel_Comment = null;
 
     if (commentsOrderBy.length > 0) {
-      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: req.user.username, successDeleteMessage_Panel_Comment, failedDeleteMessage_Panel_Comment });
+      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: displayName, successDeleteMessage_Panel_Comment, failedDeleteMessage_Panel_Comment });
     }
     else {
-      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: req.user.username, successDeleteMessage_Panel_Comment });
+      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: displayName, successDeleteMessage_Panel_Comment });
     }
   } catch (error) {
     failedLoadMessage_Comment = error.message;
-    res.render('panelComment', { title: 'Panel Comment', user: req.user.username, failedLoadMessage_Comment });
+    res.render('panelComment', { title: 'Panel Comment', user: displayName, failedLoadMessage_Comment });
   }
 });
   

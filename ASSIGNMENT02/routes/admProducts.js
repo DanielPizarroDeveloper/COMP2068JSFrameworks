@@ -1,22 +1,27 @@
 var express = require('express');
 var router = express.Router();
 
+//DateNow
 const today = require('../public/javascripts/getToday');
-const { createProduct, getProduct, updatedProductByID, deleteProductByID } = require('../Controllers/Product/product');
 
-//Sessions
+//CRUD
+const { createProduct, getProduct, updatedProductByID, deleteProductByID } = require('../Controllers/Product/product');
 
 //Message
 const { handleSuccessCreate, handleSuccessUpdate, handleSuccessDelete } = require('../public/mocks/Message');
 
-//Sessions
+//Message
 const { checked_Create, checked_Update, checked_Delete } = require('../public/mocks/Message');
 
 //Auth
 const isAuthenticated = require('../middlewares/Auth');
 
+//toUpperCaseUser
+const toUpperCaseText = require('../public/javascripts/toUpperCase');
+
 router.get('/panelProduct', isAuthenticated, async(req, res, next) => {
   try {
+    var displayName = toUpperCaseText(req.user.username);
     const productsList = await getProduct();
 
     if(productsList.length > 0) {
@@ -47,7 +52,7 @@ router.get('/panelProduct', isAuthenticated, async(req, res, next) => {
       //Delete
       req.session.Message_Delete_Panel_Product = null;
       req.session.MessageError_Delete_Panel_Product = null;
-      res.render('panelProduct', { title: 'Product Administrator', radioChecked, productsList, user: req.user.username, successCreateMessage_Panel_Product, failedCreateMessage_Panel_Product, successUpdateMessage_Panel_Product, failedUpdateMessage_Panel_Product, successDeleteMessage_Panel_Product, failedDeleteMessage_Panel_Product });
+      res.render('panelProduct', { title: 'Product Administrator', radioChecked, productsList, user: displayName, successCreateMessage_Panel_Product, failedCreateMessage_Panel_Product, successUpdateMessage_Panel_Product, failedUpdateMessage_Panel_Product, successDeleteMessage_Panel_Product, failedDeleteMessage_Panel_Product });
     }
   } catch (error) {
     req.session.MessageError_Read = error.message;

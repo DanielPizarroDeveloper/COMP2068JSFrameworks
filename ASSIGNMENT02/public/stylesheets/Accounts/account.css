@@ -89,6 +89,7 @@
 
 @media screen and (max-width: 767px) {
     .section-account {
+        margin-bottom: 5%;
         flex-direction: column;
     }
 

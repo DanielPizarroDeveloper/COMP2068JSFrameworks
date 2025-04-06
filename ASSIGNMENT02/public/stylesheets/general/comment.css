@@ -84,7 +84,7 @@
     }
     
     .article-content-comment {
-        max-width: none;
+        max-width: 95%;
     }
 
     .comment-textArea {

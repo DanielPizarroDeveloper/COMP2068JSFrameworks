@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+//DateNow
 const today = require('../public/javascripts/getToday');
 
+//CRUD
 const { createService, getService, updatedServiceByID, deleteServiceByID } = require('../Controllers/Service/service');
 
 //Message
@@ -11,9 +13,14 @@ const { handleSuccessCreate, handleSuccessUpdate, handleSuccessDelete, } = requi
 //Sessions
 const { checked_Create, checked_Update, checked_Delete } = require('../public/mocks/Message');
 
+//toUpperCaseUser
+const toUpperCaseText = require('../public/javascripts/toUpperCase');
+
+//isAuthenticated
 const isAuthenticated = require('../middlewares/Auth');
 
 router.get('/panelService', isAuthenticated, async(req, res, next) => {
+  var displayName = toUpperCaseText(req.user.username);
   const serviceList = await getService();
   
   if (serviceList.length > 0) {
@@ -44,10 +51,10 @@ router.get('/panelService', isAuthenticated, async(req, res, next) => {
     req.session.Message_Delete_Panel_Service = null;
     req.session.MessageError_Delete_Panel_Service = null;
 
-    res.render('panelService', { title: 'Service Administrator', radioChecked, serviceList, user: req.user.username, successCreateMessage_Panel_Service, failedCreateMessage_Panel_Service, successUpdateMessage_Panel_Service, failedUpdateMessage_Panel_Service, successDeleteMessage_Panel_Service, failedDeleteMessage_Panel_Service }); 
+    res.render('panelService', { title: 'Service Administrator', radioChecked, serviceList, user: displayName, successCreateMessage_Panel_Service, failedCreateMessage_Panel_Service, successUpdateMessage_Panel_Service, failedUpdateMessage_Panel_Service, successDeleteMessage_Panel_Service, failedDeleteMessage_Panel_Service }); 
   }
   else {
-    res.render('panelService', { title: 'Service Administrator', radioChecked, serviceList, user: req.user.username, successDeleteMessage_Panel_Service });
+    res.render('panelService', { title: 'Service Administrator', radioChecked, serviceList, user: displayName, successDeleteMessage_Panel_Service });
   }
 });
   

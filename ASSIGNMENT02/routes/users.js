@@ -2,10 +2,17 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport');
 
+//isAuthenticated
 const isAuthenticated = require('../middlewares/Auth');
 
+//CRUD
 const { registerUser } = require('../Controllers/User/user');
+
+//Message
 const { handleIncompleteSignup, handleFailedSignIn, handleSigninError } = require('../public/mocks/Message');
+
+//toUpperCaseUser
+const toUpperCaseText = require('../public/javascripts/toUpperCase');
 
 router.get('/login', function(req, res, next) {
   //handle session message
@@ -56,7 +63,9 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/account', isAuthenticated, (req, res, next) => {
-  res.render('account', { title: 'Account', user: req.user.username, email: req.user.email });
+  var displayName = toUpperCaseText(req.user.username);
+
+  res.render('account', { title: 'Account', user: displayName, email: req.user.email });
 });
 
 router.get('/github',

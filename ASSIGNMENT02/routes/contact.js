@@ -1,21 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
+//SendMail
 const nodemailer = require('../public/javascripts/email');
 const contactMail = require('../Controllers/Contact/contact');
 
+//isAuthenticated
 const isAuthenticated = require('../middlewares/Auth');
 
+//Message
 const { handleSendEmail, handleErrorEmail } = require('../public/mocks/Message');
 
+//toUpperCaseUser
+const toUpperCaseText = require('../public/javascripts/toUpperCase');
+
 router.get('/contact', isAuthenticated, (req, res, next) => {
+  var displayName = toUpperCaseText(req.user.username);
+
   const successSend_Mail = req.session.Message_Send_Mail;
   const failedSend_Mail = req.session.MessageError_Send_Mail;
 
   req.session.Message_Send_Mail = null;
   req.session.MessageError_Send_Mail = null;
 
-  res.render('contact', { title: 'Contact', user: req.user.username, email: req.user.email, successSend_Mail, failedSend_Mail });
+  res.render('contact', { title: 'Contact', user: displayName, email: req.user.email, successSend_Mail, failedSend_Mail });
 });
 
 router.post('/contact', isAuthenticated, (req, res, next) => {
