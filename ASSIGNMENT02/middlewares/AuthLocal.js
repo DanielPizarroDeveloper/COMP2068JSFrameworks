@@ -6,20 +6,28 @@ var githubStrategy = require('passport-github2').Strategy;
 var googleStrategy = require('passport-google-oauth20').Strategy;
 
 const Auth_Options = (app) => {
-    app.use(passport.initialize());
-    app.use(passport.session());
+  app.use(session(
+    {
+      secret: configs.Session.secret,
+      resave: false,
+      saveUninitialized: false
+    }
+  ));
 
-    local_Auth();
-    Google_Auth();
-    Github_Auth();
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-    passport.use('local', User.createStrategy());
-    passport.serializeUser(User.serializeUser());
-    passport.deserializeUser(User.deserializeUser());
+  local_Auth();
+  Google_Auth();
+  Github_Auth();
+
+  passport.use('local', User.createStrategy());
+  passport.serializeUser(User.serializeUser());
+  passport.deserializeUser(User.deserializeUser());
 }
 
 const local_Auth = () => {
-    passport.use('local', User.createStrategy());
+  passport.use('local', User.createStrategy());
 }
 
 const Google_Auth = () => {

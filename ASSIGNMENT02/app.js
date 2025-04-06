@@ -6,9 +6,6 @@ const dotenv = require('dotenv');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
-dotenv.config({ path: envFile });
-
 // Auth
 const { Auth_Options } = require('./middlewares/AuthLocal');
 
