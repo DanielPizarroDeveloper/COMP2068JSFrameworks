@@ -2,10 +2,8 @@
 var passport = require('passport');
 var User = require('../models/user');
 var configs = require('../configs/globals');
-
 var githubStrategy = require('passport-github2').Strategy;
 var googleStrategy = require('passport-google-oauth20').Strategy;
-
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
 
@@ -19,8 +17,9 @@ const Auth_Options = (app) => {
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production' ? true : false,
+      secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 1000 * 60 * 60 * 24,
     },
   }));
@@ -28,18 +27,20 @@ const Auth_Options = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
   
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
+  // passport.serializeUser((user, done) => {
+  //   console.log('Flag: serializeUser');
+  //   done(null, user.id);
+  // });
 
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await User.findById(id);
-      done(null, user);
-    } catch (error) {
-      done(error, null);
-    }
-  });    
+  // passport.deserializeUser(async (id, done) => {
+  //   console.log('Flag: deserializeUser');
+  //   try {
+  //     const user = await User.findById(id);
+  //     done(null, user);
+  //   } catch (error) {
+  //     done(error, null);
+  //   }
+  // });    
 
   local_Auth();
   Google_Auth();
