@@ -34,9 +34,18 @@ const Auth_Options = (app) => {
     }
   });
 
+  local_Auth();
   Google_Auth();
   Github_Auth();
+
+  passport.use('local', User.createStrategy());
+  passport.serializeUser(User.serializeUser());
+  passport.deserializeUser(User.deserializeUser());
 };
+
+const local_Auth = () => {
+  passport.use('local', User.createStrategy());
+}
 
 const Google_Auth = () => {
   passport.use(
