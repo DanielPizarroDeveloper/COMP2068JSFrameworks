@@ -4,6 +4,7 @@ var User = require('../models/user');
 var configs = require('../configs/globals');
 var githubStrategy = require('passport-github2').Strategy;
 var googleStrategy = require('passport-google-oauth20').Strategy;
+const session = require('express-session');
 
 const Auth_Options = (app) => {
   app.use(session(
