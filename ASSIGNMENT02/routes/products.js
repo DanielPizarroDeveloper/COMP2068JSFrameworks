@@ -14,13 +14,14 @@ router.get('/product', isAuthenticated, async(req, res, next) => {
   try {
     var displayName = toUpperCaseText(req.user.username);
     const products = await getProduct();
-
-    if(products.length > 0) {
-      res.render('product', { title: 'Product', products, user: displayName });
-    }
+    // if(products.length > 0) {
+    //   res.render('product', { title: 'Product', products, user: displayName, stylesheetProductService: '/stylesheets/general/product-service.css' });
+    // }
+    res.render('product', { title: 'Product', products, user: displayName, stylesheetProductService: '/stylesheets/general/product-service.css' });
+  
   } catch (error) {
     const failedReadMessage_Product = error.message;
-    res.render('product', { title: 'Service', user: displayName, failedReadMessage_Product });
+    res.render('product', { title: 'Service', user: displayName, failedReadMessage_Product, stylesheetProductService: '/stylesheets/general/product-service.css' });
   }
 });
 

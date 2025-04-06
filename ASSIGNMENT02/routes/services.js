@@ -16,11 +16,11 @@ router.get('/service', isAuthenticated, async(req, res, next) => {
     const services = await getService();
 
     if (services.length > 0) {
-      res.render('service', { title: 'Service', services, user: displayName });
+      res.render('service', { title: 'Service', services, user: displayName, stylesheetProductService: '/stylesheets/general/product-service.css'  });
     }
   } catch (error) {
     const failedReadMessage_Service = error.message;
-    res.render('service', { title: 'Service', user: displayName, failedReadMessage_Service });
+    res.render('service', { title: 'Service', user: displayName, failedReadMessage_Service, stylesheetProductService: '/stylesheets/general/product-service.css'  });
   }
 });
 

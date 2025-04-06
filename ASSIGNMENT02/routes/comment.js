@@ -29,7 +29,7 @@ router.get('/comment', isAuthenticated,  async(req, res, next) => {
 
     const commentsOrderBy = await getComments();
     if (commentsOrderBy.length > 0) {
-      res.render('comment', { title: 'Comment', commentsOrderBy, user: displayName, successCreateMessage_Comment, failedCreateMessage_Comment });
+      res.render('comment', { title: 'Comment', commentsOrderBy, user: displayName, successCreateMessage_Comment, failedCreateMessage_Comment, stylesheetComment: '/stylesheets/general/comment.css' });
     }
   } catch (error) {
     req.session.MessageError_Create_Comment = error.message;

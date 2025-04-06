@@ -51,10 +51,17 @@ router.get('/panelService', isAuthenticated, async(req, res, next) => {
     req.session.Message_Delete_Panel_Service = null;
     req.session.MessageError_Delete_Panel_Service = null;
 
-    res.render('panelService', { title: 'Service Administrator', radioChecked, serviceList, user: displayName, successCreateMessage_Panel_Service, failedCreateMessage_Panel_Service, successUpdateMessage_Panel_Service, failedUpdateMessage_Panel_Service, successDeleteMessage_Panel_Service, failedDeleteMessage_Panel_Service }); 
+    res.render('panelService', { 
+      title: 'Service Administrator', radioChecked, serviceList, 
+      user: displayName, successCreateMessage_Panel_Service, failedCreateMessage_Panel_Service, 
+      successUpdateMessage_Panel_Service, failedUpdateMessage_Panel_Service, successDeleteMessage_Panel_Service, 
+      failedDeleteMessage_Panel_Service, stylesheetADMCommon: '/stylesheets/panel/common.css', stylesheetADMService: '/stylesheets/panel/service.css' }); 
   }
   else {
-    res.render('panelService', { title: 'Service Administrator', radioChecked, serviceList, user: displayName, successDeleteMessage_Panel_Service });
+    res.render('panelService', { 
+      title: 'Service Administrator', radioChecked, 
+      serviceList, user: displayName, 
+      successDeleteMessage_Panel_Service, stylesheetADMCommon: '/stylesheets/panel/common.css', stylesheetADMService: '/stylesheets/panel/service.css' });
   }
 });
   

@@ -10,12 +10,12 @@ const toUpperCaseText = require('../public/javascripts/toUpperCase');
 
 router.get('/', isAuthenticated, (req, res, next) => {
   var displayName = toUpperCaseText(req.user.username);
-  res.render('index', { title: 'Home', user: displayName });
+  res.render('index', { title: 'Home', user: displayName, stylesheetIndex: '/stylesheets/general/index.css' });
 });
 
 router.get('/about', isAuthenticated, (req, res, next) => {
   var displayName = toUpperCaseText(req.user.username);
-  res.render('about', { title: 'About', user: displayName });
+  res.render('about', { title: 'About', user: displayName, stylesheetAbout: '/stylesheets/general/about.css' });
 });
 
 router.use('/', usersRouter);

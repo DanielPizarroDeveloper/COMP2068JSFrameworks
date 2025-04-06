@@ -52,7 +52,12 @@ router.get('/panelProduct', isAuthenticated, async(req, res, next) => {
       //Delete
       req.session.Message_Delete_Panel_Product = null;
       req.session.MessageError_Delete_Panel_Product = null;
-      res.render('panelProduct', { title: 'Product Administrator', radioChecked, productsList, user: displayName, successCreateMessage_Panel_Product, failedCreateMessage_Panel_Product, successUpdateMessage_Panel_Product, failedUpdateMessage_Panel_Product, successDeleteMessage_Panel_Product, failedDeleteMessage_Panel_Product });
+      res.render('panelProduct', { 
+        title: 'Product Administrator', radioChecked, productsList, 
+        user: displayName, successCreateMessage_Panel_Product, 
+        failedCreateMessage_Panel_Product, successUpdateMessage_Panel_Product, 
+        failedUpdateMessage_Panel_Product, successDeleteMessage_Panel_Product, 
+        failedDeleteMessage_Panel_Product, stylesheetADMCommon: '/stylesheets/panel/common.css', stylesheetADMProduct: '/stylesheets/panel/product.css' });
     }
   } catch (error) {
     req.session.MessageError_Read = error.message;

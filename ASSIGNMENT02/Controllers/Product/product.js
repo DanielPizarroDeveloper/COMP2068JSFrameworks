@@ -25,7 +25,8 @@ const createProduct = async(productName, productDescription, productQuantity, pr
 
 const getProduct = async () => {
     const products = await Product.find();
-    if (products.length > 0) {
+
+    if (products != null) {
         const productsOrderBy = products.sort((a, b) => new Date(b.publication) - new Date(a.publication));
         return productsOrderBy;
     } else {

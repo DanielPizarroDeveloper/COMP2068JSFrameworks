@@ -8,23 +8,59 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     {{!-- Message - Validation --}}
     <link rel='stylesheet' href='/stylesheets/general/message.css'>
-    {{!-- General --}}
-    <link rel='stylesheet' href='/stylesheets/general/index.css' />
-    <link rel='stylesheet' href='/stylesheets/general/contact.css' />
-    <link rel='stylesheet' href='/stylesheets/general/comment.css' />
-    <link rel='stylesheet' href='/stylesheets/general/about.css' />
-    <link rel='stylesheet' href='/stylesheets/general/product-service.css' />
-    {{!-- Account --}}
-    <link rel='stylesheet' href='/stylesheets/Accounts/login-register.css' />
-    <link rel='stylesheet' href='/stylesheets/Accounts/account.css' />
-    {{!-- Panel Administrative --}}
-    <link rel="stylesheet" href='/stylesheets/panel/common.css'>
-    <link rel='stylesheet' href='/stylesheets/panel/product.css' />
-    <link rel='stylesheet' href='/stylesheets/panel/service.css' />
+
     {{!-- favicon --}}
     <link rel='shortcut icon' href='/images/favicon.png' type='image/x-icon'>
+    
     {{!-- Font --}}
     <link rel='stylesheet' href='https://api.fontshare.com/v2/css?f=clash-display&display=swap' />
+
+    {{!-- General --}}
+    {{#if stylesheetIndex}}
+      <link rel="stylesheet" href='{{stylesheetIndex}}' />
+    {{/if}}
+    
+    {{#if stylesheetAbout}}
+      <link rel="stylesheet" href='{{stylesheetAbout}}' />
+    {{/if}}
+    
+    {{#if stylesheetProductService}}
+      <link rel="stylesheet" href='{{stylesheetProductService}}' />
+    {{/if}}
+    
+    {{#if stylesheetComment}}
+      <link rel="stylesheet" href='{{stylesheetComment}}' />
+    {{/if}}
+    
+    {{#if stylesheetContact}}
+      <link rel="stylesheet" href='{{stylesheetContact}}' />
+    {{/if}}
+
+    {{!-- Account --}}
+    {{#if stylesheetAccount}}
+      <link rel='stylesheet' href='{{stylesheetAccount}}' />
+    {{/if}}
+
+    {{#if stylesheetLogin}}
+      <link rel='stylesheet' href='{{stylesheetLogin}}' />
+    {{/if}}
+    
+    {{#if stylesheetRegister}}
+      <link rel='stylesheet' href='{{stylesheetRegister}}' />
+    {{/if}}
+
+    {{!-- Panel Administrative --}}
+    {{#if stylesheetADMCommon}}
+      <link rel='stylesheet' href='{{stylesheetADMCommon}}' />
+    {{/if}}
+
+    {{#if stylesheetADMProduct}}
+      <link rel='stylesheet' href='{{stylesheetADMProduct}}' />
+    {{/if}}
+
+    {{#if stylesheetADMService}}
+      <link rel='stylesheet' href='{{stylesheetADMService}}' />
+    {{/if}}
   </head>
   <body>
     <nav class='nav-horizontal'>
@@ -68,38 +104,69 @@
       </ul>
     </nav>
 
-    <aside id='responsive-menu' class='hidden'>
+    <aside id='responsive-menu' class='aside-hidden'>
       <nav class='nav-vertical'>
         <ul class='ul-vertical'>
           {{#if user}}
-            <li class='li-vertical'>
+            {{!-- <li class='li-vertical'>
               <a href='/'><span>HOME</span></a>
-            </li>
-            <li class='li-vertical'>
+            </li> --}}
+            <a class='a-menu-vertical' href='/'>
+              <li class='li-vertical'><span>HOME</span></li>
+            </a>
+
+            {{!-- <li class='li-vertical'>
               <a href='/about'><span>ABOUT US</span></a>
-            </li>
-            <li class='li-vertical'>
+            </li> --}}
+            <a class='a-menu-vertical' href='/about'>
+              <li class='li-vertical'><span>ABOUT US</span></li>
+            </a>
+
+            {{!-- <li class='li-vertical'>
               <a href='/products/product'><span>PRODUCTS</span></a>
-            </li>
-            <li class='li-vertical'>
+            </li> --}}
+            <a class='a-menu-vertical' href='/products/product'>
+              <li class='li-vertical'><span>PRODUCTS</span></li>
+            </a>
+
+            {{!-- <li class='li-vertical'>
               <a href='/services/service'><span>SERVICES</span></a>
-            </li>
-            <li class='li-vertical'>
+            </li> --}}
+            <a class='a-menu-vertical' href='/services/service'>
+              <li class='li-vertical'><span>SERVICES</span></li>
+            </a>
+
+            {{!-- <li class='li-vertical'>
               <a href='/comments/comment'><span>COMMENTS</span></a>
-            </li>
-            <li class='li-vertical'>
+            </li> --}}
+            <a class='a-menu-vertical' href='/comments/comment'>
+              <li class='li-vertical'><span>COMMENTS</span></li>
+            </a>
+
+            {{!-- <li class='li-vertical'>
               <a href='/contacts/contact'><span>CONTACT</span></a>
-            </li>
-            <li class='li-vertical'>
+            </li> --}}
+            <a class='a-menu-vertical' href='/contacts/contact'>
+              <li class='li-vertical'><span>CONTACT</span></li>
+            </a>
+
+            {{!-- <li class='li-vertical'>
               <a href='/account'><span>{{user}}</span></a>
-            </li>
-            <li class='li-vertical'>
+            </li> --}}
+            <a class='a-menu-vertical' href='/account'>
+              <li class='li-vertical'><span>{{user}}</span></li>
+            </a>
+
+            {{!-- <li class='li-vertical'>
               <a href='/logout'><span>LOGOUT</span></a>
-            </li>
+            </li> --}}
+            <a class='a-menu-vertical' href='/logout'>
+              <li class='li-vertical'><span>LOGOUT</span></li>
+            </a>
           {{else}}
-            <li class='li-login'>
+            {{!-- <li class='li-login'>
               <a href='/login'><span>LOGIN</span></a>
-            </li>
+            </li> --}}
           {{/if}}
         </ul>
       </nav>

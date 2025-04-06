@@ -18,7 +18,7 @@ router.get('/login', function(req, res, next) {
   //handle session message
   let messages = req.session.messages || []; //extract messages, or set to empty if undefined
   req.session.messages = []; // clear message
-  res.render('login', { title: 'Login', messages: messages });
+  res.render('login', { title: 'Login', messages: messages, stylesheetLogin: '/stylesheets/Accounts/login-register.css' });
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -30,7 +30,7 @@ router.post('/login', passport.authenticate('local', {
 router.get('/register', function(req, res, next) {
   const errorMessage = req.session.errorMessage;
   req.session.errorMessage = null;
-  res.render('register', { title: 'Register', errorMessage });
+  res.render('register', { title: 'Register', errorMessage, stylesheetRegister: '/stylesheets/Accounts/login-register.css' });
 });
 
 router.post('/register', async(req, res, next) => {
@@ -65,7 +65,7 @@ router.get('/logout', (req, res, next) => {
 router.get('/account', isAuthenticated, (req, res, next) => {
   var displayName = toUpperCaseText(req.user.username);
 
-  res.render('account', { title: 'Account', user: displayName, email: req.user.email });
+  res.render('account', { title: 'Account', user: displayName, email: req.user.email, stylesheetAccount: '/stylesheets/Accounts/account.css' });
 });
 
 router.get('/github',

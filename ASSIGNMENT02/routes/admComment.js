@@ -26,14 +26,22 @@ router.get('/panelComment', isAuthenticated, async(req, res, next) => {
     req.session.MessageError_Delete_Panel_Comment = null;
 
     if (commentsOrderBy.length > 0) {
-      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: displayName, successDeleteMessage_Panel_Comment, failedDeleteMessage_Panel_Comment });
+      res.render('panelComment', { 
+        title: 'Panel Comment', commentsOrderBy, 
+        user: displayName, successDeleteMessage_Panel_Comment, 
+        failedDeleteMessage_Panel_Comment, stylesheetADMCommon: '/stylesheets/panel/common.css', stylesheetComment: '/stylesheets/general/comment.css' });
     }
     else {
-      res.render('panelComment', { title: 'Panel Comment', commentsOrderBy, user: displayName, successDeleteMessage_Panel_Comment });
+      res.render('panelComment', { 
+        title: 'Panel Comment', commentsOrderBy, 
+        user: displayName, successDeleteMessage_Panel_Comment,
+        stylesheetADMCommon: '/stylesheets/panel/common.css', stylesheetComment: '/stylesheets/general/comment.css' });
     }
   } catch (error) {
     failedLoadMessage_Comment = error.message;
-    res.render('panelComment', { title: 'Panel Comment', user: displayName, failedLoadMessage_Comment });
+    res.render('panelComment', { 
+      title: 'Panel Comment', user: displayName, 
+      failedLoadMessage_Comment, stylesheetADMCommon: '/stylesheets/panel/common.css', stylesheetComment: '/stylesheets/general/comment.css' });
   }
 });
   

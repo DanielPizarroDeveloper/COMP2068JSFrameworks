@@ -178,6 +178,7 @@ h3 {
 
     .container-product {
         gap: 20px;
+        width: 100%;
         flex-direction: column;
     }
 

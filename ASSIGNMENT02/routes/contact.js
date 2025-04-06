@@ -23,7 +23,10 @@ router.get('/contact', isAuthenticated, (req, res, next) => {
   req.session.Message_Send_Mail = null;
   req.session.MessageError_Send_Mail = null;
 
-  res.render('contact', { title: 'Contact', user: displayName, email: req.user.email, successSend_Mail, failedSend_Mail });
+  res.render('contact', { 
+    title: 'Contact', user: displayName, 
+    email: req.user.email, successSend_Mail, 
+    failedSend_Mail, stylesheetContact: '/stylesheets/general/contact.css' });
 });
 
 router.post('/contact', isAuthenticated, (req, res, next) => {
