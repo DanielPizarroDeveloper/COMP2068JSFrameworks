@@ -36,8 +36,7 @@ const getProduct = async () => {
 const updatedProductByID = async(ID, productName, productDescription, productQuantity, today, productPrice, productImage) => {
     try {
         const productID = normalize_identifier(ID);
-        console.log('Path: ', productImage);
-        console.log('Path Length: ', productImage.length);
+
         let path = productImage.length;
 
         if (path > 0) {

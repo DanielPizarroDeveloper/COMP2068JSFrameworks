@@ -15,33 +15,29 @@ const Auth_Options = (app) => {
       mongoUrl: process.env.CONNECTION_STRING_MONGODB,
       ttl: 14 * 24 * 60 * 60,
     }),
-    secret: process.env.SESSION_SECRET || 'clave-super-secreta',
+    secret: process.env.SESSION_SECRET || 'secret-password',
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production' ? false : false, // TEMPORAL PARA PRUEBAS
+      secure: process.env.NODE_ENV === 'production' ? true : false,
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24, // Un día
+      maxAge: 1000 * 60 * 60 * 24,
     },
   }));
+
   app.use(passport.initialize());
-  app.use(passport.session()); // DEBE estar después del middleware de sesiones
-  
+  app.use(passport.session());
   
   passport.serializeUser((user, done) => {
-    console.log('Serializando usuario:', user.id);
     done(null, user.id);
   });
 
   passport.deserializeUser(async (id, done) => {
-    console.log('Intentando deserializar usuario con ID:', id); // Verifica que se ejecuta
     try {
       const user = await User.findById(id);
-      console.log('Usuario deserializado:', user); // Verifica si el usuario se recupera correctamente
       done(null, user);
     } catch (error) {
-      console.error('Error en deserialización:', error);
-      done(error, null); // Llama a done con error si algo falla
+      done(error, null);
     }
   });    
 
@@ -79,7 +75,6 @@ const Google_Auth = () => {
                 oauthProvider: 'Google',
               });
               const savedUser = await newUser.save();
-              console.log('Usuario guardado en la BD:', savedUser);
               return done(null, savedUser);
             }
           } catch (error) {
@@ -110,7 +105,6 @@ const Github_Auth = () => {
             oauthProvider: 'GitHub'
           });
           const savedUser = await newUser.save();
-          console.log('Usuario guardado en la BD:', savedUser);
           return done(null, savedUser);
         }
       }
