@@ -246,14 +246,6 @@ aside {
   align-items: center;
 }
 
-/* .li-vertical:hover {
-  border-bottom: 1px solid var(--red-600);
-}
-
-.li-vertical:hover a {
-  color: var(--red-400);
-} */
-
 .a-menu-vertical:hover .li-vertical {
   border-bottom: 1px solid var(--red-600);
 }

@@ -1,22 +1,21 @@
 <main class='main-ADM'>
     <h1>ADM. Services</h1>
-
     <section class='section-options-filter'>
         <h3>Select one option</h3>
         <div class='radio-button-group'>
             <div class='radio-button-option'>
-                <input type='radio' name='option' value='create' {{#if (eq radioChecked 'create')}}checked{{/if}}><label for='create'>Create Service</label>
+                <input type='radio' id='create' name='option' value='create' {{#if (eq radioChecked 'create')}}checked{{/if}}><label for='create'>Create Service</label>
             </div>
             <div class='radio-button-option'>
-                <input type='radio' name='option' value='update' {{#if (eq radioChecked 'update')}}checked{{/if}}><label for='update'>Update Service</label>
+                <input type='radio' id='update' name='option' value='update' {{#if (eq radioChecked 'update')}}checked{{/if}}><label for='update'>Update Service</label>
             </div>
             <div class='radio-button-option'>
-                <input type='radio' name='option' value='delete' {{#if (eq radioChecked 'delete')}}checked{{/if}}><label for='delete'>Delete Service</label>
+                <input type='radio' id='delete' name='option' value='delete' {{#if (eq radioChecked 'delete')}}checked{{/if}}><label for='delete'>Delete Service</label>
             </div>
         </div>
     </section>
 
-    <div id='createSection' class='section-list-panel-product hidden'>
+    <div id='createSection' class='section-list-panel-service hidden'>
         {{#if successCreateMessage_Panel_Service}}
             <div id='MessageSuccess' class='container-message-visible'>
                 <div class='container-message success-color'>
@@ -66,7 +65,7 @@
         </article>
     </div>
 
-    <div id='updateSection' class='section-list-panel-product hidden'>
+    <div id='updateSection' class='section-list-panel-service hidden'>
         {{#if successUpdateMessage_Panel_Service}}
             <div id='MessageSuccess' class='container-message-visible'>
                 <div class='container-message success-color'>
@@ -138,7 +137,7 @@
         {{/each}}
     </div>
 
-    <div id='deleteSection' class='section-list-panel-product hidden'>
+    <div id='deleteSection' class='section-list-panel-service hidden'>
         {{#if successDeleteMessage_Panel_Service}}
             <div id='MessageSuccess' class='container-message-visible'>
                 <div class='container-message success-color'>
