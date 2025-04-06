@@ -4,7 +4,7 @@
     width: 445px;
     min-height: 450px;
     border-radius: 10px;
-    box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
+    box-shadow: 0px 0px 20px 5px var(--gray-shadow-600);
     padding: 2%;
     gap: 5px;
 }

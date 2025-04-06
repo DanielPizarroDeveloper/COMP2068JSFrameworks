@@ -23,7 +23,7 @@
     width: 1100px;
     max-width: 1000px; 
     border-radius: 10px; 
-    box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
+    box-shadow: 0px 0px 20px 5px var(--gray-shadow-600);
 }
 
 .article-content-comment {
@@ -85,7 +85,6 @@
     
     .article-content-comment {
         max-width: none;
-        width: 85%;
     }
 
     .comment-textArea {
@@ -110,8 +109,52 @@
     }
 }
 
-@media screen and (max-width: 428px) {
-    p {
+@media screen and (max-width: 600px) {
+    .comment-content > h3 {
         font-size: 20px;
+    }
+
+    .comment-avatar {
+        font-size: 15px;
+    }
+    
+    p, span {
+        font-size: 15px;
+    }
+
+    button[type='submit'] {
+        width: 35px;
+        height: 35px !important;
+    }
+
+    .svg {
+        position: relative;
+        right: 2px;
+        bottom: 2px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .comment-content > h3 {
+        font-size: 18px;
+    }
+
+    .comment-avatar {
+        font-size: 14px;
+    }
+    
+    p, span {
+        font-size: 12px;
+    }
+
+    button[type='submit'] {
+        width: 30px;
+        height: 30px !important;
+    }
+
+    .svg {
+        position: relative;
+        right: 5px;
+        bottom: 4px;
     }
 }

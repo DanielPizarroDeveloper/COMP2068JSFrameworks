@@ -204,7 +204,7 @@ aside {
   right: 0;
   height: 100%;
   background-color: var(--primary-black);
-  box-shadow: 0px 0px 50px 5px var(--gray-shadow-600);
+  box-shadow: 0px 0px 50px 1px var(--gray-shadow-600);
 }
 
 .nav-vertical {
@@ -331,6 +331,10 @@ footer {
   .footer-last {
     gap: 15px;
     flex-direction: column-reverse;
+  }
+
+  .footer-last > span {
+    text-align: center;
   }
 }
 
