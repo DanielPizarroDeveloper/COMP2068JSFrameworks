@@ -67,7 +67,7 @@ router.get('/panelService', isAuthenticated, async(req, res, next) => {
   
 router.post('/panelService', isAuthenticated, async(req, res, next) => {
   try {
-    const result = await createService(req.body.serviceName, req.body.serviceDescription, req.body.servicePrice, req.body.base64Create, today());
+    const result = await createService(req.body.serviceName, req.body.serviceDescription, req.body.servicePrice, req.body.serviceURL, today());
     
     if(result) {
       req.session.Message_Create_Panel_Service = handleSuccessCreate();
@@ -82,7 +82,7 @@ router.post('/panelService', isAuthenticated, async(req, res, next) => {
   
 router.post('/panelService/:_id', isAuthenticated, async(req, res, next) => {
   try {
-    const result = await updatedServiceByID(req.params._id, req.body.serviceName, req.body.description, req.body.price, req.body.base64Update, today());
+    const result = await updatedServiceByID(req.params._id, req.body.serviceName, req.body.description, req.body.price, req.body.serviceURL, today());
     
     if(result) {
       req.session.Message_Update_Panel_Service = handleSuccessUpdate();

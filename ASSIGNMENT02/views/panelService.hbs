@@ -52,12 +52,13 @@
 
                     <textarea class='service-width' name='serviceDescription' placeholder='Detail from product'></textarea>
 
-                    <div class='content-group-file'>
+                    <input type='url' name='serviceURL' placeholder='Type the URL of your service'>
+                    {{!-- <div class='content-group-file'>
                         <label for='fileUploadCreate' class='custom-file-label'>Upload your image</label>
                         <input type='file' id='fileUploadCreate' class='hidden' accept='.webp'>
                         <p id='fileNameCreate'>No file has been selected.</p>
                         <input type='text' id='base64Create' name='base64Create' class='hidden'>
-                    </div>
+                    </div> --}}
 
                     <input type='submit' value='Create Service'>
                 </div>
@@ -118,10 +119,11 @@
                                 
                                 <div class='detail-product-description'>
                                     <div class='content-group-file'>
-                                        <label for='fileUploadUpdate{{_id}}' class='custom-file-label' onclick="fileLoad('{{_id}}')">Upload your image</label>
+                                        <input type='url' name='serviceURL' placeholder='Type the URL of your service'>
+                                        {{!-- <label for='fileUploadUpdate{{_id}}' class='custom-file-label' onclick="fileLoad('{{_id}}')">Upload your image</label>
                                         <input type='file' id='fileUploadUpdate{{_id}}' accept='.webp' class='hidden'>
                                         <p id='fileNameUpdate{{_id}}'>No file has been selected.</p>
-                                        <input type='text' id='base64Update{{_id}}' name='base64Update' class='hidden'>
+                                        <input type='text' id='base64Update{{_id}}' name='base64Update' class='hidden'> --}}
                                     </div> 
                                 </div>
                             </div>
